@@ -6,10 +6,15 @@
 #include <SFML/Window.hpp>
 #include <SFML/Network.hpp>
 
+#include <sstream>
+#include <fstream>
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
 #include <vector>
+
+using namespace sf;
+using namespace std;
 
 class State
 {

@@ -2,7 +2,29 @@
 
 void Game::InitWindow()
 {
-	this->window = new RenderWindow(VideoMode(800, 600), "My window");
+	ifstream ifs("C:\\Users\\popka\\source\\repos\\Project14\\Config\\Wincon.ini");
+	string title = "None";
+	VideoMode Wind_bound(1280, 720);
+	unsigned Frame = 120;
+	bool Vertical_sync_enabled = false;
+	
+	if (ifs.is_open())
+	{
+		getline(ifs, title);
+		ifs >> Wind_bound.width >> Wind_bound.height;
+		ifs >> Frame;
+		ifs >> Vertical_sync_enabled;
+	}
+	else
+	{
+		throw "Error";
+		ifs.close();
+	}
+	ifs.close();
+
+	this->window = new RenderWindow(Wind_bound, title);
+	this->window->setFramerateLimit(Frame);
+	this->window->setVerticalSyncEnabled(Vertical_sync_enabled);
 }
 
 Game::Game()
