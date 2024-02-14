@@ -1,14 +1,19 @@
 #ifndef MAINMENUSTATE_H
 #define MAINMENUSTATE_H
+
+#include "Button.h"
 #include "GameState.h"
 
 class MainMenuState : public State
 {
 private:
 	RectangleShape BackGround;
+	Font font;
 public:
 	MainMenuState(RenderWindow* window, map<string, int>* supportedKey);
 	virtual ~MainMenuState();
+
+	void InitFont();
 
 	void InitKeyBinds();
 	void EndState();

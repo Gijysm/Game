@@ -11,6 +11,13 @@ State::~State()
 {
 }
 
+void State::UpdateMousePosition()
+{
+	this->MousePosScreen = Mouse::getPosition();
+	this->MousePosWindow = Mouse::getPosition(*this->window);
+	this->MousePosView = this->window->mapPixelToCoords(Mouse::getPosition(*this->window));
+}
+
 void State::CheckForEnd()
 {
 	if (Keyboard::isKeyPressed(Keyboard::Key(this->KeyBinds.at("Close"))))

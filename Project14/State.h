@@ -11,11 +11,15 @@ protected:
 	vector<Texture> texture;
 	map<string, int>* supportedKey;
 	map<string, int> KeyBinds;
+
+	Vector2i MousePosScreen;
+	Vector2i MousePosWindow;
+	Vector2f MousePosView;
 public:
 	State(RenderWindow* window, map<string, int>* supportedKey);
 	virtual ~State();
 
-
+	virtual void UpdateMousePosition();
 	virtual void InitKeyBinds() = 0;
 	virtual void CheckForEnd();
 	const bool& GetQuit() const;
