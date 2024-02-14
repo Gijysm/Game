@@ -5,16 +5,17 @@
 class GameState:public State
 {
 private:
-
+	Entity player;
 public:
-	GameState(RenderWindow* window);
+	GameState(RenderWindow* window, map<string, int>* supportedKey);
 	virtual ~GameState();
 
+	void InitKeyBinds();
 	void EndState();
-	void Update_Key_Binds(const float& dt);
+	void Update_Input(const float& dt);
 	
 	void update(const float& dt);
-	void render(RenderTarget* target);
+	void render(RenderTarget* target = NULL);
 };
 
 #endif

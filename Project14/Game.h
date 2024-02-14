@@ -15,8 +15,11 @@ private:
 	Clock Clockdt;
 	float dt;
 
+	map<string, int> supportedKey;
+
 	void InitWindow();
 	void initStates();
+	void InitKeys();
 public:
 	Game();
 	virtual ~Game();

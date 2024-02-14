@@ -1,9 +1,10 @@
 #include "State.h"
 
-State::State(RenderWindow* window)
+State::State(RenderWindow* window, map<string, int>* supportedKey)
 {
 	this->window = window;
 	this->Wants_end = false;
+	this->supportedKey = supportedKey;
 }
 
 State::~State()
@@ -12,7 +13,7 @@ State::~State()
 
 void State::CheckForEnd()
 {
-	if (Keyboard::isKeyPressed(Keyboard::Escape))
+	if (Keyboard::isKeyPressed(Keyboard::Key(this->KeyBinds.at("Close"))))
 		this->Wants_end = true;
 }
 
