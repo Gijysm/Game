@@ -71,9 +71,6 @@
     <ClInclude Include="MainMenuState.h">
       <Filter>State</Filter>
     </ClInclude>
-    <ClInclude Include="GameState.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="Button.h">
       <Filter>Window</Filter>
     </ClInclude>
@@ -88,6 +85,9 @@
     </ClInclude>
     <ClInclude Include="MovementComponent.h">
       <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>State</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

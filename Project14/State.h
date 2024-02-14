@@ -12,6 +12,8 @@
 #include <ctime>
 #include <cstdlib>
 #include <vector>
+#include <stack>
+#include <map>
 
 using namespace sf;
 using namespace std;
@@ -19,13 +21,21 @@ using namespace std;
 class State
 {
 private:
+	RenderWindow* window;
+	bool Wants_end;
 	vector<Texture> texture;
 
 public:
-	State();
+	State(RenderWindow* window);
 	virtual ~State();
 
-	virtual void update() = 0;
-	virtual void render() = 0;
+	virtual void CheckForEnd();
+	const bool& GetQuit() const;
+
+	virtual void EndState() = 0;
+	virtual void Update_Key_Binds(const float& dt) = 0;
+
+	virtual void update(const float& dt) = 0;
+	virtual void render(RenderTarget* target) = 0;
 };
 #endif

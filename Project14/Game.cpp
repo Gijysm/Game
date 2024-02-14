@@ -1,5 +1,10 @@
 #include "Game.h"
 
+void Game::initStates()
+{
+	this->states.push(new GameState(this->window));
+}
+
 void Game::InitWindow()
 {
 	ifstream ifs("C:\\Users\\popka\\source\\repos\\Project14\\Config\\Wincon.ini");
@@ -30,11 +35,18 @@ void Game::InitWindow()
 Game::Game()
 {
 	this->InitWindow();
+	this->initStates();
 }
 
 Game::~Game()
 {
 	delete this->window;
+
+	while (!this->states.empty())
+	{
+		delete this->states.top();
+		this->states.pop();
+	}
 }
 
 void Game::updateSFMLEvent()
@@ -51,18 +63,43 @@ void Game::updateSFMLEvent()
 void Game::UpdateDt()
 {
 	this->dt = this->Clockdt.getElapsedTime().asSeconds();
-	system("cls");
-	cout << this->dt << "\n";
 }
 
 void Game::update()
 {
 	this->updateSFMLEvent();
+
+	if (!this->states.empty())
+	{
+		this->states.top()->update(this->dt);
+	
+		if (this->states.top()->GetQuit())
+		{
+			this->states.top()->EndState();
+			delete this->states.top();
+			this->states.pop();
+		}
+	}
+	else
+	{
+		this->EndApplication();
+		this->window->close();
+	}
+}
+
+void Game::EndApplication()
+{
+	cout << "End Application" << "\n";
 }
 
 void Game::render()
 {
 	this->window->clear();
+
+	if (!this->states.empty())
+	{
+		this->states.top()->render(this->window);
+	}
 	this->window->display();
 }
 
