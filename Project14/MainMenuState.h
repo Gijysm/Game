@@ -9,15 +9,20 @@ class MainMenuState : public State
 private:
 	RectangleShape BackGround;
 	Font font;
+
+	map<string,Button*> MainMenuState_Btn;
 public:
-	MainMenuState(RenderWindow* window, map<string, int>* supportedKey);
+	MainMenuState(RenderWindow* window, map<string, int>* supportedKey, stack<State*>* states);
 	virtual ~MainMenuState();
 
 	void InitFont();
-
+	void InitButtons();
 	void InitKeyBinds();
 	void EndState();
 	void Update_Input(const float& dt);
+
+	void updateButton();
+	void renderButton(RenderTarget* target = NULL);
 
 	void update(const float& dt);
 	void render(RenderTarget* target = NULL);

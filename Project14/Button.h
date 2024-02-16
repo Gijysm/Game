@@ -15,9 +15,17 @@
 using namespace sf;
 using namespace std;
 
+enum Button_States{BTN_IDLE = 0, 
+BTN_HOWER, BTN_ACTIVE};
+
 class Button
 {
 private:
+	short unsigned Button_State;
+
+	bool Hower;
+	bool Active;
+
 	RectangleShape Shape;
 	Font* font;
 	Text Text;
@@ -30,6 +38,8 @@ public:
 		Font* font, string text,
 		Color idle_Color, Color hower_Color, Color active_Color);
 	virtual ~Button();
+
+	const bool isPressed() const;
 
 	void update(const Vector2f MousePos);
 

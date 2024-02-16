@@ -9,6 +9,9 @@ protected:
 	RenderWindow* window;
 	bool Wants_end;
 	vector<Texture> texture;
+
+	stack<State*>* states;
+
 	map<string, int>* supportedKey;
 	map<string, int> KeyBinds;
 
@@ -16,7 +19,7 @@ protected:
 	Vector2i MousePosWindow;
 	Vector2f MousePosView;
 public:
-	State(RenderWindow* window, map<string, int>* supportedKey);
+	State(RenderWindow* window, map<string, int>* supportedKey, stack<State*>* states);
 	virtual ~State();
 
 	virtual void UpdateMousePosition();

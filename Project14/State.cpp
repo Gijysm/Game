@@ -1,9 +1,10 @@
 #include "State.h"
 
-State::State(RenderWindow* window, map<string, int>* supportedKey)
+State::State(RenderWindow* window, map<string, int>* supportedKey, stack<State*>* states)
 {
 	this->window = window;
 	this->Wants_end = false;
+	this->states = states;
 	this->supportedKey = supportedKey;
 }
 

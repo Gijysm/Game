@@ -7,7 +7,7 @@ class GameState:public State
 private:
 	Entity player;
 public:
-	GameState(RenderWindow* window, map<string, int>* supportedKey);
+	GameState(RenderWindow* window, map<string, int>* supportedKey, stack<State*>* states);
 	virtual ~GameState();
 
 	void InitKeyBinds();

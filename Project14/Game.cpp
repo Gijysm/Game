@@ -2,7 +2,7 @@
 
 void Game::initStates()
 {
-	this->states.push(new MainMenuState(this->window, &this->supportedKey));
+	this->states.push(new MainMenuState(this->window, &this->supportedKey, &this->states));
 }
 
 void Game::InitWindow()

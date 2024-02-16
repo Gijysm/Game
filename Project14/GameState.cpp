@@ -1,7 +1,7 @@
 #include "GameState.h"
 
-GameState::GameState(RenderWindow* window, map<string, int>* supportedKey)
-	:State(window, supportedKey)
+GameState::GameState(RenderWindow* window, map<string, int>* supportedKey, stack<State*>* states)
+	:State(window, supportedKey, states)
 {
 	this->InitKeyBinds();
 }

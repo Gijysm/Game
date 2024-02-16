@@ -1,17 +1,24 @@
-#include "MainMenuState.h"
+﻿#include "MainMenuState.h"
 #include "GameState.h"
 
-MainMenuState::MainMenuState(RenderWindow* window, map<string, int>* supportedKey)
-	:State(window, supportedKey)
+MainMenuState::MainMenuState(RenderWindow* window, map<string, int>* supportedKey, stack<State*>* states)
+	:State(window, supportedKey, states)
 {
 	this->InitFont();
 	this->InitKeyBinds();
+	this->InitButtons();
 	this->BackGround.setSize(Vector2f(window->getSize().x, window->getSize().y));
 	this->BackGround.setFillColor(Color::Red);
 }
 
 MainMenuState::~MainMenuState()
 {
+	auto it = this->MainMenuState_Btn.begin();
+
+	for (it = this->MainMenuState_Btn.begin(); it != this->MainMenuState_Btn.end(); it++)
+	{
+		delete it->second;
+	}
 }
 
 void MainMenuState::InitFont()
@@ -21,6 +28,32 @@ void MainMenuState::InitFont()
 		throw "Error";
 	}
 }
+
+void MainMenuState::InitButtons()
+{
+	// Создаем первую кнопку с ключом "Button_NewGame"
+	this->MainMenuState_Btn["Button_NewGame"] = new Button(100, 100, 150, 50,
+		&this->font, "New Game", sf::Color(70, 70, 70, 50),
+		sf::Color(150, 170, 120, 255),
+		sf::Color(20, 20, 90, 230));
+
+	// Создаем вторую кнопку, которая сдвинута на 100 пикселей по горизонтали и 50 пикселей по вертикали относительно первой кнопки
+	this->MainMenuState_Btn["Button_Settings"] = new Button(100, 200, 150, 50,
+		&this->font, "Settings", sf::Color(70, 70, 70, 50),
+		sf::Color(150, 170, 120, 255),
+		sf::Color(20, 20, 90, 230));
+
+	// Создаем третью кнопку, которая сдвинута на 100 пикселей по горизонтали и 100 пикселей по вертикали относительно первой кнопки
+	this->MainMenuState_Btn["Button_Edit"] = new Button(100, 350, 150, 50,
+		&this->font, "Edit", sf::Color(70, 70, 70, 50),
+		sf::Color(150, 170, 120, 255),
+		sf::Color(20, 20, 90, 230));
+	this->MainMenuState_Btn["Button_Exit"] = new Button(100, 500, 150, 50,
+		&this->font, "Exit", sf::Color(70, 70, 70, 50),
+		sf::Color(150, 170, 120, 255),
+		sf::Color(20, 20, 90, 230));
+}
+
 
 
 void MainMenuState::InitKeyBinds()
@@ -51,11 +84,40 @@ void MainMenuState::Update_Input(const float& dt)
 
 }
 
+void MainMenuState::updateButton()
+{
+
+	for (auto &it : this->MainMenuState_Btn)
+	{
+		it.second->update(this->MousePosView);
+	}
+
+	if (this->MainMenuState_Btn["Button_NewGame"]->isPressed())
+	{
+		this->states->push(new GameState(this->window, this->supportedKey, this->states));
+	}
+
+	if (this->MainMenuState_Btn["Button_Exit"]->isPressed())
+	{
+		this->Wants_end = true;
+	}
+}
+
+void MainMenuState::renderButton(RenderTarget* target)
+{
+
+	for (auto& it : this->MainMenuState_Btn)
+	{
+		it.second->render(target);;
+	}
+}
+
 void MainMenuState::update(const float& dt)
 {
 	this->UpdateMousePosition();
 	this->Update_Input(dt);
 	//cout << this->MousePosView.x << "   " << this->MousePosView.y << "\n";
+	this->updateButton();
 }
 
 void MainMenuState::render(RenderTarget* target)
@@ -65,4 +127,5 @@ void MainMenuState::render(RenderTarget* target)
 		target = this->window;
 	}
 	target->draw(this->BackGround);
+	this->renderButton(target);
 }
