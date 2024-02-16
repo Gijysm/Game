@@ -9,16 +9,20 @@ void Game::InitWindow()
 {
 	ifstream ifs("C:\\Users\\popka\\source\\repos\\Project14\\Config\\Wincon.ini");
 	string title = "None";
-	VideoMode Wind_bound(1280, 720);
+	VideoMode windowBoundes = VideoMode::getDesktopMode();
+	bool fullscreenmode = false;
 	unsigned Frame = 120;
 	bool Vertical_sync_enabled = false;
+	unsigned antializing_lvl = 0;
 	
 	if (ifs.is_open())
 	{
 		getline(ifs, title);
-		ifs >> Wind_bound.width >> Wind_bound.height;
+		ifs >> windowBoundes.width >> windowBoundes.height;
+		ifs >> fullscreenmode;
 		ifs >> Frame;
 		ifs >> Vertical_sync_enabled;
+		ifs >> antializing_lvl;
 	}
 	else
 	{
@@ -27,7 +31,17 @@ void Game::InitWindow()
 	}
 	ifs.close();
 
-	this->window = new RenderWindow(Wind_bound, title);
+	this->fullscreenmode = fullscreenmode;
+
+	Window_Settings.antialiasingLevel = antializing_lvl;
+	if(this->fullscreenmode)
+	{
+		this->window = new RenderWindow(windowBoundes, title, Style::Fullscreen, Window_Settings);
+	}
+	else
+	{
+		this->window = new RenderWindow(windowBoundes, title, Style::Titlebar | Style::Close, Window_Settings);
+	}
 	this->window->setFramerateLimit(Frame);
 	this->window->setVerticalSyncEnabled(Vertical_sync_enabled);
 }

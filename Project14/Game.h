@@ -8,6 +8,10 @@ class Game
 private:
 	Event event;
 	RenderWindow *window;
+	vector<VideoMode> V_VideoMode;
+	ContextSettings Window_Settings;
+
+	bool fullscreenmode;
 
 	stack<State*> states;
 

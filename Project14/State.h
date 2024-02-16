@@ -10,6 +10,7 @@ protected:
 	bool Wants_end;
 	vector<Texture> texture;
 
+
 	stack<State*>* states;
 
 	map<string, int>* supportedKey;

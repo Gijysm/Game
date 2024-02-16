@@ -8,6 +8,7 @@ class MainMenuState : public State
 {
 private:
 	RectangleShape BackGround;
+	Texture BackGroundTexture;
 	Font font;
 
 	map<string,Button*> MainMenuState_Btn;
@@ -15,6 +16,8 @@ public:
 	MainMenuState(RenderWindow* window, map<string, int>* supportedKey, stack<State*>* states);
 	virtual ~MainMenuState();
 
+	void InitVariables();
+	void InitBackGround();
 	void InitFont();
 	void InitButtons();
 	void InitKeyBinds();

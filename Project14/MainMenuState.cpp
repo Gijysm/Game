@@ -4,11 +4,11 @@
 MainMenuState::MainMenuState(RenderWindow* window, map<string, int>* supportedKey, stack<State*>* states)
 	:State(window, supportedKey, states)
 {
+	this->InitVariables();
+	this->InitBackGround();
 	this->InitFont();
 	this->InitKeyBinds();
 	this->InitButtons();
-	this->BackGround.setSize(Vector2f(window->getSize().x, window->getSize().y));
-	this->BackGround.setFillColor(Color::Red);
 }
 
 MainMenuState::~MainMenuState()
@@ -19,6 +19,25 @@ MainMenuState::~MainMenuState()
 	{
 		delete it->second;
 	}
+}
+
+void MainMenuState::InitVariables()
+{
+}
+
+void MainMenuState::InitBackGround()
+{
+	this->BackGround.setSize(
+		Vector2f(
+			static_cast<float>(this->window->getSize().x),
+			static_cast<float>(this->window->getSize().y)
+		)
+	);
+	if (!this->BackGroundTexture.loadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\Background\\20240122151658_1.jpg"))
+	{
+		throw "FAILED LOAD IMAGE";
+	}
+	this->BackGround.setTexture(&this->BackGroundTexture);
 }
 
 void MainMenuState::InitFont()
@@ -128,4 +147,13 @@ void MainMenuState::render(RenderTarget* target)
 	}
 	target->draw(this->BackGround);
 	this->renderButton(target);
+
+	/*Text MouseText;
+	MouseText.setPosition(MousePosView + Vector2f(15, 10));
+	MouseText.setFont(font);
+	MouseText.setCharacterSize(15);
+	stringstream ss;
+	ss << MousePosView.x << " " << MousePosView.y;
+	MouseText.setString(ss.str());
+	target->draw(MouseText);*/
 }
