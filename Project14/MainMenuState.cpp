@@ -50,19 +50,16 @@ void MainMenuState::InitFont()
 
 void MainMenuState::InitButtons()
 {
-	// Создаем первую кнопку с ключом "Button_NewGame"
 	this->MainMenuState_Btn["Button_NewGame"] = new Button(100, 100, 150, 50,
 		&this->font, "New Game", sf::Color(70, 70, 70, 50),
 		sf::Color(150, 170, 120, 255),
 		sf::Color(20, 20, 90, 230));
 
-	// Создаем вторую кнопку, которая сдвинута на 100 пикселей по горизонтали и 50 пикселей по вертикали относительно первой кнопки
 	this->MainMenuState_Btn["Button_Settings"] = new Button(100, 200, 150, 50,
 		&this->font, "Settings", sf::Color(70, 70, 70, 50),
 		sf::Color(150, 170, 120, 255),
 		sf::Color(20, 20, 90, 230));
 
-	// Создаем третью кнопку, которая сдвинута на 100 пикселей по горизонтали и 100 пикселей по вертикали относительно первой кнопки
 	this->MainMenuState_Btn["Button_Edit"] = new Button(100, 350, 150, 50,
 		&this->font, "Edit", sf::Color(70, 70, 70, 50),
 		sf::Color(150, 170, 120, 255),
