@@ -1,6 +1,6 @@
 #ifndef STATE_H
 #define STATE_H
-#include "Entity.h"
+#include "Player.h"
 class State
 {
 private:
@@ -8,7 +8,7 @@ private:
 protected:
 	RenderWindow* window;
 	bool Wants_end;
-	vector<Texture> texture;
+	map<string, Texture> texture;
 
 
 	stack<State*>* states;
@@ -25,10 +25,9 @@ public:
 
 	virtual void UpdateMousePosition();
 	virtual void InitKeyBinds() = 0;
-	virtual void CheckForEnd();
 	const bool& GetQuit() const;
 
-	virtual void EndState() = 0;
+	void EndState();
 	virtual void Update_Input(const float& dt) = 0;
 
 	virtual void update(const float& dt) = 0;

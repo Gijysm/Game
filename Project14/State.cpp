@@ -19,15 +19,15 @@ void State::UpdateMousePosition()
 	this->MousePosView = this->window->mapPixelToCoords(Mouse::getPosition(*this->window));
 }
 
-void State::CheckForEnd()
-{
-	if (Keyboard::isKeyPressed(Keyboard::Key(this->KeyBinds.at("Close"))))
-		this->Wants_end = true;
-}
 
 const bool& State::GetQuit() const
 {
 	return this->Wants_end;
+}
+
+void State::EndState()
+{
+	this->Wants_end = true;
 }
 
 void State::update(const float& dt)

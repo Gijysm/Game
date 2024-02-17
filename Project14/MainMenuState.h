@@ -21,7 +21,6 @@ public:
 	void InitFont();
 	void InitButtons();
 	void InitKeyBinds();
-	void EndState();
 	void Update_Input(const float& dt);
 
 	void updateButton();

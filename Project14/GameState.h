@@ -2,15 +2,18 @@
 #define GAMESTATE_H
 
 #include "State.h"
+
 class GameState:public State
 {
 private:
-	Entity player;
+	Player* player;
+	void InitKeyBinds();
+	void InitTexture();
+	void InitPlayers();
 public:
 	GameState(RenderWindow* window, map<string, int>* supportedKey, stack<State*>* states);
 	virtual ~GameState();
 
-	void InitKeyBinds();
 	void EndState();
 	void Update_Input(const float& dt);
 	

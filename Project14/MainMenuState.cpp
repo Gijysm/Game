@@ -89,21 +89,16 @@ void MainMenuState::InitKeyBinds()
 	ifs.close();
 }
 
-void MainMenuState::EndState()
-{
-	cout << "Ending_State" << "\n";
-}
 
 void MainMenuState::Update_Input(const float& dt)
 {
-	this->CheckForEnd();
 
 }
 
 void MainMenuState::updateButton()
 {
 
-	for (auto &it : this->MainMenuState_Btn)
+	for (auto& it : this->MainMenuState_Btn)
 	{
 		it.second->update(this->MousePosView);
 	}
@@ -115,7 +110,7 @@ void MainMenuState::updateButton()
 
 	if (this->MainMenuState_Btn["Button_Exit"]->isPressed())
 	{
-		this->Wants_end = true;
+		this->EndState();
 	}
 }
 

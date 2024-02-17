@@ -104,7 +104,7 @@ void Game::updateSFMLEvent()
 
 void Game::UpdateDt()
 {
-	this->dt = this->Clockdt.getElapsedTime().asSeconds();
+	this->dt = this->Clockdt.restart().asSeconds();
 }
 
 void Game::update()
