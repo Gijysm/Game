@@ -6,10 +6,10 @@ void Player::InitVariables()
 
 void Player::InitComponent()
 {
-	this->CreateMovementComponent(290.f);
+	this->CreateMovementComponent(700.f);
 }
 
-Player::Player(float x, float y, Texture* texture)
+Player::Player(float x, float y, Texture& texture)
 {
 	this->InitVariables();
 	this->InitComponent();

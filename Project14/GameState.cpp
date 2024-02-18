@@ -9,7 +9,7 @@ void GameState::InitTexture()
 
 void GameState::InitPlayers()
 {
-	this->player = new Player(0, 0, &this->texture["Player_Idle"]);
+	this->player = new Player(100, 50, this->texture["Player_Idle"]);
 }
 
 GameState::GameState(RenderWindow* window, map<string, int>* supportedKey, stack<State*>* states)

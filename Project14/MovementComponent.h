@@ -22,6 +22,8 @@ using namespace std;
 class MovementComponent
 {
 private:
+	Sprite& sprite;
+
 	float MaxVelocity;
 
 	Vector2f velocity;
@@ -31,12 +33,12 @@ protected:
 
 public:
 
-	MovementComponent(const float MaxVelocity);
+	MovementComponent(Sprite& sprite, const float MaxVelocity);
 	virtual ~MovementComponent();
 
 	const Vector2f& GetVelocity() const;
 
 	void update(const float& dt);
-	void move(const float dir_x, const float dir_y);
+	void move(const float dir_x, const float dir_y, const float& dt);
 };
 #endif

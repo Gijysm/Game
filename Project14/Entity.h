@@ -10,7 +10,7 @@ private:
 	void InitVariables();
 
 protected:
-	Sprite* sprite;
+	Sprite sprite;
 	MovementComponent* Movecomponent;
 
 public:
@@ -18,7 +18,7 @@ public:
 	virtual ~Entity();
 
 	virtual void SetPosition(const float x, const float y);
-	void CreateSprite(Texture* texture);
+	void CreateSprite(Texture& texture);
 	void CreateMovementComponent(const float MaxVelocity);
 	virtual void move(const float& dt, const float dir_x, const float dir_y);
 

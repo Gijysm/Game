@@ -11,7 +11,7 @@ private:
 protected:
 
 public:
-	Player(float x, float y, Texture* texture);
+	Player(float x, float y, Texture& texture);
 	virtual ~Player();
 };
 
