@@ -16,6 +16,13 @@ const Vector2f& MovementComponent::GetVelocity() const
 	return this->velocity;
 }
 
+const bool MovementComponent::Idle() const
+{
+	if (this->velocity.x == 0 && this->velocity.y == 0)
+		return true;
+	return false;
+}
+
 void MovementComponent::update(const float& dt)
 {
 	if (this->velocity.x > 0)

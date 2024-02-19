@@ -24,7 +24,14 @@ Player::~Player()
 }
 void Player::update(const float& dt)
 {
-    Entity::update(dt);
+        this->Movecomponent->update(dt);
 
-        this->animationComponent->play("IDLE", dt);
+        if (this->Movecomponent->Idle())
+        {
+            this->animationComponent->play("IDLE", dt);
+        }
+        else
+        {
+            this->animationComponent->play("WALK", dt);
+        }
 }

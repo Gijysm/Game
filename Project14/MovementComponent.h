@@ -39,6 +39,7 @@ public:
 
 	const Vector2f& GetVelocity() const;
 
+	const bool Idle() const;
 	void update(const float& dt);
 	void move(const float dir_x, const float dir_y, const float& dt);
 };
