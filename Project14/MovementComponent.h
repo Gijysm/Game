@@ -27,13 +27,14 @@ private:
 	float MaxVelocity;
 
 	Vector2f velocity;
-	Vector2f acceleration;
-	Vector2f deceleration;
+	float acceleration;
+	float deceleration;
 protected:
 
 public:
 
-	MovementComponent(Sprite& sprite, const float MaxVelocity);
+	MovementComponent(Sprite& sprite, const float MaxVelocity,
+		const float& acceleration, const float& deceleration);
 	virtual ~MovementComponent();
 
 	const Vector2f& GetVelocity() const;

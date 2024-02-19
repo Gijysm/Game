@@ -52,19 +52,19 @@ void GameState::Update_Input(const float& dt)
 {
 	if (Keyboard::isKeyPressed(Keyboard::Key(this->KeyBinds.at("MOVE_LEFT"))))
 	{
-		player->move(dt, -1.f, 0.f);
+		player->move(-1.f, 0.f, dt);
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Key(this->KeyBinds.at("MOVE_RIGHT"))))
 	{
-		player->move(dt, 1.f, 0.f);
+		player->move(1.f, 0.f, dt);
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Key(this->KeyBinds.at("MOVE_UP"))))
 	{
-		player->move(dt, 0.f, -1.f);
+		player->move(0.f, -1.f, dt);
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Key(this->KeyBinds.at("MOVE_DOWN"))))
 	{
-		player->move(dt, 0.f, 1.f);
+		player->move(0.f, 1.f, dt);
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Key(this->KeyBinds.at("Close"))))
 	{

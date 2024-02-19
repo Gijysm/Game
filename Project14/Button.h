@@ -33,9 +33,14 @@ private:
 	Color Idle_Color;
 	Color Hower_Color;
 	Color Active_Color;
+
+	Color Text_idle_Color;
+	Color Text_hower_Color;
+	Color Text_active_Color;
 public:
 	Button(float x, float y, float Width, float height,
-		Font* font, string text,
+		Font* font, string text, int Character_size, 
+		Color Text_idle_Color, Color Text_hower_Color, Color Text_active_Color,
 		Color idle_Color, Color hower_Color, Color active_Color);
 	virtual ~Button();
 

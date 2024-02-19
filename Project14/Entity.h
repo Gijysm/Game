@@ -2,7 +2,7 @@
 #define ENTITY_H
 
 #include "MovementComponent.h"
-
+#include "AnimationComponent.h"
 class Entity
 {
 private:
@@ -12,6 +12,7 @@ private:
 protected:
 	Sprite sprite;
 	MovementComponent* Movecomponent;
+	AnimationComponent* animationComponent;
 
 public:
 	Entity();
@@ -19,8 +20,10 @@ public:
 
 	virtual void SetPosition(const float x, const float y);
 	void CreateSprite(Texture& texture);
-	void CreateMovementComponent(const float MaxVelocity);
-	virtual void move(const float& dt, const float dir_x, const float dir_y);
+	void CreateMovementComponent(const float MaxVelocity,
+		const float& acceleration, const float& deceleration);
+	void CreateAnimationComponent(Texture& texture);
+	virtual void move(const float dir_x, const float dir_y, const float& dt);
 
 	virtual void update(const float& dt);
 	virtual void render(RenderTarget* target);

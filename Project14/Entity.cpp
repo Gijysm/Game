@@ -13,6 +13,7 @@ Entity::Entity()
 
 Entity::~Entity()
 {
+	delete this->Movecomponent;
 }
 
 void Entity::SetPosition(const float x, const float y)
@@ -26,12 +27,18 @@ void Entity::CreateSprite(Texture& texture)
 	this->sprite.setScale(2.5, 2.5);
 }
 
-void Entity::CreateMovementComponent(const float MaxVelocity)
+void Entity::CreateMovementComponent(const float MaxVelocity,
+	const float& acceleration, const float& deceleration)
 {
-	this->Movecomponent = new MovementComponent(sprite, MaxVelocity);
+	this->Movecomponent = new MovementComponent(this->sprite, MaxVelocity, acceleration, deceleration);
 }
 
-void Entity::move(const float& dt, const float dir_x, const float dir_y)
+void Entity::CreateAnimationComponent(Texture& texture)
+{
+	this->animationComponent = new AnimationComponent(this->sprite, texture);
+}
+
+void Entity::move(const float dir_x, const float dir_y, const float& dt)
 {
 	if(this->Movecomponent)
 	{
@@ -41,7 +48,10 @@ void Entity::move(const float& dt, const float dir_x, const float dir_y)
 
 void Entity::update(const float& dt)
 {
-
+	if (this->Movecomponent)
+	{
+		this->Movecomponent->update(dt);
+	}
 }
 
 void Entity::render(RenderTarget* target)

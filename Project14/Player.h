@@ -13,6 +13,7 @@ protected:
 public:
 	Player(float x, float y, Texture& texture);
 	virtual ~Player();
+	void update(const float& dt);
 };
 
 #endif
