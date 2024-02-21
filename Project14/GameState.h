@@ -6,6 +6,7 @@
 class GameState:public State
 {
 private:
+	map<string, Texture> temp;
 	Player* player;
 	void InitKeyBinds();
 	void InitTexture();

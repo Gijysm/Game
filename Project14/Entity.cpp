@@ -33,7 +33,7 @@ void Entity::CreateMovementComponent(const float MaxVelocity,
 	this->Movecomponent = new MovementComponent(this->sprite, MaxVelocity, acceleration, deceleration);
 }
 
-void Entity::CreateAnimationComponent(Texture& texture)
+void Entity::CreateAnimationComponent(map < string, Texture>& texture)
 {
 	this->animationComponent = new AnimationComponent(this->sprite, texture);
 }

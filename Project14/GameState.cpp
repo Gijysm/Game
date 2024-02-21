@@ -2,16 +2,15 @@
 
 void GameState::InitTexture()
 {
-	map<string,Texture> temp;
 	temp["Idle"].loadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\Player\\Hero.png");
-	this->texture["Player_Idle"] = temp["Idle"];
+	this->texture["Idle"] = temp["Idle"];
 	temp["Run"].loadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\Player\\Run.png");
-	this->texture["Player_Run"] = temp["Run"];
+	this->texture["Run"] = temp["Run"];
 }
 
 void GameState::InitPlayers()
 {
-	this->player = new Player(100, 50, this->texture["Player_Run"]);
+	this->player = new Player(100, 50, this->temp);
 }
 
 GameState::GameState(RenderWindow* window, map<string, int>* supportedKey, stack<State*>* states)

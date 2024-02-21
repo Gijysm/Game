@@ -1,87 +1,85 @@
 #ifndef ANIMATIONCOMPONENT_H
 #define ANIMATIONCOMPONENT_H
 
-#include<map>
-#include<string>
-#include<iostream>
-
+#include <map>
+#include <string>
+#include <iostream>
 #include <SFML/Graphics.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/Audio.hpp>
-#include <SFML/Network.hpp>
 using namespace sf;
 using namespace std;
+
 class AnimationComponent
 {
 private:
-	Sprite& sprite;
-	Texture& textureSheet;
-	class Animation {
-	public:
-		Texture& Texturesheet;
-		Sprite& SpriTe;
-		float AnimationTimer;
-		float Timer;
-		int width;
-		int height;
-		IntRect Startrect;
-		IntRect Currentrect;
-		IntRect Endrect;
+    Sprite& sprite;
+    map<string, Texture> textureSheet;
 
-		Animation(Sprite& SpriTe, Texture& Texturesheet, float AnimationTimer, int start_frame_x, int start_frame_y,
-			int frame_x, int frame_y, int width, int height)
-			:SpriTe(SpriTe), Texturesheet(Texturesheet), width(width), height(height),
-			AnimationTimer(AnimationTimer)
-		{
-			this->Timer = 0.f;
-			this->Startrect = IntRect(start_frame_x * width, start_frame_y * height, width, height);
-			this->Currentrect = this->Startrect;
-			this->Endrect = IntRect(frame_x * width, frame_y * height, width, height);
-			this->SpriTe.setTexture(this->Texturesheet, true);
-			this->SpriTe.setTextureRect(this->Startrect);
-		}
-		void play(const float& dt)
-		{
-			this->Timer += 10.f * dt;
-			if (this->Timer >= this->AnimationTimer)
-			{
-				this->Timer = 0.f;
+    class Animation
+    {
+    public:
+        Texture& texture;
+        Sprite& sprite;
+        float animationTimer;
+        float timer;
+        int width;
+        int height;
+        IntRect startRect;
+        IntRect currentRect;
+        IntRect endRect;
 
-				// ???????????, ?? ????????? ????? ????????
-				if (this->Currentrect.top != this->Endrect.top || this->Currentrect.left != this->Endrect.left)
-				{
-					// ???????????? ????????
-					this->Currentrect.left += this->width;
-					if (this->Currentrect.left + this->width >= this->Endrect.left + this->Endrect.width)
-					{
-						this->Currentrect.left = this->Startrect.left;
-						this->Currentrect.top += this->height;
-						if (this->Currentrect.top + this->height >= this->Endrect.top + this->Endrect.height)
-						{
-							this->Currentrect.top = this->Startrect.top;
-						}
-					}
-				}
-				else
-				{
-					// ?????? ? ???????
-					this->Currentrect = this->Startrect;
-				}
+        Animation(Sprite& sprite, Texture& texture, float animationTimer, int start_frame_x, int start_frame_y,
+            int frame_x, int frame_y, int width, int height)
+            : sprite(sprite), texture(texture), width(width), height(height),
+            animationTimer(animationTimer)
+        {
+            timer = 0.f;
+            startRect = IntRect(start_frame_x * width, start_frame_y * height, width, height);
+            currentRect = startRect;
+            endRect = IntRect(frame_x * width, frame_y * height, width, height);
+            sprite.setTexture(texture, true);
+            sprite.setTextureRect(startRect);
+        }
 
-				this->SpriTe.setTextureRect(this->Currentrect);
-			}
-		}
+        void play(const float& dt)
+        {
+            timer += 10.f * dt;
+            if (timer >= animationTimer)
+            {
+                timer = 0.f;
 
-	};
-	map<string, Animation*> animation;
+                if (currentRect.top != endRect.top || currentRect.left != endRect.left)
+                {
+                    currentRect.left += width;
+                    if (currentRect.left + width >= endRect.left + endRect.width)
+                    {
+                        currentRect.left = startRect.left;
+                        currentRect.top += height;
+                        if (currentRect.top + height >= endRect.top + endRect.height)
+                        {
+                            currentRect.top = startRect.top;
+                        }
+                    }
+                }
+                else
+                {
+                    currentRect = startRect;
+                }
+
+                sprite.setTextureRect(currentRect);
+            }
+        }
+    };
+
+    map<string, Animation*> animation;
+
 public:
-	void addAnimation(const string key, float AnimationTimer, int start_frame_x, int start_frame_y,
-		int frame_x, int frame_y, int width, int height);
+    void addAnimation(const string key, float animationTimer, int start_frame_x, int start_frame_y,
+        int frame_x, int frame_y, int width, int height);
 
-	void play(const string key, const float& dt);
-	AnimationComponent(Sprite& sprite, Texture& textureSheet);
-	virtual ~AnimationComponent();
+    void play(const string key, const float& dt, const bool ver);
+
+    AnimationComponent(Sprite& sprite, map<string, Texture>& textureSheet);
+    virtual ~AnimationComponent();
 };
-#endif
 
+#endif // ANIMATIONCOMPONENT_H

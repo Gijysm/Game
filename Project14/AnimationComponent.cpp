@@ -1,29 +1,39 @@
 #include "AnimationComponent.h"
 
-
-void AnimationComponent::addAnimation(const string key, float AnimationTimer, int start_frame_x, int start_frame_y,
-	int frame_x, int frame_y, int width, int height)
+void AnimationComponent::addAnimation(const string key, float animationTimer, int start_frame_x, int start_frame_y,
+    int frame_x, int frame_y, int width, int height)
 {
-	this->sprite.scale(3, 3);
-	this->animation[key] = new Animation(this->sprite, this->textureSheet,
-		AnimationTimer, start_frame_x, start_frame_y,
-		frame_x, frame_y, width, height);
+
+    animation[key] = new Animation(sprite, textureSheet[key],
+        animationTimer, start_frame_x, start_frame_y,
+        frame_x, frame_y, width, height);
+
 }
 
-void AnimationComponent::play(const string key, const float& dt)
+void AnimationComponent::play(const string key, const float& dt, const bool ver)
 {
-	this->animation[key]->play(dt);
+    bool found = false;
+    if (ver)
+    {
+        this->animation[key]->sprite.setTexture(textureSheet[key]);
+        this->animation[key]->play(dt);
+        found = true;
+    }
+    else
+    { 
+    }
 }
 
-AnimationComponent::AnimationComponent(Sprite& sprite, Texture& textureSheet)
-	:sprite(sprite), textureSheet(textureSheet)
+AnimationComponent::AnimationComponent(Sprite& sprite, map<string, Texture>& textureSheet)
+    : sprite(sprite), textureSheet(textureSheet)
 {
+    this->sprite.scale(3, 3);
 }
 
 AnimationComponent::~AnimationComponent()
 {
-	for (auto& i : this->animation)
-	{
-		delete i.second;
-	}
+    for (auto& i : animation)
+    {
+        delete i.second;
+    }
 }
