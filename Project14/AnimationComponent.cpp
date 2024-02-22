@@ -10,31 +10,25 @@ void AnimationComponent::addAnimation(const string key, float animationTimer, in
 
 }
 
-void AnimationComponent::play(const string key, const float& dt, const bool ver)
+void AnimationComponent::play(const string key, const float& dt)
 {
-    if (animation.find(key) != animation.end()) // ?????????, ?? ? ???????? ? ????? ??????
+    if (this->Lastanimation != animation[key])
     {
-        if (ver)
-        {
-            animation[key]->sprite.setTexture(textureSheet[key]);
-            animation[key]->play(dt);
+        if(this->Lastanimation == NULL)
+            this->Lastanimation = this->animation[key];
+        else {
+        this->Lastanimation->reset();
+        this->Lastanimation = this->animation[key];
         }
-        else
-        {
-            // ??????? ???????, ???? ??????????? (ver) ?? ????????
-            animation[key]->play(dt);
-        }
+
     }
-    else
-    {
-        // ??????? ???????, ???? ???????? ? ????? ?????? ?? ????????
-        throw "Animation not found";
-    }
+    animation[key]->sprite.setTexture(textureSheet[key]);
+    animation[key]->play(dt);
 }
 
 
 AnimationComponent::AnimationComponent(Sprite& sprite, map<string, Texture>& textureSheet)
-    : sprite(sprite), textureSheet(textureSheet)
+    : sprite(sprite), textureSheet(textureSheet), Lastanimation(NULL)
 {
     this->sprite.scale(3, 3);
 }

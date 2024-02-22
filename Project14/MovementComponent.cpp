@@ -16,12 +16,38 @@ const Vector2f& MovementComponent::GetVelocity() const
 	return this->velocity;
 }
 
-const bool MovementComponent::Idle() const
+const bool MovementComponent::GetStates(const short unsigned State) const
 {
-	if (this->velocity.x == 0 && this->velocity.y == 0)
-		return true;
+	switch (State)
+	{
+	case Movement_States::Idle:
+		if (this->velocity.x == 0 && this->velocity.y == 0)
+			return true;
+		break;
+	case Movement_States::Moving:
+		if (this->velocity.x != 0 || this->velocity.y != 0)
+			return true;
+		break;
+	case Movement_States::Moving_Left:
+		if (this->velocity.x < 0)
+			return true;
+		break;
+	case Movement_States::Moving_Right:
+		if (this->velocity.x > 0)
+			return true;
+		break;
+	case Movement_States::Moving_Up:
+		if (this->velocity.y < 0)
+			return true;
+		break;
+	case Movement_States::Moving_Down:
+		if (this->velocity.y > 0)
+			return true;
+		break;
+	}
 	return false;
 }
+
 
 void MovementComponent::update(const float& dt)
 {

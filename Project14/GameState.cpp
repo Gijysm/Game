@@ -10,7 +10,7 @@ void GameState::InitTexture()
 
 void GameState::InitPlayers()
 {
-	this->player = new Player(100, 50, this->temp);
+	this->player = new Player(0, 0, this->temp);
 }
 
 GameState::GameState(RenderWindow* window, map<string, int>* supportedKey, stack<State*>* states)
@@ -46,7 +46,7 @@ void GameState::InitKeyBinds()
 
 void GameState::EndState()
 {
-	cout << "Ending_State" << "\n";
+	this->Wants_end = true;
 }
 
 void GameState::Update_Input(const float& dt)
@@ -69,7 +69,7 @@ void GameState::Update_Input(const float& dt)
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Key(this->KeyBinds.at("Close"))))
 	{
-		this->GetQuit();
+		this->EndState();
 	}
 }
 

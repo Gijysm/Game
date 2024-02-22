@@ -60,6 +60,9 @@
     <ClCompile Include="MovementComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="EditorState.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="State.h">
@@ -87,6 +90,9 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="GameState.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorState.h">
       <Filter>State</Filter>
     </ClInclude>
   </ItemGroup>

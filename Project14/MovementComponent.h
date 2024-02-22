@@ -19,6 +19,15 @@
 using namespace sf;
 using namespace std;
 
+enum Movement_States {
+	Idle = 0,
+	Moving,
+	Moving_Left,
+	Moving_Right,
+	Moving_Up,
+	Moving_Down
+};
+
 class MovementComponent
 {
 private:
@@ -39,7 +48,8 @@ public:
 
 	const Vector2f& GetVelocity() const;
 
-	const bool Idle() const;
+	const bool GetStates(const short unsigned State) const;
+
 	void update(const float& dt);
 	void move(const float dir_x, const float dir_y, const float& dt);
 };

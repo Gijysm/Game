@@ -115,6 +115,10 @@ void MainMenuState::updateButton()
 	{
 		this->states->push(new GameState(this->window, this->supportedKey, this->states));
 	}
+	if (this->MainMenuState_Btn["Button_Edit"]->isPressed())
+	{
+		this->states->push(new EditorState(this->window, this->supportedKey, this->states));
+	}
 
 	if (this->MainMenuState_Btn["Button_Exit"]->isPressed())
 	{

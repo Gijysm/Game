@@ -4,11 +4,6 @@ void Player::InitVariables()
 {
 }
 
-void Player::InitComponent()
-{
-	this->CreateMovementComponent(500.f, 15,5);
-}
-
 Player::Player(float x, float y, map < string, Texture>& texture_sheet)
 {
 	this->InitVariables();
@@ -27,12 +22,12 @@ void Player::update(const float& dt)
 {
         this->Movecomponent->update(dt);
 
-        if (this->Movecomponent->Idle())
+        if (this->Movecomponent->GetStates(Idle))
         {
-            this->animationComponent->play("Idle", dt, true);
+            this->animationComponent->play("Idle", dt);
         }
-        else
+        if (this->Movecomponent->GetStates(Moving_Right))
         {
-            this->animationComponent->play("Run", dt, true);
+            this->animationComponent->play("Run", dt);
         }
 }

@@ -1,21 +1,18 @@
-#ifndef MAINMENUSTATE_H
-#define MAINMENUSTATE_H
-
+#ifndef EDITORSTATE_H
+#define EDITORSTATE_H
+#include "State.h"
 #include "Button.h"
-#include "EditorState.h"
-#include "GameState.h"
-
-class MainMenuState : public State
+class EditorState:public State
 {
 private:
 	RectangleShape BackGround;
 	Texture BackGroundTexture;
 	Font font;
 
-	map<string,Button*> MainMenuState_Btn;
+	map<string, Button*> MainMenuState_Btn;
 public:
-	MainMenuState(RenderWindow* window, map<string, int>* supportedKey, stack<State*>* states);
-	virtual ~MainMenuState();
+	EditorState(RenderWindow* window, map<string, int>* supportedKey, stack<State*>* states);
+	virtual ~EditorState();
 
 	void InitVariables();
 	void InitBackGround();
@@ -30,5 +27,4 @@ public:
 	void update(const float& dt);
 	void render(RenderTarget* target = NULL);
 };
-
-#endif // !MAINMENUSTATE_H
+#endif

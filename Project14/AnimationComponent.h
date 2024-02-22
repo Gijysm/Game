@@ -68,15 +68,21 @@ private:
                 sprite.setTextureRect(currentRect);
             }
         }
+        void reset()
+        {
+            this->timer = 0;
+            this->currentRect = startRect;
+        }
     };
 
     map<string, Animation*> animation;
+    Animation* Lastanimation;
 
 public:
     void addAnimation(const string key, float animationTimer, int start_frame_x, int start_frame_y,
         int frame_x, int frame_y, int width, int height);
 
-    void play(const string key, const float& dt, const bool ver);
+    void play(const string key, const float& dt);
 
     AnimationComponent(Sprite& sprite, map<string, Texture>& textureSheet);
     virtual ~AnimationComponent();
