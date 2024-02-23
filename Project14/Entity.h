@@ -1,6 +1,7 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
+#include "HitboxComponent.h"
 #include "MovementComponent.h"
 #include "AnimationComponent.h"
 class Entity
@@ -11,6 +12,7 @@ private:
 
 protected:
 	Sprite sprite;
+	HitboxComponent* hitboxComponent;
 	MovementComponent* Movecomponent;
 	AnimationComponent* animationComponent;
 
@@ -19,6 +21,9 @@ public:
 	virtual ~Entity();
 
 	virtual void SetPosition(const float x, const float y);
+	void CreateHitBoxComponent(Sprite& sprite,
+		double off_set_x, double off_set_y,
+		float width, float height);
 	void CreateSprite(Texture& texture);
 	void CreateMovementComponent(const float MaxVelocity,
 		const float& acceleration, const float& deceleration);
@@ -26,7 +31,7 @@ public:
 	virtual void move(const float dir_x, const float dir_y, const float& dt);
 
 	virtual void update(const float& dt);
-	virtual void render(RenderTarget* target);
+	virtual void render(RenderTarget& target);
 };
 
 

@@ -86,5 +86,5 @@ void GameState::render(RenderTarget* target)
 	{
 		target = this->window;
 	}
-		this->player->render(target);
+		this->player->render(*target);
 }

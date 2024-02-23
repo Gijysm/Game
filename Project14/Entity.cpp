@@ -2,23 +2,33 @@
 
 void Entity::InitVariables()
 {
+	this->animationComponent = NULL;
 	this->Movecomponent = NULL;
+	this->hitboxComponent = NULL;
 }
 
 Entity::Entity()
 {
 	this->InitVariables();
-
 }
 
 Entity::~Entity()
 {
 	delete this->Movecomponent;
+	delete this->animationComponent;
+	delete this->hitboxComponent;
 }
 
 void Entity::SetPosition(const float x, const float y)
 {
 	this->sprite.setPosition(x, y);
+}
+
+void Entity::CreateHitBoxComponent(Sprite& sprite, double off_set_x, double off_set_y,
+	float width, float height)
+{
+	this->hitboxComponent = new HitboxComponent(sprite, off_set_x, off_set_y,
+		width, height);
 }
 
 void Entity::CreateSprite(Texture& texture)
@@ -54,7 +64,11 @@ void Entity::update(const float& dt)
 	}
 }
 
-void Entity::render(RenderTarget* target)
+void Entity::render(RenderTarget& target)
 {
-	target->draw(this->sprite);
+	target.draw(this->sprite);
+	if (this->hitboxComponent)
+	{
+		this->hitboxComponent->render(target);
+	}
 }

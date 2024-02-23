@@ -25,7 +25,7 @@ public:
 	void Update_Input(const float& dt);
 
 	void updateButton();
-	void renderButton(RenderTarget* target = NULL);
+	void renderButton(RenderTarget& target);
 
 	void update(const float& dt);
 	void render(RenderTarget* target = NULL);

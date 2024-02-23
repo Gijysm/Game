@@ -63,6 +63,9 @@
     <ClCompile Include="EditorState.cpp">
       <Filter>State</Filter>
     </ClCompile>
+    <ClCompile Include="HitboxComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="State.h">
@@ -94,6 +97,9 @@
     </ClInclude>
     <ClInclude Include="EditorState.h">
       <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="HitboxComponent.h">
+      <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

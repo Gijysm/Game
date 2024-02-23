@@ -73,12 +73,12 @@ void EditorState::updateButton()
 {
 }
 
-void EditorState::renderButton(RenderTarget* target)
+void EditorState::renderButton(RenderTarget& target)
 {
 
 	for (auto& it : this->MainMenuState_Btn)
 	{
-		it.second->render(target);;
+		it.second->render(&target);
 	}
 }
 
@@ -97,7 +97,7 @@ void EditorState::render(RenderTarget* target)
 		target = this->window;
 	}
 	target->draw(this->BackGround);
-	this->renderButton(target);
+	this->renderButton(*target);
 
 	/*Text MouseText;
 	MouseText.setPosition(MousePosView + Vector2f(15, 10));
