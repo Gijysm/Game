@@ -39,10 +39,9 @@ private:
             sprite.setTexture(texture, true);
             sprite.setTextureRect(startRect);
         }
-
         void play(const float& dt)
         {
-            timer += 10.f * dt;
+            timer += 100.f * dt;
             if (timer >= animationTimer)
             {
                 timer = 0.f;
@@ -53,10 +52,45 @@ private:
                     if (currentRect.left + width >= endRect.left + endRect.width)
                     {
                         currentRect.left = startRect.left;
-                        currentRect.top += height;
-                        if (currentRect.top + height >= endRect.top + endRect.height)
+                        if (currentRect.top != endRect.top)
                         {
-                            currentRect.top = startRect.top;
+                            currentRect.top += height;
+                            if (currentRect.top + height >= endRect.top + endRect.height)
+                            {
+                                currentRect.top = startRect.top;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    currentRect = startRect;
+                }
+
+                sprite.setTextureRect(currentRect);
+            }
+        }
+        void play(const float& dt,
+            const float& modifiere, const float& modifiere_max)
+        {
+            timer +=(modifiere/modifiere_max) * 100.f * dt;
+            if (timer >= animationTimer)
+            {
+                timer = 0.f;
+
+                if (currentRect.top != endRect.top || currentRect.left != endRect.left)
+                {
+                    currentRect.left += width;
+                    if (currentRect.left + width >= endRect.left + endRect.width)
+                    {
+                        currentRect.left = startRect.left;
+                        if (currentRect.top != endRect.top)
+                        {
+                            currentRect.top += height;
+                            if (currentRect.top + height >= endRect.top + endRect.height)
+                            {
+                                currentRect.top = startRect.top;
+                            }
                         }
                     }
                 }
@@ -82,8 +116,9 @@ public:
     void addAnimation(const string key, float animationTimer, int start_frame_x, int start_frame_y,
         int frame_x, int frame_y, int width, int height);
 
+    void play(const string key, const float& dt,
+        const float& modifiere, const float& modifiere_max);
     void play(const string key, const float& dt);
-
     AnimationComponent(Sprite& sprite, map<string, Texture>& textureSheet);
     virtual ~AnimationComponent();
 };

@@ -11,6 +11,11 @@ MovementComponent::~MovementComponent()
 {
 }
 
+const float& MovementComponent::GetMaxVelocity() const
+{
+	return this->MaxVelocity;
+}
+
 const Vector2f& MovementComponent::GetVelocity() const
 {
 	return this->velocity;

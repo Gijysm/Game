@@ -2,10 +2,12 @@
 
 void GameState::InitTexture()
 {
-	temp["Idle"].loadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\Player\\Hero.png");
+	temp["Idle"].loadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\Player\\Idle.png");
 	this->texture["Idle"] = temp["Idle"];
 	temp["Run"].loadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\Player\\Run.png");
 	this->texture["Run"] = temp["Run"];
+	temp["Attack"].loadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\Player\\Attacks.png");
+	this->texture["Attack"] = temp["Attack"];
 }
 
 void GameState::InitPlayers()

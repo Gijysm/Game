@@ -46,6 +46,7 @@ public:
 		const float& acceleration, const float& deceleration);
 	virtual ~MovementComponent();
 
+	const float& GetMaxVelocity() const;
 	const Vector2f& GetVelocity() const;
 
 	const bool GetStates(const short unsigned State) const;
