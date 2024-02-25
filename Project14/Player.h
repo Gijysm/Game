@@ -6,6 +6,7 @@
 class Player:public Entity
 {
 private:
+	bool Attacking;
 	void InitVariables();
 	void InitComponent();
 protected:

@@ -9,41 +9,103 @@ void AnimationComponent::addAnimation(const string key, float animationTimer, in
         frame_x, frame_y, width, height);
 
 }
-void AnimationComponent::play(const string key, const float& dt)
+void AnimationComponent::play(const string key, const float& dt
+    , const bool priority)
 {
-    if (this->Lastanimation != animation[key])
+    if (this->AnimationPriority)
     {
-        if (this->Lastanimation == NULL)
-            this->Lastanimation = this->animation[key];
-        else {
-            this->Lastanimation->reset();
-            this->Lastanimation = this->animation[key];
-        }
+        if (this->AnimationPriority == this->animation[key])
+        {
+            if (this->Lastanimation != animation[key])
+            {
+                if (this->Lastanimation == NULL)
+                    this->Lastanimation = this->animation[key];
+                else {
+                    this->Lastanimation->reset();
+                    this->Lastanimation = this->animation[key];
+                }
 
+            }
+            animation[key]->sprite.setTexture(textureSheet[key]);
+
+            if (animation[key]->play(dt))
+            {
+                AnimationPriority = NULL;
+            }
+        }
     }
-    animation[key]->sprite.setTexture(textureSheet[key]);
-    animation[key]->play(dt);
+    else
+    {
+        if (priority)
+        {
+            this->AnimationPriority = this->animation[key];
+        }
+        if (this->Lastanimation != animation[key])
+        {
+            if (this->Lastanimation == NULL)
+                this->Lastanimation = this->animation[key];
+            else {
+                this->Lastanimation->reset();
+                this->Lastanimation = this->animation[key];
+            }
+
+        }
+        animation[key]->sprite.setTexture(textureSheet[key]);
+        animation[key]->play(dt);
+    }
+
 }
 void AnimationComponent::play(const string key, const float& dt,
-    const float& modifiere, const float& modifiere_max)
+    const float& modifiere, const float& modifiere_max, const bool priority)
 {
-    if (this->Lastanimation != animation[key])
+    if (this->AnimationPriority)
     {
-        if(this->Lastanimation == NULL)
-            this->Lastanimation = this->animation[key];
-        else {
-        this->Lastanimation->reset();
-        this->Lastanimation = this->animation[key];
-        }
+        if (this->AnimationPriority == this->animation[key])
+        {
+            if (this->Lastanimation != animation[key])
+            {
+                if (this->Lastanimation == NULL)
+                    this->Lastanimation = this->animation[key];
+                else {
+                    this->Lastanimation->reset();
+                    this->Lastanimation = this->animation[key];
+                }
 
+            }
+            animation[key]->sprite.setTexture(textureSheet[key]);
+
+            if (animation[key]->play(dt, abs(modifiere / modifiere_max)))
+            {
+                AnimationPriority = NULL;
+            }
+        }
     }
+    else
+    {
+        if (priority)
+        {
+            this->AnimationPriority = this->animation[key];
+        }
+        if (this->Lastanimation != animation[key])
+        {
+            if (this->Lastanimation == NULL)
+                this->Lastanimation = this->animation[key];
+            else {
+                this->Lastanimation->reset();
+                this->Lastanimation = this->animation[key];
+            }
+
+        }
     animation[key]->sprite.setTexture(textureSheet[key]);
-    animation[key]->play(dt, modifiere, modifiere_max);
+    animation[key]->play(dt, abs(modifiere/modifiere_max));
+    }
+
 }
 
 
 AnimationComponent::AnimationComponent(Sprite& sprite, map<string, Texture>& textureSheet)
-    : sprite(sprite), textureSheet(textureSheet), Lastanimation(NULL)
+    : sprite(sprite), textureSheet(textureSheet), 
+    Lastanimation(NULL), AnimationPriority(NULL)
 {
     this->sprite.setScale(3, 3);
 }
