@@ -16,7 +16,7 @@ void GameState::InitPlayers()
 }
 
 GameState::GameState(RenderWindow* window, map<string, int>* supportedKey, stack<State*>* states)
-	:State(window, supportedKey, states)
+	:State(window, supportedKey, states), pmenu(*window)
 {
 	this->InitKeyBinds();
 	this->InitTexture();
@@ -48,7 +48,7 @@ void GameState::InitKeyBinds()
 
 void GameState::EndState()
 {
-	this->Wants_end = true;
+	this->Exit = true;
 }
 
 void GameState::Update_Input(const float& dt)
@@ -71,15 +71,29 @@ void GameState::Update_Input(const float& dt)
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Key(this->KeyBinds.at("Close"))))
 	{
-		this->EndState();
+		if (!this->paused)
+		{
+			this->PausedState();
+		}
+		/*else
+		{
+			this->UnPausedState();
+		}*/
 	}
 }
 
 void GameState::update(const float& dt)
 {
-	this->UpdateMousePosition();
-	this->Update_Input(dt);
-	this->player->update(dt);
+	if(!this->paused)
+	{
+		this->UpdateMousePosition();
+		this->Update_Input(dt);
+		this->player->update(dt);
+	}
+	else
+	{
+		this->pmenu.update();
+	}
 }
 
 void GameState::render(RenderTarget* target)
@@ -88,5 +102,9 @@ void GameState::render(RenderTarget* target)
 	{
 		target = this->window;
 	}
-		this->player->render(*target);
+	this->player->render(*target);
+	if (this->paused)
+	{
+		this->pmenu.render(*target);
+	}
 }

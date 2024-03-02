@@ -3,7 +3,8 @@
 State::State(RenderWindow* window, map<string, int>* supportedKey, stack<State*>* states)
 {
 	this->window = window;
-	this->Wants_end = false;
+	this->Exit = false;
+	this->paused = false;
 	this->states = states;
 	this->supportedKey = supportedKey;
 }
@@ -22,12 +23,22 @@ void State::UpdateMousePosition()
 
 const bool& State::GetQuit() const
 {
-	return this->Wants_end;
+	return this->Exit;
 }
 
 void State::EndState()
 {
-	this->Wants_end = true;
+	this->Exit = true;
+}
+
+void State::PausedState()
+{
+	this->paused = true;
+}
+
+void State::UnPausedState()
+{
+	this->paused = false;
 }
 
 void State::update(const float& dt)

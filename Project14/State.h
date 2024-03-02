@@ -7,7 +7,8 @@ private:
 
 protected:
 	RenderWindow* window;
-	bool Wants_end;
+	bool Exit;
+	bool paused;
 	map<string, Texture> texture;
 
 
@@ -28,6 +29,9 @@ public:
 	const bool& GetQuit() const;
 
 	void EndState();
+	void PausedState();
+	void UnPausedState();
+
 	virtual void Update_Input(const float& dt) = 0;
 
 	virtual void update(const float& dt) = 0;

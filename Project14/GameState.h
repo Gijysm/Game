@@ -2,10 +2,12 @@
 #define GAMESTATE_H
 
 #include "State.h"
+#include "PauseMenu.h"
 
 class GameState:public State
 {
 private:
+	PauseMenu pmenu;
 	map<string, Texture> temp;
 	Player* player;
 	void InitKeyBinds();
