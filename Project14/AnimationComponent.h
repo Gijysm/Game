@@ -22,9 +22,11 @@ public:
     void addAnimation(const string key, float animationTimer, int start_frame_x, int start_frame_y,
         int frame_x, int frame_y, int width, int height);
 
-    void play(const string key, const float& dt,
+    const bool& IsDone(const string key);
+
+    const bool& play(const string key, const float& dt,
         const float& modifiere, const float& modifiere_max, const bool priority = false);
-    void play(const string key, const float& dt, const bool priority= false);
+    const bool& play(const string key, const float& dt, const bool priority= false);
     AnimationComponent(Sprite& sprite, map<string, Texture>& textureSheet);
     virtual ~AnimationComponent();
 };
@@ -38,6 +40,7 @@ public:
     float timer;
     int width;
     int height;
+    bool done;
     IntRect startRect;
     IntRect currentRect;
     IntRect endRect;
@@ -45,18 +48,24 @@ public:
     Animation(Sprite& sprite, Texture& texture, float animationTimer, int start_frame_x, int start_frame_y,
         int frame_x, int frame_y, int width, int height)
         : sprite(sprite), texture(texture), width(width), height(height),
-        animationTimer(animationTimer)
+        animationTimer(animationTimer),timer(0.f), done(false)
     {
-        timer = 0.f;
         startRect = IntRect(start_frame_x * width, start_frame_y * height, width, height);
         currentRect = startRect;
         endRect = IntRect(frame_x * width, frame_y * height, width, height);
-        sprite.setTexture(texture, true);
-        sprite.setTextureRect(startRect);
+        
+        this->sprite.setTexture(this->texture, true);
+        this->sprite.setTextureRect(this->startRect);
     }
-    bool play(const float& dt)
+    
+    const bool& IsDone() const
     {
-        bool done = false;
+        return this->done;
+    }
+
+    const bool& play(const float& dt)
+    {
+        this->done = false;
         timer += 100.f * dt;
         if (timer >= animationTimer)
         {
@@ -74,27 +83,23 @@ public:
                         if (currentRect.top + height >= endRect.top + endRect.height)
                         {
                             currentRect.top = startRect.top;
+                            this->done = true;
                         }
                     }
                 }
-            }
-            else
-            {
-                currentRect = startRect;
-                done = true;
             }
 
             sprite.setTextureRect(currentRect);
             
         }
-        return done;
+        return this->done;
     }
-    bool play(const float& dt,
+    const bool& play(const float& dt,
         float modifiere_precent)
     {
         if (modifiere_precent < 0.5)
             modifiere_precent = 0.5;
-        bool done = false;
+        this->done = false;
         timer += modifiere_precent * 100.f * dt;
         if (timer >= animationTimer)
         {
@@ -112,20 +117,15 @@ public:
                         if (currentRect.top + height >= endRect.top + endRect.height)
                         {
                             currentRect.top = startRect.top;
+                            this->done = true;
                         }
                     }
                 }
             }
-            else
-            {
-                currentRect = startRect;
-                done = true;
-            }
-
             sprite.setTextureRect(currentRect);
             
         }
-        return done;
+        return this->done;
     }
     void reset()
     {

@@ -24,41 +24,41 @@ Player::~Player()
 }
 void Player::update(const float& dt)
 {
-        this->Movecomponent->update(dt);
+    this->Movecomponent->update(dt);
 
-        //if (Mouse::isButtonPressed(Mouse::Left))
-        //{
-        //    Attacking = true;
-        //}
-        if (Attacking)
-        {
-            this->animationComponent->play("Attack", dt, true);
-        }
-        if (this->Movecomponent->GetStates(Idle))
-        {
-            this->animationComponent->play("Idle", dt);
-        }
-        if (this->Movecomponent->GetStates(Moving_Right))
-        {
+    if (Mouse::isButtonPressed(Mouse::Button::Left)) // ?????? ????? !this->Attacking
+    {
+        this->Attacking = true;
+    }
+    if (this->Attacking)
+    {
+        if (this->animationComponent->play("Attack", dt, true))
             this->Attacking = false;
-            this->sprite.setOrigin(0, 0);
-            this->sprite.setScale(3, 3);
-            this->animationComponent->play("Run", dt, this->Movecomponent->GetVelocity().x, this->Movecomponent->GetMaxVelocity());
-        }
-        if (this->Movecomponent->GetStates(Moving_Left))
-        {
-            this->sprite.setOrigin(130, 0);
-            this->sprite.setScale(-3, 3);
-            this->animationComponent->play("Run", dt, dt, this->Movecomponent->GetVelocity().x, this->Movecomponent->GetMaxVelocity());
-        }
-        if (this->Movecomponent->GetStates(Moving_Down))
-        {
-            this->animationComponent->play("Run", dt, dt, this->Movecomponent->GetVelocity().y, this->Movecomponent->GetMaxVelocity());
-        }
-        if (this->Movecomponent->GetStates(Moving_Up))
-        {
-            this->animationComponent->play("Run", dt, dt, this->Movecomponent->GetVelocity().y, this->Movecomponent->GetMaxVelocity());
-        }
+    }
+    if (this->Movecomponent->GetStates(Idle))
+    {
+        this->animationComponent->play("Idle", dt);
+    }
+    else if (this->Movecomponent->GetStates(Moving_Right))
+    {
+        this->sprite.setOrigin(0, 0);
+        this->sprite.setScale(3, 3);
+        this->animationComponent->play("Run", dt, this->Movecomponent->GetVelocity().x, this->Movecomponent->GetMaxVelocity());
+    }
+    else if (this->Movecomponent->GetStates(Moving_Left))
+    {
+        this->sprite.setOrigin(130, 0);
+        this->sprite.setScale(-3, 3);
+        this->animationComponent->play("Run", dt, this->Movecomponent->GetVelocity().x, this->Movecomponent->GetMaxVelocity());
+    }
+    else if (this->Movecomponent->GetStates(Moving_Down))
+    {
+        this->animationComponent->play("Run", dt, this->Movecomponent->GetVelocity().y, this->Movecomponent->GetMaxVelocity());
+    }
+    else if (this->Movecomponent->GetStates(Moving_Up))
+    {
+        this->animationComponent->play("Run", dt, this->Movecomponent->GetVelocity().y, this->Movecomponent->GetMaxVelocity());
+    }
 
-        this->hitboxComponent->update();
+    this->hitboxComponent->update();
 }

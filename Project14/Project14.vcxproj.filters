@@ -25,6 +25,9 @@
     <Filter Include="Components">
       <UniqueIdentifier>{792f0464-00cc-4e41-a5f0-85b868fcf5bc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Tite">
+      <UniqueIdentifier>{e9cebc0a-2344-4219-be78-27cb32c50a1a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -66,6 +69,9 @@
     <ClCompile Include="HitboxComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Tite</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="State.h">
@@ -100,6 +106,9 @@
     </ClInclude>
     <ClInclude Include="HitboxComponent.h">
       <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Tite</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
