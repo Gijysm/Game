@@ -98,7 +98,7 @@ void MainMenuState::InitKeyBinds()
 }
 
 
-void MainMenuState::Update_Input(const float& dt)
+void MainMenuState::updateInput(const float& dt)
 {
 
 }
@@ -138,7 +138,7 @@ void MainMenuState::renderButton(RenderTarget& target)
 void MainMenuState::update(const float& dt)
 {
 	this->UpdateMousePosition();
-	this->Update_Input(dt);
+	this->updateInput(dt);
 	//cout << this->MousePosView.x << "   " << this->MousePosView.y << "\n";
 	this->updateButton();
 }

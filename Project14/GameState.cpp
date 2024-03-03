@@ -16,15 +16,28 @@ void GameState::InitPlayers()
 }
 
 GameState::GameState(RenderWindow* window, map<string, int>* supportedKey, stack<State*>* states)
-	:State(window, supportedKey, states), pmenu(*window)
+	:State(window, supportedKey, states)
 {
+	this->InitFont();
 	this->InitKeyBinds();
 	this->InitTexture();
+	this->InitPmenu();
 	this->InitPlayers();
 }
-
+void GameState::InitFont()
+{
+	if (!this->font.loadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\Font\\DungeonFont.ttf"))
+	{
+		throw "Error";
+	}
+}
+void GameState::InitPmenu()
+{
+	this->pmenu = new PauseMenu(*this->window, this->font);
+}
 GameState::~GameState()
 {
+	delete this->pmenu;
 	delete this->player;
 }
 
@@ -51,7 +64,7 @@ void GameState::EndState()
 	this->Exit = true;
 }
 
-void GameState::Update_Input(const float& dt)
+void GameState::UpdatePlayerInput(const float& dt)
 {
 	if (Keyboard::isKeyPressed(Keyboard::Key(this->KeyBinds.at("MOVE_LEFT"))))
 	{
@@ -69,30 +82,36 @@ void GameState::Update_Input(const float& dt)
 	{
 		player->move(0.f, 1.f, dt);
 	}
+
+}
+
+void GameState::updateInput(const float& dt)
+{
 	if (Keyboard::isKeyPressed(Keyboard::Key(this->KeyBinds.at("Close"))))
 	{
 		if (!this->paused)
 		{
 			this->PausedState();
 		}
-		/*else
+		else
 		{
 			this->UnPausedState();
-		}*/
+		}
 	}
 }
 
 void GameState::update(const float& dt)
 {
+	this->UpdateMousePosition();
+	this->updateInput(dt);
 	if(!this->paused)
 	{
-		this->UpdateMousePosition();
-		this->Update_Input(dt);
+		this->UpdatePlayerInput(dt);
 		this->player->update(dt);
 	}
 	else
 	{
-		this->pmenu.update();
+		this->pmenu->update();
 	}
 }
 
@@ -105,6 +124,6 @@ void GameState::render(RenderTarget* target)
 	this->player->render(*target);
 	if (this->paused)
 	{
-		this->pmenu.render(*target);
+		this->pmenu->render(*target);
 	}
 }

@@ -1,6 +1,6 @@
 #include "PauseMenu.h"
 
-PauseMenu::PauseMenu(RenderWindow& window)
+PauseMenu::PauseMenu(RenderWindow& window, Font& font):Menufont(font)
 {
 	this->BackGround.setSize(Vector2f(static_cast<float>(window.getSize().x), 
 		static_cast<float>(window.getSize().y))
@@ -12,6 +12,11 @@ PauseMenu::PauseMenu(RenderWindow& window)
 	this->container.setFillColor(Color(20, 20, 20, 200));
 	this->container.setPosition(static_cast<float>(window.getSize().x) / 2.f - this->container.getSize().x / 2.f,
 		60.f);
+	this->MenuText.setFont(Menufont);
+	this->MenuText.setFillColor(Color(255, 255, 255, 200));
+	this->MenuText.setCharacterSize(60);
+	this->MenuText.setString("PAUSED");
+	this->MenuText.setPosition(this->container.getPosition().x+55, this->container.getPosition().y+100);
 }
 
 PauseMenu::~PauseMenu()
@@ -36,4 +41,5 @@ void PauseMenu::render(RenderTarget& target)
 	{
 		it.second->render(&target);
 	}
+	target.draw(this->MenuText);
 }

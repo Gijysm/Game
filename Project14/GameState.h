@@ -7,9 +7,10 @@
 class GameState:public State
 {
 private:
-	PauseMenu pmenu;
+	PauseMenu* pmenu;
 	map<string, Texture> temp;
 	Player* player;
+	Font font;
 	void InitKeyBinds();
 	void InitTexture();
 	void InitPlayers();
@@ -18,8 +19,11 @@ public:
 	virtual ~GameState();
 
 	void EndState();
-	void Update_Input(const float& dt);
+	void UpdatePlayerInput(const float& dt);
+	void InitFont();
+	void InitPmenu();
 	
+	void updateInput(const float& dt);
 	void update(const float& dt);
 	void render(RenderTarget* target = NULL);
 };

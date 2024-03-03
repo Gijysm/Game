@@ -24,12 +24,15 @@ using namespace std;
 class PauseMenu
 {
 private:
+	Text MenuText;
+	Font& Menufont;
+
 	RectangleShape BackGround;
 	RectangleShape container;
 
 	map<string, Button*> PauseMenu_Btn;
 public:
-	PauseMenu(RenderWindow& window);
+	PauseMenu(RenderWindow& window, Font& font);
 	virtual ~PauseMenu();
 
 	void update();

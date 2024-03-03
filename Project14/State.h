@@ -32,7 +32,6 @@ public:
 	void PausedState();
 	void UnPausedState();
 
-	virtual void Update_Input(const float& dt) = 0;
 
 	virtual void update(const float& dt) = 0;
 	virtual void render(RenderTarget* target = NULL) = 0;

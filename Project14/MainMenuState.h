@@ -22,7 +22,7 @@ public:
 	void InitFont();
 	void InitButtons();
 	void InitKeyBinds();
-	void Update_Input(const float& dt);
+	void updateInput(const float& dt);
 
 	void updateButton();
 	void renderButton(RenderTarget& target);

@@ -61,7 +61,7 @@ void EditorState::InitKeyBinds()
 }
 
 
-void EditorState::Update_Input(const float& dt)
+void EditorState::updateInput(const float& dt)
 {
 	if (Keyboard::isKeyPressed(Keyboard::Key(this->KeyBinds.at("Close"))))
 	{
@@ -85,7 +85,7 @@ void EditorState::renderButton(RenderTarget& target)
 void EditorState::update(const float& dt)
 {
 	this->UpdateMousePosition();
-	this->Update_Input(dt);
+	this->updateInput(dt);
 	//cout << this->MousePosView.x << "   " << this->MousePosView.y << "\n";
 	this->updateButton();
 }
