@@ -46,7 +46,7 @@ public:
 
 	const bool isPressed() const;
 
-	void update(const Vector2f MousePos);
+	void update(const Vector2f& MousePos);
 
 	virtual void render(RenderTarget* target);
 };

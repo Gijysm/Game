@@ -34,6 +34,10 @@ void GameState::InitFont()
 void GameState::InitPmenu()
 {
 	this->pmenu = new PauseMenu(*this->window, this->font);
+	this->pmenu->AddButtons("RESUME", 250, "Resume");
+	this->pmenu->AddButtons("SAVE", 350, "SAVE");
+	this->pmenu->AddButtons("LOAD", 450, "Load");
+	this->pmenu->AddButtons("QUIT", 550, "Quit");
 }
 GameState::~GameState()
 {
@@ -111,7 +115,20 @@ void GameState::update(const float& dt)
 	}
 	else
 	{
-		this->pmenu->update();
+		this->pmenu->update(this->MousePosView);
+		this->updateButtons();
+	}
+}
+
+void GameState::updateButtons()
+{
+	if (this->pmenu->isButtonPressed("RESUME"))
+	{
+		this->UnPausedState();
+	}
+	if (this->pmenu->isButtonPressed("QUIT"))
+	{
+		this->EndState();
 	}
 }
 

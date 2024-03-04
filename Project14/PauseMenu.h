@@ -34,8 +34,11 @@ private:
 public:
 	PauseMenu(RenderWindow& window, Font& font);
 	virtual ~PauseMenu();
+	map<string, Button*>& GetButtons();
 
-	void update();
+	const bool isButtonPressed(const string& key);
+	void AddButtons(const string& key, const float& y, const string& name);
+	void update(const Vector2f& mousePosition);
 	void render(RenderTarget& target);
 };
 

@@ -46,7 +46,7 @@ const bool Button::isPressed() const
 	return false;
 }
 
-void Button::update(const Vector2f MousePos)
+void Button::update(const Vector2f& MousePos)
 {
 	this->Button_State = BTN_IDLE;
 	if (this->Shape.getGlobalBounds().contains(MousePos))

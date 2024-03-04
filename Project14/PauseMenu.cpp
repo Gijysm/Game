@@ -29,8 +29,34 @@ PauseMenu::~PauseMenu()
 	}
 }
 
-void PauseMenu::update()
+map<string, Button*>& PauseMenu::GetButtons()
 {
+	return this->PauseMenu_Btn;
+}
+
+const bool PauseMenu::isButtonPressed(const string& key) 
+{
+	return this->PauseMenu_Btn[key]->isPressed();
+}
+
+void PauseMenu::AddButtons(const string& key, const float& y, const string& name)
+{
+	float width = 150, height = 50;
+	float x = this->container.getPosition().x + this->container.getSize().x /2.f - width/2;
+	this->PauseMenu_Btn[key] = new Button(x, y, width, height,
+		&this->Menufont, name, 30, Color(100, 100, 200, 50),
+		Color(50, 150, 200, 125),
+		Color(30, 30, 70, 180), Color(100, 100, 200, 150),
+		Color(50, 150, 200, 185),
+		Color(30, 30, 70, 230));
+}
+
+void PauseMenu::update(const Vector2f& mousePosition)
+{
+	for (auto &i : PauseMenu_Btn)
+	{
+		i.second->update(mousePosition);
+	}
 }
 
 void PauseMenu::render(RenderTarget& target)

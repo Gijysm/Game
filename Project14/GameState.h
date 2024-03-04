@@ -23,6 +23,7 @@ public:
 	void InitFont();
 	void InitPmenu();
 	
+	void updateButtons();
 	void updateInput(const float& dt);
 	void update(const float& dt);
 	void render(RenderTarget* target = NULL);
