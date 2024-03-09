@@ -48,7 +48,7 @@
     <ClCompile Include="MainMenuState.cpp">
       <Filter>State</Filter>
     </ClCompile>
-    <ClCompile Include="Button.cpp">
+    <ClCompile Include="Gui.cpp">
       <Filter>Window</Filter>
     </ClCompile>
     <ClCompile Include="Entity.cpp">
@@ -78,6 +78,9 @@
     <ClCompile Include="PauseMenu.cpp">
       <Filter>GUI</Filter>
     </ClCompile>
+    <ClCompile Include="SettingsState.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="State.h">
@@ -89,7 +92,7 @@
     <ClInclude Include="MainMenuState.h">
       <Filter>State</Filter>
     </ClInclude>
-    <ClInclude Include="Button.h">
+    <ClInclude Include="Gui.h">
       <Filter>Window</Filter>
     </ClInclude>
     <ClInclude Include="Entity.h">
@@ -118,6 +121,9 @@
     </ClInclude>
     <ClInclude Include="PauseMenu.h">
       <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="SettingsState.h">
+      <Filter>State</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

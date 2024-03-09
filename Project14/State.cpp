@@ -7,6 +7,8 @@ State::State(RenderWindow* window, map<string, int>* supportedKey, stack<State*>
 	this->paused = false;
 	this->states = states;
 	this->supportedKey = supportedKey;
+	this->Keytime = 0;
+	this->KeytimeMax = 3;
 }
 
 State::~State()
@@ -20,10 +22,32 @@ void State::UpdateMousePosition()
 	this->MousePosView = this->window->mapPixelToCoords(Mouse::getPosition(*this->window));
 }
 
+void State::InitKeyBinds()
+{
+}
+
+void State::UpdateKeyTime(const float& dt)
+{
+	if (this->Keytime < this->KeytimeMax)
+	{
+		this->Keytime += 10 * dt;
+	}
+}
+
 
 const bool& State::GetQuit() const
 {
 	return this->Exit;
+}
+
+const bool State::GetKeyTime()
+{
+	if (this->Keytime > this->KeytimeMax)
+	{
+		this->Keytime = 0;
+		return true;
+	}
+	return false;
 }
 
 void State::EndState()

@@ -78,7 +78,7 @@ void EditorState::renderButton(RenderTarget& target)
 
 	for (auto& it : this->MainMenuState_Btn)
 	{
-		it.second->render(&target);
+		it.second->render(target);
 	}
 }
 

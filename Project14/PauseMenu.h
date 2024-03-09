@@ -16,11 +16,11 @@
 #include <stack>
 #include <map>
 
-#include "Button.h"
+#include "Gui.h"
 
 using namespace sf;
 using namespace std;
-
+using namespace gui;
 class PauseMenu
 {
 private:

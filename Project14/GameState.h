@@ -18,7 +18,6 @@ public:
 	GameState(RenderWindow* window, map<string, int>* supportedKey, stack<State*>* states);
 	virtual ~GameState();
 
-	void EndState();
 	void UpdatePlayerInput(const float& dt);
 	void InitFont();
 	void InitPmenu();

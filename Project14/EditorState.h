@@ -1,7 +1,7 @@
 #ifndef EDITORSTATE_H
 #define EDITORSTATE_H
 #include "State.h"
-#include "Button.h"
+#include "Gui.h"
 class EditorState:public State
 {
 private:
@@ -9,7 +9,7 @@ private:
 	Texture BackGroundTexture;
 	Font font;
 
-	map<string, Button*> MainMenuState_Btn;
+	map<string, gui::Button*> MainMenuState_Btn;
 public:
 	EditorState(RenderWindow* window, map<string, int>* supportedKey, stack<State*>* states);
 	virtual ~EditorState();

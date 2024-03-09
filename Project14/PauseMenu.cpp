@@ -65,7 +65,7 @@ void PauseMenu::render(RenderTarget& target)
 	target.draw(this->container);
 	for (auto& it : this->PauseMenu_Btn)
 	{
-		it.second->render(&target);
+		it.second->render(target);
 	}
 	target.draw(this->MenuText);
 }

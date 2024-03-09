@@ -1,26 +1,6 @@
 ﻿#include "MainMenuState.h"
 #include "GameState.h"
 
-MainMenuState::MainMenuState(RenderWindow* window, map<string, int>* supportedKey, stack<State*>* states)
-	:State(window, supportedKey, states)
-{
-	this->InitVariables();
-	this->InitBackGround();
-	this->InitFont();
-	this->InitKeyBinds();
-	this->InitButtons();
-}
-
-MainMenuState::~MainMenuState()
-{
-	auto it = this->MainMenuState_Btn.begin();
-
-	for (it = this->MainMenuState_Btn.begin(); it != this->MainMenuState_Btn.end(); it++)
-	{
-		delete it->second;
-	}
-}
-
 void MainMenuState::InitVariables()
 {
 }
@@ -50,6 +30,7 @@ void MainMenuState::InitFont()
 
 void MainMenuState::InitButtons()
 {
+	using namespace gui;
 	this->MainMenuState_Btn["Button_NewGame"] = new Button(100, 100, 150, 50,
 		&this->font, "New Game", 30, Color(100, 100, 200, 50),
 		Color(50, 150, 200, 125),
@@ -78,8 +59,6 @@ void MainMenuState::InitButtons()
 		Color(150, 0, 0, 230));
 }
 
-
-
 void MainMenuState::InitKeyBinds()
 {
 	ifstream ifs("C:\\Users\\popka\\source\\repos\\Project14\\Config\\MainMenuKey_binds.ini");
@@ -97,6 +76,25 @@ void MainMenuState::InitKeyBinds()
 	ifs.close();
 }
 
+MainMenuState::MainMenuState(RenderWindow* window, map<string, int>* supportedKey, stack<State*>* states)
+	:State(window, supportedKey, states)
+{
+	this->InitVariables();
+	this->InitBackGround();
+	this->InitFont();
+	this->InitKeyBinds();
+	this->InitButtons();
+}
+
+MainMenuState::~MainMenuState()
+{
+	auto it = this->MainMenuState_Btn.begin();
+
+	for (it = this->MainMenuState_Btn.begin(); it != this->MainMenuState_Btn.end(); it++)
+	{
+		delete it->second;
+	}
+}
 
 void MainMenuState::updateInput(const float& dt)
 {
@@ -115,6 +113,10 @@ void MainMenuState::updateButton()
 	{
 		this->states->push(new GameState(this->window, this->supportedKey, this->states));
 	}
+	if (this->MainMenuState_Btn["Button_Settings"]->isPressed())
+	{
+		this->states->push(new SettingsState(this->window, this->supportedKey, this->states));
+	}
 	if (this->MainMenuState_Btn["Button_Edit"]->isPressed())
 	{
 		this->states->push(new EditorState(this->window, this->supportedKey, this->states));
@@ -131,7 +133,7 @@ void MainMenuState::renderButton(RenderTarget& target)
 
 	for (auto& it : this->MainMenuState_Btn)
 	{
-		it.second->render(&target);
+		it.second->render(target);
 	}
 }
 

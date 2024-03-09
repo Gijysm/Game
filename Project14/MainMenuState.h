@@ -1,9 +1,10 @@
 #ifndef MAINMENUSTATE_H
 #define MAINMENUSTATE_H
 
-#include "Button.h"
+#include "Gui.h"
 #include "EditorState.h"
 #include "GameState.h"
+#include "SettingsState.h"
 
 class MainMenuState : public State
 {
@@ -12,21 +13,20 @@ private:
 	Texture BackGroundTexture;
 	Font font;
 
-	map<string,Button*> MainMenuState_Btn;
-public:
-	MainMenuState(RenderWindow* window, map<string, int>* supportedKey, stack<State*>* states);
-	virtual ~MainMenuState();
+	map<string,gui::Button*> MainMenuState_Btn;
 
 	void InitVariables();
 	void InitBackGround();
 	void InitFont();
 	void InitButtons();
 	void InitKeyBinds();
-	void updateInput(const float& dt);
+public:
+	MainMenuState(RenderWindow* window, map<string, int>* supportedKey, stack<State*>* states);
+	virtual ~MainMenuState();
 
+	void updateInput(const float& dt);
 	void updateButton();
 	void renderButton(RenderTarget& target);
-
 	void update(const float& dt);
 	void render(RenderTarget* target = NULL);
 };

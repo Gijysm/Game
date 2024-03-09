@@ -63,11 +63,6 @@ void GameState::InitKeyBinds()
 	ifs.close();
 }
 
-void GameState::EndState()
-{
-	this->Exit = true;
-}
-
 void GameState::UpdatePlayerInput(const float& dt)
 {
 	if (Keyboard::isKeyPressed(Keyboard::Key(this->KeyBinds.at("MOVE_LEFT"))))
@@ -91,7 +86,7 @@ void GameState::UpdatePlayerInput(const float& dt)
 
 void GameState::updateInput(const float& dt)
 {
-	if (Keyboard::isKeyPressed(Keyboard::Key(this->KeyBinds.at("Close"))))
+	if (Keyboard::isKeyPressed(Keyboard::Key(this->KeyBinds.at("Close"))) && this->GetKeyTime())
 	{
 		if (!this->paused)
 		{
@@ -107,6 +102,7 @@ void GameState::updateInput(const float& dt)
 void GameState::update(const float& dt)
 {
 	this->UpdateMousePosition();
+	this->UpdateKeyTime(dt);
 	this->updateInput(dt);
 	if(!this->paused)
 	{
@@ -126,7 +122,7 @@ void GameState::updateButtons()
 	{
 		this->UnPausedState();
 	}
-	if (this->pmenu->isButtonPressed("QUIT"))
+	if (this->pmenu->isButtonPressed("QUIT") && this->GetKeyTime())
 	{
 		this->EndState();
 	}
