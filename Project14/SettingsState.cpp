@@ -7,7 +7,8 @@ SettingsState::SettingsState(RenderWindow* window, map<string, int>* supportedKe
 	this->InitBackGround();
 	this->InitFont();
 	this->InitKeyBinds();
-	this->InitGui();
+	this->InitGui(); 
+	this->initText();
 }
 
 SettingsState::~SettingsState()
@@ -46,6 +47,10 @@ void SettingsState::updateGui(const float& dt)
 	{
 		this->EndState();
 	}
+	if (this->Buttons["APPLY"]->isPressed())
+	{
+		this->window->create(this->modes[this->dropdownList["RESOLUTION"]->getActiveEllementId()], "test", Style::Default);
+	}
 	for (auto& it : this->dropdownList)
 	{
 		it.second->update(this->MousePosView,dt);
@@ -82,19 +87,21 @@ void SettingsState::render(RenderTarget* target)
 	}
 	target->draw(this->BackGround);
 	this->renderGui(*target);
+	target->draw(this->optionsText);
 
-	/*Text MouseText;
+	Text MouseText;
 	MouseText.setPosition(MousePosView + Vector2f(15, 10));
 	MouseText.setFont(font);
 	MouseText.setCharacterSize(15);
 	stringstream ss;
 	ss << MousePosView.x << " " << MousePosView.y;
 	MouseText.setString(ss.str());
-	target->draw(MouseText);*/
+	target->draw(MouseText);
 }
 
 void SettingsState::InitVariables()
 {
+	this->modes = VideoMode::getFullscreenModes();
 }
 
 void SettingsState::InitBackGround()
@@ -123,14 +130,24 @@ void SettingsState::InitFont()
 void SettingsState::InitGui()
 {
 
-	this->Buttons["Button_Exit"] = new gui::Button(560, 600, 150, 50,
+	this->Buttons["Button_Exit"] = new gui::Button(960, 600, 150, 50,
 		&this->font, "Back", 30, Color(255, 0, 0, 50),
 		Color(255, 100, 100, 125),
 		Color(150, 0, 0, 180), Color(255, 0, 0, 150),
 		Color(255, 100, 100, 185),
 		Color(150, 0, 0, 230));
-	string li[] = { "1920x1080","800x600","640x480" };
-	this->dropdownList["RESOLUTION"] = new gui::DropDownList(540, 200, 200, 50, font, li, 3);
+	this->Buttons["APPLY"] = new gui::Button(160, 600, 150, 50,
+		&this->font, "Apply", 30, Color(255, 0, 0, 50),
+		Color(255, 100, 100, 125),
+		Color(150, 0, 0, 180), Color(255, 0, 0, 150),
+		Color(255, 100, 100, 185),
+		Color(150, 0, 0, 230));
+	vector<string> modes_str;
+	for (auto& i : modes)
+	{
+		modes_str.push_back(to_string(i.width) + 'X' + to_string(i.height));
+	}
+	this->dropdownList["RESOLUTION"] = new gui::DropDownList(540, 100, 200, 50, font, modes_str.data(), modes_str.size());
 }
 
 void SettingsState::InitKeyBinds()
@@ -148,4 +165,15 @@ void SettingsState::InitKeyBinds()
 		}
 	}
 	ifs.close();
+}
+
+void SettingsState::initText()
+{
+	this->optionsText.setFont(this->font);
+
+	this->optionsText.setPosition(Vector2f(100, 100));
+
+	this->optionsText.setCharacterSize(30);
+	this->optionsText.setFillColor(Color(255, 255, 255, 200));;
+	this->optionsText.setString("Resolution\nFullsreen\nVsyc\nAntialising\n");
 }

@@ -10,16 +10,18 @@ private:
 	RectangleShape BackGround;
 	Texture BackGroundTexture;
 	Font font;
+	Text optionsText;
 
 	map<string, gui::Button*> Buttons;
 	map<string, gui::DropDownList*> dropdownList;
-	gui::DropDownList* ddl;
+	vector<VideoMode> modes;
 
 	void InitVariables();
 	void InitBackGround();
 	void InitFont();
 	void InitGui();
 	void InitKeyBinds();
+	void initText();
 public:
 	SettingsState(RenderWindow* window, map<string, int>* supportedKey, stack<State*>* states);
 	virtual ~SettingsState();

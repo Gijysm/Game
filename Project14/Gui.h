@@ -31,10 +31,15 @@ namespace gui
 		RectangleShape Shape;
 		Font* font;
 		Text Text;
+		short unsigned id;
 
 		Color Idle_Color;
 		Color Hower_Color;
 		Color Active_Color;
+
+		Color OutLine_Idle_Color;
+		Color OutLine_Hower_Color;
+		Color OutLine_Active_Color;
 
 		Color Text_idle_Color;
 		Color Text_hower_Color;
@@ -43,14 +48,18 @@ namespace gui
 		Button(float x, float y, float Width, float height,
 			Font* font, string text, int Character_size,
 			Color Text_idle_Color, Color Text_hower_Color, Color Text_active_Color,
-			Color idle_Color, Color hower_Color, Color active_Color);
+			Color idle_Color, Color hower_Color, Color active_Color,
+			Color OutLine_idle_Color= Color::Transparent, Color OutLine_hower_Color = Color::Transparent, Color OutLine_active_Color = Color::Transparent,
+			short unsigned id = 0);
 		virtual ~Button();
 
 		const bool isPressed() const;
 		const string getText() const;
+		const short unsigned& getId() const;
 
 
 		void setText(const string text);
+		void setId(const short unsigned id);
 
 		void update(const Vector2f& MousePos);
 		void render(RenderTarget& target);
@@ -62,7 +71,6 @@ namespace gui
 		gui::Button* activeEllement;
 		vector<gui::Button*> list;
 
-
 		bool showlist;
 		float Keytime;
 		float KeytimeMax;
@@ -73,6 +81,7 @@ namespace gui
 
 		void UpdateKeyTime(const float& dt);
 		const bool GetKeyTime();
+		const unsigned short& getActiveEllementId() const;
 		void update(const Vector2f& MousePos, const float& dt);
 		void render(RenderTarget& target);
 	};
