@@ -1,20 +1,6 @@
 #ifndef GUI_H
 #define GUI_H
-
-#include <SFML/Audio.hpp>
-#include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/System.hpp>
-
-#include <sstream>
-#include <fstream>
-#include <iostream>
-#include <ctime>
-#include <vector>
-
-
-using namespace sf;
-using namespace std;
+#include "stdafx.h"
 
 enum Button_States{BTN_IDLE = 0, 
 BTN_HOWER, BTN_ACTIVE};

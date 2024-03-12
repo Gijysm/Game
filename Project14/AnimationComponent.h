@@ -1,12 +1,6 @@
 #ifndef ANIMATIONCOMPONENT_H
 #define ANIMATIONCOMPONENT_H
-
-#include <map>
-#include <string>
-#include <iostream>
-#include <SFML/Graphics.hpp>
-using namespace sf;
-using namespace std;
+#include "stdafx.h"
 
 class AnimationComponent
 {

@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "State.h"
 
 State::State(RenderWindow* window, map<string, int>* supportedKey, stack<State*>* states)

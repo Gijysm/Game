@@ -22,7 +22,7 @@ public:
 
 	virtual void SetPosition(const float x, const float y);
 	void CreateHitBoxComponent(Sprite& sprite,
-		double off_set_x, double off_set_y,
+		float off_set_x, float off_set_y,
 		float width, float height);
 	void CreateSprite(Texture& texture);
 	void CreateMovementComponent(const float MaxVelocity,

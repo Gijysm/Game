@@ -1,4 +1,6 @@
+#include "stdafx.h"
 #include "GameState.h"
+
 
 void GameState::InitTexture()
 {

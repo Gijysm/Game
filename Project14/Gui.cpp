@@ -1,5 +1,5 @@
+#include "stdafx.h"
 #include "Gui.h"
-
 
 gui::Button::Button(float x, float y, float Width, float height,
 	Font* font, string text, int Character_size,

@@ -1,7 +1,9 @@
+#include "stdafx.h"
 #include "HitboxComponent.h"
 
+
 HitboxComponent::HitboxComponent(Sprite& sprite,
-	double off_set_x, double off_set_y,
+	float off_set_x, float off_set_y,
 	float width, float height)
 	: sprite(sprite), Offset_x(off_set_x),
 	Offset_y(off_set_y)
@@ -26,8 +28,8 @@ bool HitboxComponent::checkIntersect(const FloatRect& frect)
 
 void HitboxComponent::update()
 {
-	this->hitbox.setPosition(this->sprite.getPosition().x + Offset_x,
-		this->sprite.getPosition().y + Offset_y);
+	this->hitbox.setPosition(float(this->sprite.getPosition().x + Offset_x),
+		float(this->sprite.getPosition().y + Offset_y));
 }
 
 void HitboxComponent::render(RenderTarget& target)

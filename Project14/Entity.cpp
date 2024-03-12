@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "Entity.h"
 
 void Entity::InitVariables()
@@ -24,7 +25,7 @@ void Entity::SetPosition(const float x, const float y)
 	this->sprite.setPosition(x, y);
 }
 
-void Entity::CreateHitBoxComponent(Sprite& sprite, double off_set_x, double off_set_y,
+void Entity::CreateHitBoxComponent(Sprite& sprite, float off_set_x, float off_set_y,
 	float width, float height)
 {
 	this->hitboxComponent = new HitboxComponent(sprite, off_set_x, off_set_y,

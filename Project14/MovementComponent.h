@@ -1,23 +1,6 @@
 #ifndef MOVEMENTCOMPONENT_H
 #define MOVEMENTCOMPONENT_H
-
-#include <SFML/Audio.hpp>
-#include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Network.hpp>
-
-#include <sstream>
-#include <fstream>
-#include <iostream>
-#include <ctime>
-#include <cstdlib>
-#include <vector>
-#include <stack>
-#include <map>
-
-using namespace sf;
-using namespace std;
+#include "stdafx.h"
 
 enum Movement_States {
 	Idle = 0,

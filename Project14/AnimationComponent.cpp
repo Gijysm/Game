@@ -1,4 +1,6 @@
+#include "stdafx.h"
 #include "AnimationComponent.h"
+
 
 void AnimationComponent::addAnimation(const string key, float animationTimer, int start_frame_x, int start_frame_y,
     int frame_x, int frame_y, int width, int height)

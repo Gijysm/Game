@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "SettingsState.h"
 
 SettingsState::SettingsState(RenderWindow* window, map<string, int>* supportedKey, stack<State*>* states)

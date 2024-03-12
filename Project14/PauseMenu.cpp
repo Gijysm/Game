@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "PauseMenu.h"
 
 PauseMenu::PauseMenu(RenderWindow& window, Font& font):Menufont(font)
