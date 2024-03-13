@@ -136,6 +136,7 @@ void GameState::render(RenderTarget* target)
 	{
 		target = this->window;
 	}
+	this->T_map.render(*target);
 	this->player->render(*target);
 	if (this->paused)
 	{

@@ -3,11 +3,13 @@
 
 #include "State.h"
 #include "PauseMenu.h"
+#include "TileMap.h"
 
 class GameState:public State
 {
 private:
 	PauseMenu* pmenu;
+	TileMap T_map;
 	map<string, Texture> temp;
 	Player* player;
 	Font font;

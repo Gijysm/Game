@@ -78,8 +78,8 @@ void MainMenuState::InitKeyBinds()
 	ifs.close();
 }
 
-MainMenuState::MainMenuState(RenderWindow* window, map<string, int>* supportedKey, stack<State*>* states)
-	:State(window, supportedKey, states)
+MainMenuState::MainMenuState(RenderWindow* window, GraphicsSettings& GfxSettings, map<string, int>* supportedKey, stack<State*>* states)
+	:State(window, supportedKey, states), GfxSettings(GfxSettings)
 {
 	this->InitVariables();
 	this->InitBackGround();
@@ -117,7 +117,7 @@ void MainMenuState::updateButton()
 	}
 	if (this->MainMenuState_Btn["Button_Settings"]->isPressed())
 	{
-		this->states->push(new SettingsState(this->window, this->supportedKey, this->states));
+		this->states->push(new SettingsState(this->window, GfxSettings, this->supportedKey, this->states));
 	}
 	if (this->MainMenuState_Btn["Button_Edit"]->isPressed())
 	{

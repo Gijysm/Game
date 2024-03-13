@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "SettingsState.h"
 
-SettingsState::SettingsState(RenderWindow* window, map<string, int>* supportedKey, stack<State*>* states)
-	: State(window, supportedKey, states)
+SettingsState::SettingsState(RenderWindow* window, GraphicsSettings& GfxSettings, map<string, int>* supportedKey, stack<State*>* states)
+	: State(window, supportedKey, states), GfxSettings(GfxSettings)
 {
 	this->InitVariables();
 	this->InitBackGround();
@@ -50,7 +50,8 @@ void SettingsState::updateGui(const float& dt)
 	}
 	if (this->Buttons["APPLY"]->isPressed())
 	{
-		this->window->create(this->modes[this->dropdownList["RESOLUTION"]->getActiveEllementId()], "test", Style::Default);
+		this->GfxSettings.resolution = this->modes[this->dropdownList["RESOLUTION"]->getActiveEllementId()];
+		this->window->create(this->GfxSettings.resolution, this->GfxSettings.title, Style::Default);
 	}
 	for (auto& it : this->dropdownList)
 	{

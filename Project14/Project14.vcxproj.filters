@@ -90,6 +90,9 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Файлы заголовков</Filter>
     </ClCompile>
+    <ClCompile Include="GraphicsSettings.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="State.h">
@@ -138,6 +141,9 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="stdafx.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsSettings.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

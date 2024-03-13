@@ -3,52 +3,27 @@
 
 void Game::initStates()
 {
-	this->states.push(new MainMenuState(this->window, &this->supportedKey, &this->states));
+	this->states.push(new MainMenuState(this->window, this->GFXSettings, &this->supportedKey, &this->states));
 }
 
 void Game::InitWindow()
 {
-	ifstream ifs("C:\\Users\\popka\\source\\repos\\Project14\\Config\\Wincon.ini");
-	string title = "None";
-	VideoMode windowBoundes = VideoMode::getDesktopMode();
-	bool fullscreenmode = false;
-	unsigned Frame = 120;
-	bool Vertical_sync_enabled = false;
-	unsigned antializing_lvl = 0;
-	
-	if (ifs.is_open())
+	if (this->GFXSettings.fullscreen)
 	{
-		getline(ifs, title);
-		ifs >> windowBoundes.width >> windowBoundes.height;
-		ifs >> fullscreenmode;
-		ifs >> Frame;
-		ifs >> Vertical_sync_enabled;
-		ifs >> antializing_lvl;
+		this->window = new RenderWindow(GFXSettings.resolution, GFXSettings.title, Style::Fullscreen, this->GFXSettings.Context_Settings);
 	}
 	else
 	{
-		throw "Error";
-		ifs.close();
+		this->window = new RenderWindow(GFXSettings.resolution, GFXSettings.title, Style::Titlebar | Style::Close, this->GFXSettings.Context_Settings);
 	}
-	ifs.close();
-
-	this->fullscreenmode = fullscreenmode;
-
-	Window_Settings.antialiasingLevel = antializing_lvl;
-	if(this->fullscreenmode)
-	{
-		this->window = new RenderWindow(windowBoundes, title, Style::Fullscreen, Window_Settings);
-	}
-	else
-	{
-		this->window = new RenderWindow(windowBoundes, title, Style::Titlebar | Style::Close, Window_Settings);
-	}
-	this->window->setFramerateLimit(Frame);
-	this->window->setVerticalSyncEnabled(Vertical_sync_enabled);
+	this->window->setFramerateLimit(this->GFXSettings.FrameRateLimit);
+	this->window->setVerticalSyncEnabled(this->GFXSettings.Vertical_sync);
 }
 
 Game::Game()
 {
+	this->InitVariabes();
+	this->InitGraphicsSettings();
 	this->InitWindow();
 	this->InitKeys();
 	this->initStates();
@@ -81,7 +56,7 @@ void Game::InitKeys()
 	}
 	for (auto i : supportedKey)
 	{
-		if(i.first != "Escape")
+		if (i.first != "Escape")
 		{
 			cout << i.first << "      " << i.second << "\n";
 		}
@@ -103,6 +78,18 @@ void Game::updateSFMLEvent()
 	}
 }
 
+void Game::InitVariabes()
+{
+	this->window = NULL;
+	this->dt = 0;
+}
+
+void Game::InitGraphicsSettings()
+{
+	this->GFXSettings.LoadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\Config\\Wincon.ini");
+
+}
+
 void Game::UpdateDt()
 {
 	this->dt = this->Clockdt.restart().asSeconds();
@@ -115,7 +102,7 @@ void Game::update()
 	if (!this->states.empty())
 	{
 		this->states.top()->update(this->dt);
-	
+
 		if (this->states.top()->GetQuit())
 		{
 			this->states.top()->EndState();
@@ -129,6 +116,7 @@ void Game::update()
 		this->window->close();
 	}
 }
+
 
 void Game::EndApplication()
 {

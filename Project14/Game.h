@@ -6,11 +6,10 @@
 class Game
 {
 private:
+
 	Event event;
 	RenderWindow *window;
-	vector<VideoMode> V_VideoMode;
-	ContextSettings Window_Settings;
-	bool fullscreenmode;
+	GraphicsSettings GFXSettings;
 
 	stack<State*> states;
 
@@ -20,6 +19,8 @@ private:
 	map<string, int> supportedKey;
 
 	void InitWindow();
+	void InitVariabes();
+	void InitGraphicsSettings();
 	void initStates();
 	void InitKeys();
 public:
