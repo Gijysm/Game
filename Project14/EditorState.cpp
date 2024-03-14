@@ -10,11 +10,14 @@ EditorState::EditorState(StateData* state_data)
 	this->InitKeyBinds();
 	this->InitButtons();
 	this->InitPmenu();
+	this->InitGui();
+	this->InitTileMap();
 }
 
 EditorState::~EditorState()
 {
 	delete this->pmenu; 
+	delete this->Tilemap;
 }
 
 
@@ -78,6 +81,19 @@ void EditorState::InitPmenu()
 	this->pmenu->AddButtons("QUIT", 550, "Quit");
 }
 
+void EditorState::InitTileMap()
+{
+	this->Tilemap = new TileMap(this->Statedata->GridSize, 10, 10);
+}
+
+void EditorState::InitGui()
+{
+	this->SelectorRect.setSize(Vector2f(this->Statedata->GridSize, this->Statedata->GridSize));
+	this->SelectorRect.setFillColor(Color::Transparent);
+	this->SelectorRect.setOutlineThickness(1);
+	this->SelectorRect.setOutlineColor(Color::Green);
+}
+
 
 void EditorState::updateInput(const float& dt)
 {
@@ -128,6 +144,11 @@ void EditorState::updateButton()
 {
 }
 
+void EditorState::updateGui()
+{
+	this->SelectorRect.setPosition(this->MousePosView);
+}
+
 void EditorState::renderPmenuButton(RenderTarget& target)
 {
 	this->pmenu->render(target);
@@ -135,6 +156,11 @@ void EditorState::renderPmenuButton(RenderTarget& target)
 
 void EditorState::renderButton(RenderTarget& target)
 {
+}
+
+void EditorState::renderGui(RenderTarget* target)
+{
+	target->draw(this->SelectorRect);
 }
 
 void EditorState::update(const float& dt)
@@ -145,6 +171,7 @@ void EditorState::update(const float& dt)
 	if (!this->paused)
 	{
 		this->KeyTime(dt);
+		this->updateGui();
 	}
 	else
 	{
@@ -160,7 +187,8 @@ void EditorState::render(RenderTarget* target)
 	{
 		target = this->window;
 	}
-	this->Map.render(*target);
+	this->Tilemap->render(*target);
+	this->renderGui(target);
 	if (paused)
 	{
 		this->renderPmenuButton(*target);

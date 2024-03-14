@@ -11,9 +11,11 @@ private:
 	vector<vector<vector<Tile>>> T_map;
 
 public:
-	TileMap();
+	TileMap(float gridSize, unsigned width, unsigned height);
 	virtual ~TileMap();
 
+	void AddTile();
+	void RemoveTile();
 	void update();
 	void render(RenderTarget& target);
 };

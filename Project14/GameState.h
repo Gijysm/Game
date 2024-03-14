@@ -8,8 +8,8 @@
 class GameState:public State
 {
 private:
+	TileMap* Tilemap;
 	PauseMenu* pmenu;
-	TileMap T_map;
 	map<string, Texture> temp;
 	Player* player;
 	Font font;
@@ -23,6 +23,7 @@ public:
 	void UpdatePlayerInput(const float& dt);
 	void InitFont();
 	void InitPmenu();
+	void InitTileMap();
 	
 	void updateButtons();
 	void updateInput(const float& dt);

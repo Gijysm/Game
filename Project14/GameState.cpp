@@ -45,6 +45,7 @@ GameState::~GameState()
 {
 	delete this->pmenu;
 	delete this->player;
+	delete this->Tilemap;
 }
 
 
@@ -136,10 +137,14 @@ void GameState::render(RenderTarget* target)
 	{
 		target = this->window;
 	}
-	this->T_map.render(*target);
 	this->player->render(*target);
 	if (this->paused)
 	{
 		this->pmenu->render(*target);
 	}
+}
+
+void GameState::InitTileMap()
+{
+	this->Tilemap = new TileMap(this->Statedata->GridSize, 10, 10);
 }

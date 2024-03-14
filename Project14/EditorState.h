@@ -12,9 +12,9 @@ class TileMap;
 class EditorState:public State
 {
 private:
-	
+	TileMap* Tilemap;
 	PauseMenu* pmenu;
-	TileMap Map; 
+	RectangleShape SelectorRect;
 	Font font;
 
 	map<string, gui::Button*> Buttons;
@@ -27,13 +27,17 @@ public:
 	void InitButtons();
 	void InitKeyBinds();
 	void InitPmenu();
+	void InitTileMap();
+	void InitGui();
 	void updateInput(const float& dt);
 
 	void KeyTime(const float& dt);
 	void updatePmenuButton();
 	void updateButton();
+	void updateGui();
 	void renderPmenuButton(RenderTarget& target);
 	void renderButton(RenderTarget& target);
+	void renderGui(RenderTarget* target);
 
 	void update(const float& dt);
 	void render(RenderTarget* target = NULL);

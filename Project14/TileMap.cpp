@@ -1,12 +1,12 @@
 #include "stdafx.h"
 #include "TileMap.h"
 
-TileMap::TileMap()
+TileMap::TileMap(float gridSize, unsigned width, unsigned height)
 {
-	this->GridSizeF = 50.f;
+	this->GridSizeF = gridSize;
 	this->GridsizeU = static_cast<unsigned>(this->GridSizeF);
-	this->maxSize.x = 10;
-	this->maxSize.y = 10;
+	this->maxSize.x = width;
+	this->maxSize.y = height;
 	this->layers = 1;
 	 
 	this->T_map.resize(this->maxSize.x);
