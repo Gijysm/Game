@@ -4,6 +4,11 @@
 #include "Gui.h"
 #include "PauseMenu.h"
 #include "TileMap.h"
+
+class State;
+class Gui;
+class PauseMenu;
+class TileMap;
 class EditorState:public State
 {
 private:
@@ -14,7 +19,7 @@ private:
 
 	map<string, gui::Button*> Buttons;
 public:
-	EditorState(RenderWindow* window, map<string, int>* supportedKey, stack<State*>* states);
+	EditorState(StateData* state_data);
 	virtual ~EditorState();
 	void InitVariables();
 	void InitBackGround();

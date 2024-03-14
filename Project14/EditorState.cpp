@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "EditorState.h"
 
-EditorState::EditorState(RenderWindow* window, map<string, int>* supportedKey, stack<State*>* states)
-	:State(window, supportedKey, states)
+EditorState::EditorState(StateData* state_data)
+	:State(state_data)
 {
 	this->InitVariables();
 	this->InitBackGround();

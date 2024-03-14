@@ -17,8 +17,8 @@ void GameState::InitPlayers()
 	this->player = new Player(0, 0, this->temp);
 }
 
-GameState::GameState(RenderWindow* window, map<string, int>* supportedKey, stack<State*>* states)
-	:State(window, supportedKey, states)
+GameState::GameState(StateData* state_data)
+	:State(state_data)
 {
 	this->InitFont();
 	this->InitKeyBinds();

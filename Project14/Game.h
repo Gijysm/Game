@@ -9,17 +9,20 @@ private:
 
 	Event event;
 	RenderWindow *window;
+	StateData Statedata;
 	GraphicsSettings GFXSettings;
 
 	stack<State*> states;
 
 	Clock Clockdt;
 	float dt;
+	float GridSize;
 
 	map<string, int> supportedKey;
 
 	void InitWindow();
 	void InitVariabes();
+	void InitStateData();
 	void InitGraphicsSettings();
 	void initStates();
 	void InitKeys();

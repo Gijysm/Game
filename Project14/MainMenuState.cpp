@@ -78,8 +78,8 @@ void MainMenuState::InitKeyBinds()
 	ifs.close();
 }
 
-MainMenuState::MainMenuState(RenderWindow* window, GraphicsSettings& GfxSettings, map<string, int>* supportedKey, stack<State*>* states)
-	:State(window, supportedKey, states), GfxSettings(GfxSettings)
+MainMenuState::MainMenuState(StateData* state_data)
+	:State(state_data)
 {
 	this->InitVariables();
 	this->InitBackGround();
@@ -113,15 +113,15 @@ void MainMenuState::updateButton()
 
 	if (this->MainMenuState_Btn["Button_NewGame"]->isPressed())
 	{
-		this->states->push(new GameState(this->window, this->supportedKey, this->states));
+		this->states->push(new GameState(this->Statedata));
 	}
 	if (this->MainMenuState_Btn["Button_Settings"]->isPressed())
 	{
-		this->states->push(new SettingsState(this->window, GfxSettings, this->supportedKey, this->states));
+		this->states->push(new SettingsState(this->Statedata));
 	}
 	if (this->MainMenuState_Btn["Button_Edit"]->isPressed())
 	{
-		this->states->push(new EditorState(this->window, this->supportedKey, this->states));
+		this->states->push(new EditorState(this->Statedata));
 	}
 
 	if (this->MainMenuState_Btn["Button_Exit"]->isPressed())

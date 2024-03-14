@@ -2,6 +2,23 @@
 #define STATE_H
 #include "Player.h"
 #include "GraphicsSettings.h"
+
+class Player;
+class GraphicsSettings;  
+class State;
+
+class StateData
+{
+private:
+
+public:
+	StateData() {};
+	float GridSize;
+	RenderWindow* window;
+	GraphicsSettings* GFXSettings;
+	map<string, int>* supportedKey; 
+	stack<State*>* states;
+};
 class State
 {
 private:
@@ -14,17 +31,20 @@ protected:
 
 
 	stack<State*>* states;
+	GraphicsSettings* GfxSettings;
+	StateData* Statedata;
 
 	map<string, int>* supportedKey;
 	map<string, int> KeyBinds;
 	float Keytime;
 	float KeytimeMax;
+	float gridSize; 
 
 	Vector2i MousePosScreen;
 	Vector2i MousePosWindow;
 	Vector2f MousePosView;
 public:
-	State(RenderWindow* window, map<string, int>* supportedKey, stack<State*>* states);
+	State(StateData* state_data);
 	virtual ~State();
 
 	const bool& GetQuit() const;

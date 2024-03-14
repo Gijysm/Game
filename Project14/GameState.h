@@ -17,7 +17,7 @@ private:
 	void InitTexture();
 	void InitPlayers();
 public:
-	GameState(RenderWindow* window, map<string, int>* supportedKey, stack<State*>* states);
+	GameState(StateData* satate_data);
 	virtual ~GameState();
 
 	void UpdatePlayerInput(const float& dt);

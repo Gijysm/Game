@@ -11,7 +11,6 @@ private:
 	Texture BackGroundTexture;
 	Font font;
 	Text optionsText;
-	GraphicsSettings& GfxSettings;
 	map<string, gui::Button*> Buttons;
 	map<string, gui::DropDownList*> dropdownList;
 	vector<VideoMode> modes;
@@ -23,7 +22,7 @@ private:
 	void InitKeyBinds();
 	void initText();
 public:
-	SettingsState(RenderWindow* window, GraphicsSettings& GfxSettings, map<string, int>* supportedKey, stack<State*>* states);
+	SettingsState(StateData* state_data);
 	virtual ~SettingsState();
 
 	void updateInput(const float& dt);
