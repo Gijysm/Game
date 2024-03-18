@@ -23,6 +23,10 @@ void State::UpdateMousePosition()
 	this->MousePosScreen = Mouse::getPosition();
 	this->MousePosWindow = Mouse::getPosition(*this->window);
 	this->MousePosView = this->window->mapPixelToCoords(Mouse::getPosition(*this->window));
+	this->MousePosGrid = Vector2u(
+		static_cast<unsigned>(this->MousePosView.x) / static_cast<unsigned>(this->gridSize),
+		static_cast<unsigned>(this->MousePosView.y) / static_cast<unsigned>(this->gridSize)
+	);
 }
 
 void State::InitKeyBinds()

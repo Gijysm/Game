@@ -83,7 +83,7 @@ void EditorState::InitPmenu()
 
 void EditorState::InitTileMap()
 {
-	this->Tilemap = new TileMap(this->Statedata->GridSize, 10, 10);
+	this->Tilemap = new TileMap(this->Statedata->GridSize, 100, 100);
 }
 
 void EditorState::InitGui()
@@ -146,7 +146,19 @@ void EditorState::updateButton()
 
 void EditorState::updateGui()
 {
-	this->SelectorRect.setPosition(this->MousePosView);
+	this->SelectorRect.setPosition(this->MousePosGrid.x * this->Statedata->GridSize, this->MousePosGrid.y * this->Statedata->GridSize);
+}
+
+void EditorState::UpdateEditorInput(const float& dt)
+{
+	if (Mouse::isButtonPressed(Mouse::Left) && this->GetKeyTime())
+	{
+		this->Tilemap->AddTile(this->MousePosGrid.x, this->MousePosGrid.y, 0);
+	}
+	if (Mouse::isButtonPressed(Mouse::Right) && this->GetKeyTime())
+	{
+		this->Tilemap->RemoveTile(this->MousePosGrid.x, this->MousePosGrid.y, 0);
+	}
 }
 
 void EditorState::renderPmenuButton(RenderTarget& target)
@@ -171,6 +183,7 @@ void EditorState::update(const float& dt)
 	if (!this->paused)
 	{
 		this->KeyTime(dt);
+		this->UpdateEditorInput(dt);
 		this->updateGui();
 	}
 	else
@@ -195,12 +208,12 @@ void EditorState::render(RenderTarget* target)
 	}
 
 
-	/*Text MouseText;
+	Text MouseText;
 	MouseText.setPosition(MousePosView + Vector2f(15, 10));
 	MouseText.setFont(font);
 	MouseText.setCharacterSize(15);
 	stringstream ss;
 	ss << MousePosView.x << " " << MousePosView.y;
 	MouseText.setString(ss.str());
-	target->draw(MouseText);*/
+	target->draw(MouseText);
 }

@@ -43,6 +43,7 @@ protected:
 	Vector2i MousePosScreen;
 	Vector2i MousePosWindow;
 	Vector2f MousePosView;
+	Vector2u MousePosGrid;
 public:
 	State(StateData* state_data);
 	virtual ~State();

@@ -35,6 +35,7 @@ public:
 	void updatePmenuButton();
 	void updateButton();
 	void updateGui();
+	void UpdateEditorInput(const float& dt);
 	void renderPmenuButton(RenderTarget& target);
 	void renderButton(RenderTarget& target);
 	void renderGui(RenderTarget* target);

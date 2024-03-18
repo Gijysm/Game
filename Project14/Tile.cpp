@@ -5,11 +5,11 @@ Tile::Tile()
 {
 }
 
-Tile::Tile(float x, float y, float gridSizeF)
+Tile::Tile(float x, float y, float gridSizeF, Texture& tex)
 {
 	
 	this->shape.setSize(Vector2f(gridSizeF, gridSizeF));
-	this->shape.setFillColor(Color::Green);
+	this->shape.setTexture(&tex);
 	this->shape.setPosition(x, y);
 }
 
