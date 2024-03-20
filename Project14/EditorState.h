@@ -16,6 +16,8 @@ private:
 	PauseMenu* pmenu;
 	RectangleShape SelectorRect;
 	Font font;
+	Text CursorText;
+	IntRect Texture_rect;
 
 	map<string, gui::Button*> Buttons;
 public:
@@ -29,6 +31,7 @@ public:
 	void InitPmenu();
 	void InitTileMap();
 	void InitGui();
+	void InitText();
 	void updateInput(const float& dt);
 
 	void KeyTime(const float& dt);

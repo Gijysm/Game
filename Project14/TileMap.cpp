@@ -21,7 +21,7 @@ TileMap::TileMap(float gridSize, unsigned width, unsigned height)
 			}
 		}
 	}
-	if (!this->tileTextureSheet.loadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\Grass\\GRASS.png"))
+	if (!this->tileSheet.loadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\Grass\\GRASS.png"))
 		throw "ERROR";
 }
 
@@ -40,7 +40,12 @@ TileMap::~TileMap()
 	}
 }
 
-void TileMap::AddTile(const unsigned x, const unsigned y, const unsigned z)
+const Texture* TileMap::getTileSheet() const
+{
+	return &this->tileSheet;
+}
+
+void TileMap::AddTile(const unsigned x, const unsigned y, const unsigned z, const IntRect& tex_rect)
 {
 	if (x < this->maxSize.x && x >= 0
 		&& y < this->maxSize.y && y >= 0
@@ -48,7 +53,7 @@ void TileMap::AddTile(const unsigned x, const unsigned y, const unsigned z)
 	{
 		if (this->T_map[x][y][z] == NULL)
 		{
-			this->T_map[x][y][z] = new Tile(x * this->GridSizeF,y * this->GridSizeF,this->GridSizeF, this->tileTextureSheet);
+			this->T_map[x][y][z] = new Tile(x * this->GridSizeF,y * this->GridSizeF,this->GridSizeF, this->tileSheet,tex_rect);
 		}
 	}
 }

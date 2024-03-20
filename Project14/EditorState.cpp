@@ -7,11 +7,12 @@ EditorState::EditorState(StateData* state_data)
 	this->InitVariables();
 	this->InitBackGround();
 	this->InitFont();
+	this->InitText();
 	this->InitKeyBinds();
 	this->InitButtons();
 	this->InitPmenu();
-	this->InitGui();
 	this->InitTileMap();
+	this->InitGui();
 }
 
 EditorState::~EditorState()
@@ -24,6 +25,7 @@ EditorState::~EditorState()
 void EditorState::InitVariables()
 {
 	this->paused = false;
+	this->Texture_rect = IntRect(0, 0, static_cast<int>(16), static_cast<int>(16));
 }
 
 void EditorState::InitBackGround()
@@ -41,12 +43,6 @@ void EditorState::InitFont()
 
 void EditorState::InitButtons()
 {
-	this->Buttons["Close"] = new Button(100, 500, 150, 50,
-		&this->font, "Close", 30, Color(255, 0, 0, 50),
-		Color(255, 100, 100, 125),
-		Color(150, 0, 0, 180), Color(255, 0, 0, 150),
-		Color(255, 100, 100, 185),
-		Color(150, 0, 0, 230));
 }
 
 
@@ -89,9 +85,18 @@ void EditorState::InitTileMap()
 void EditorState::InitGui()
 {
 	this->SelectorRect.setSize(Vector2f(this->Statedata->GridSize, this->Statedata->GridSize));
-	this->SelectorRect.setFillColor(Color::Transparent);
+	this->SelectorRect.setFillColor(Color(255,255,255,150));
 	this->SelectorRect.setOutlineThickness(1);
 	this->SelectorRect.setOutlineColor(Color::Green);
+
+	this->SelectorRect.setTexture(this->Tilemap->getTileSheet());
+}
+
+void EditorState::InitText()
+{
+	this->CursorText.setFillColor(Color::White);
+	this->CursorText.setFont(font);
+	this->CursorText.setCharacterSize(15);
 }
 
 
@@ -147,17 +152,27 @@ void EditorState::updateButton()
 void EditorState::updateGui()
 {
 	this->SelectorRect.setPosition(this->MousePosGrid.x * this->Statedata->GridSize, this->MousePosGrid.y * this->Statedata->GridSize);
+	this->SelectorRect.setTextureRect(this->Texture_rect);
+	stringstream ss;
+	this->CursorText.setPosition(MousePosView + Vector2f(15, 10));
+	ss << MousePosView.x << " " << MousePosView.y << "\n" << this->Texture_rect.left << " " << this->Texture_rect.width
+		<< "\n" << this->Texture_rect.top << " " << this->Texture_rect.height;
+	this->CursorText.setString(ss.str());
 }
 
 void EditorState::UpdateEditorInput(const float& dt)
 {
 	if (Mouse::isButtonPressed(Mouse::Left) && this->GetKeyTime())
 	{
-		this->Tilemap->AddTile(this->MousePosGrid.x, this->MousePosGrid.y, 0);
+		this->Tilemap->AddTile(this->MousePosGrid.x, this->MousePosGrid.y, 0, this->Texture_rect);
 	}
 	if (Mouse::isButtonPressed(Mouse::Right) && this->GetKeyTime())
 	{
 		this->Tilemap->RemoveTile(this->MousePosGrid.x, this->MousePosGrid.y, 0);
+	}
+	if (Keyboard::isKeyPressed(Keyboard::Right) && this->GetKeyTime() && this->Texture_rect.left < 384)
+	{
+		this->Texture_rect.left += 16;
 	}
 }
 
@@ -173,6 +188,7 @@ void EditorState::renderButton(RenderTarget& target)
 void EditorState::renderGui(RenderTarget* target)
 {
 	target->draw(this->SelectorRect);
+	target->draw(this->CursorText);
 }
 
 void EditorState::update(const float& dt)
@@ -201,19 +217,11 @@ void EditorState::render(RenderTarget* target)
 		target = this->window;
 	}
 	this->Tilemap->render(*target);
+	target->draw(this->CursorText);
 	this->renderGui(target);
 	if (paused)
 	{
 		this->renderPmenuButton(*target);
 	}
 
-
-	Text MouseText;
-	MouseText.setPosition(MousePosView + Vector2f(15, 10));
-	MouseText.setFont(font);
-	MouseText.setCharacterSize(15);
-	stringstream ss;
-	ss << MousePosView.x << " " << MousePosView.y;
-	MouseText.setString(ss.str());
-	target->draw(MouseText);
 }

@@ -8,7 +8,7 @@ protected:
 	RectangleShape shape;
 public:
 	Tile();
-	Tile(float x, float y, float gridSizeF, Texture& tex);
+	Tile(float x, float y, float gridSizeF, const Texture& tex, const IntRect& tex_rect);
 	virtual ~Tile();
 	void update();
 	void render(RenderTarget& target);
