@@ -1,0 +1,5 @@
+60 60
+50
+1
+C:\Users\popka\source\repos\Project14\All_Texture\Grass\GRASS.png
+336 112 0 0 224 112 0 0 224 112 0 0 224 112 0 0 224 112 0 0 0 0 0 0 0 0 0 0 224 112 0 0 336 112 0 0 336 112 0 0 336 112 0 0 

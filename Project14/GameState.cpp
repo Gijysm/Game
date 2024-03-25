@@ -146,5 +146,5 @@ void GameState::render(RenderTarget* target)
 
 void GameState::InitTileMap()
 {
-	this->Tilemap = new TileMap(this->Statedata->GridSize, 10, 10);
+	this->Tilemap = new TileMap(this->Statedata->GridSize, 10, 10, "C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\Grass\\GRASS.png");
 }

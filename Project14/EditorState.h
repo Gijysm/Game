@@ -14,6 +14,8 @@ class EditorState:public State
 private:
 	TileMap* Tilemap;
 	PauseMenu* pmenu;
+	TextureSelector* Texture_sel;
+	RectangleShape slidebar;
 	RectangleShape SelectorRect;
 	Font font;
 	Text CursorText;
@@ -37,7 +39,7 @@ public:
 	void KeyTime(const float& dt);
 	void updatePmenuButton();
 	void updateButton();
-	void updateGui();
+	void updateGui(const float& dt);
 	void UpdateEditorInput(const float& dt);
 	void renderPmenuButton(RenderTarget& target);
 	void renderButton(RenderTarget& target);

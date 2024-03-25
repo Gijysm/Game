@@ -214,3 +214,130 @@ void gui::DropDownList::render(RenderTarget& target)
 	}
 
 }
+
+gui::TextureSelector::TextureSelector(const float& x, const float& y, 
+	const float& width, const float& height, 
+	const float& gridSize, 
+	const Texture* texture_sheet, Font& font,
+	const string& str)
+	: active(active), gridSize(gridSize), Keytime(0), KeytimeMax(5)
+{
+	this->hiden = false;
+	this->bounds.setSize(Vector2f(width, height));
+	this->bounds.setPosition(x, y);
+	this->bounds.setFillColor(Color(50, 50, 50, 100));
+	this->bounds.setOutlineThickness(1.f);
+	this->bounds.setOutlineColor(Color(255, 255, 255, 200));
+
+	this->sheet.setTexture(*texture_sheet);
+	this->sheet.setPosition(x, y);
+
+	if (this->sheet.getGlobalBounds().width > this->bounds.getGlobalBounds().width)
+	{
+		this->sheet.setTextureRect(IntRect(0, 0, this->bounds.getGlobalBounds().width, this->sheet.getGlobalBounds().height));
+
+	}
+	if (this->sheet.getGlobalBounds().height> this->bounds.getGlobalBounds().height)
+	{
+		this->sheet.setTextureRect(IntRect(0, 0, this->sheet.getGlobalBounds().width, this->bounds.getGlobalBounds().height));
+
+	}
+	this->selector.setPosition(x, y);
+	this->selector.setSize(Vector2f(this->gridSize, this->gridSize));
+	this->selector.setFillColor(Color::Transparent);
+	this->selector.setOutlineThickness(1);
+	this->selector.setOutlineColor(Color::Red);
+
+	this->TextureRect.width = static_cast<int>(gridSize);
+	this->TextureRect.height = static_cast<int>(gridSize);
+	this->Hide_Button = new Button(1100, 620, 140, 50,
+		&font, str, 30, Color(100, 100, 200, 50),
+		Color(50, 150, 200, 125),
+		Color(30, 30, 70, 180), Color(100, 100, 200, 150),
+		Color(50, 150, 200, 185),
+		Color(30, 30, 70, 230));
+}
+
+gui::TextureSelector::~TextureSelector()
+{
+	delete this->Hide_Button;
+}
+
+const bool& gui::TextureSelector::GetActive() const
+{
+	return active;
+}
+
+const IntRect& gui::TextureSelector::getTextureRect() const
+{
+	return this->TextureRect;
+}
+
+const bool gui::TextureSelector::GetKeyTime()
+{
+	if (this->Keytime >= this->KeytimeMax)
+	{
+		this->Keytime = 0;
+		return true;
+	}
+	return false;
+}
+
+void gui::TextureSelector::UpdateKeyTime(const float& dt)
+{
+	if (this->Keytime < this->KeytimeMax)
+	{
+		this->Keytime += 10 * dt;
+	}
+}
+
+void gui::TextureSelector::update(const Vector2i& MousePosWindow, const float& dt)
+{
+	UpdateKeyTime(dt);
+	this->Hide_Button->update(static_cast<Vector2f>(MousePosWindow));
+	if (this->Hide_Button->isPressed() && this->GetKeyTime())
+	{
+		if(this->hiden)
+		{
+			this->hiden = false;
+		}
+		else
+		{
+			this->hiden = true;
+		}
+	}
+	if(!this->hiden)
+	{
+		if (this->bounds.getGlobalBounds().contains(static_cast<Vector2f>(MousePosWindow)))
+			this->active = true;
+		else
+		{
+			this->active = false;
+		}
+		if (this->active)
+		{
+			this->mousePosGrid.x = ((MousePosWindow.x - static_cast<int>(this->bounds.getPosition().x)) / static_cast<unsigned>(gridSize));
+			this->mousePosGrid.y = ((MousePosWindow.y - static_cast<int>(this->bounds.getPosition().y)) / static_cast<unsigned>(gridSize));
+			this->selector.setPosition(this->bounds.getPosition().x + this->mousePosGrid.x * this->gridSize,
+				this->bounds.getPosition().y + this->mousePosGrid.y * this->gridSize);
+			this->TextureRect.left = static_cast<int>(this->selector.getPosition().x - this->bounds.getPosition().x);
+			this->TextureRect.top = static_cast<int>(this->selector.getPosition().y - this->bounds.getPosition().y);
+
+		}
+	}
+}
+
+
+void gui::TextureSelector::render(RenderTarget& target)
+{
+	this->Hide_Button->render(target);
+	if(!this->hiden)
+	{
+		target.draw(this->bounds);
+		target.draw(this->sheet);
+		if (this->active)
+		{
+			target.draw(this->selector);
+		}
+	}
+}

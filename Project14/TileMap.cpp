@@ -1,13 +1,14 @@
 #include "stdafx.h"
 #include "TileMap.h"
 
-TileMap::TileMap(float gridSize, unsigned width, unsigned height)
+TileMap::TileMap(float gridSize, unsigned width, unsigned height,  const string& texture_file)
 {
 	this->GridSizeF = gridSize;
 	this->GridsizeU = static_cast<unsigned>(this->GridSizeF);
 	this->maxSize.x = width;
 	this->maxSize.y = height;
 	this->layers = 1;
+	this->Texture_file = texture_file;
 	 
 	this->T_map.resize(this->maxSize.x, vector<vector<Tile*>>());
 	for (int x = 0; x < this->maxSize.x; x++)
@@ -21,7 +22,7 @@ TileMap::TileMap(float gridSize, unsigned width, unsigned height)
 			}
 		}
 	}
-	if (!this->tileSheet.loadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\Grass\\GRASS.png"))
+	if (!this->tileSheet.loadFromFile(this->Texture_file))
 		throw "ERROR";
 }
 
@@ -70,6 +71,53 @@ void TileMap::RemoveTile(const unsigned x, const unsigned y, const unsigned z)
 			this->T_map[x][y][z] = NULL;
 		}
 	}
+}
+
+void TileMap::saveToFile(const string file_name)
+{
+	/*Saves the entire tilemap to txt.file
+	Format:
+	Basic:
+	Size x, y
+	gridSizee
+	layers
+	texture_file
+
+	All tiles:
+	gridPos x y, Texture rect x, y
+	*/
+	ofstream out_file;
+
+	out_file.open(file_name);
+
+	if(out_file.is_open())
+	{ 
+		out_file << this->maxSize.x << " " << this->maxSize.y << "\n"
+			<< this->GridsizeU << "\n"
+			<< this->layers << "\n"
+			<< this->Texture_file << "\n";
+		for (int x = 0; x < this->maxSize.x; x++)
+		{
+
+			for (int y = 0; y < this->maxSize.y; y++)
+			{
+				for (int z = 0; z < this->layers; z++)
+				{
+					if(this->T_map[x][y][z])
+						out_file << this->T_map[x][y][z]->getAsString() << " ";
+				}
+			}
+		}
+	}
+	else
+	{
+		throw "Bad Token";
+	}
+	out_file.close();
+}
+
+void TileMap::loadToFile(const string file_name)
+{
 }
 
 void TileMap::update()

@@ -71,6 +71,36 @@ namespace gui
 		void update(const Vector2f& MousePos, const float& dt);
 		void render(RenderTarget& target);
 	};
+	class TextureSelector
+	{
+	private:
+		RectangleShape bounds;
+		Sprite sheet;
+		RectangleShape selector;
+		Vector2u mousePosGrid;
+		Button* Hide_Button;
+		IntRect TextureRect;
+		float gridSize;
+		bool hiden;
+		bool active;
+		float Keytime;
+		float KeytimeMax;
+	public:
+		TextureSelector(const float& x, const float& y, 
+			const float& width, const float& height, 
+			const float& gridSize, 
+			const Texture* texture_sheet, Font& font, 
+			const string& str);
+		~TextureSelector();
+
+		const bool &GetActive() const;
+		const IntRect& getTextureRect() const;
+
+		const bool GetKeyTime();
+		void UpdateKeyTime(const float& dt);
+		void update(const Vector2i& MousePosWindow, const float& dt);
+		void render(RenderTarget& target);
+	};
 }
 
 #endif // !BUTTON_H
