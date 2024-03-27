@@ -16,7 +16,7 @@ protected:
 	bool collision;
 public:
 	Tile();
-	Tile(float x, float y, float gridSizeF, const Texture& tex,
+	Tile(unsigned x, unsigned y, float gridSizeF, const Texture& tex,
 		const IntRect& tex_rect, bool collision = false, short type = TileTypes::DEFAULT);
 	virtual ~Tile();
 

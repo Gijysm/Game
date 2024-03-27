@@ -7,13 +7,13 @@ Tile::Tile()
 	this->type = false;
 }
 
-Tile::Tile(float x, float y, float gridSizeF, const Texture& tex,
+Tile::Tile(unsigned x, unsigned y, float gridSizeF, const Texture& tex,
 	const IntRect& tex_rect, bool collision, short type)
 {
 	
 	this->shape.setSize(Vector2f(gridSizeF, gridSizeF));
 	this->shape.setTexture(&tex);
-	this->shape.setPosition(x, y);
+	this->shape.setPosition(static_cast<float>(x) * gridSizeF, static_cast<float>(y) * gridSizeF);
 	this->shape.setTextureRect(tex_rect);
 	this->collision = collision;
 	this->type = type; 

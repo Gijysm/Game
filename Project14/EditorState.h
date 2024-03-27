@@ -20,6 +20,8 @@ private:
 	Font font;
 	Text CursorText;
 	IntRect Texture_rect;
+	bool collision;
+	short type;
 
 	map<string, gui::Button*> Buttons;
 public:

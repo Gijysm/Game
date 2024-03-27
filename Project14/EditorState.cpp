@@ -27,6 +27,8 @@ void EditorState::InitVariables()
 {
 	this->paused = false;
 	this->Texture_rect = IntRect(0, 0, static_cast<int>(16), static_cast<int>(16));
+	this->collision = false;
+	this->type = TileTypes::DEFAULT;
 }
 
 void EditorState::InitBackGround()
@@ -80,7 +82,7 @@ void EditorState::InitPmenu()
 
 void EditorState::InitTileMap()
 {
-	this->Tilemap = new TileMap(this->Statedata->GridSize, 60, 60, "C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\Grass\\GRASS.png");
+	this->Tilemap = new TileMap(this->Statedata->GridSize,16,16, 60, 60, "C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\Grass\\GRASS.png");
 }
 
 void EditorState::InitGui()
@@ -122,9 +124,27 @@ void EditorState::updateInput(const float& dt)
 			this->UnPausedState();
 		}
 	}
-	
+	if (Keyboard::isKeyPressed(Keyboard::Key(this->KeyBinds.at("TOGGLE_COLLISION"))) && this->GetKeyTime())
+	{
+		if (this->collision)
+		{
+			this->collision = false;
+		}
+		else
+		{
+			this->collision = true;
+		}
+	}
+	if (Keyboard::isKeyPressed(Keyboard::Key(this->KeyBinds.at("TYPE_INC"))) && this->GetKeyTime())
+	{
+		++this->type;
+	}
+	if (Keyboard::isKeyPressed(Keyboard::Key(this->KeyBinds.at("TYPE_DEC"))) && this->GetKeyTime())
+	{
+		if(this->type > 0)
+			--this->type;
+	}
 }
-
 void EditorState::KeyTime(const float& dt)
 {
 	//if (Keyboard::isKeyPressed(Keyboard::Key(this->KeyBinds.at("MOVE_LEFT"))))
@@ -144,6 +164,7 @@ void EditorState::KeyTime(const float& dt)
 
 void EditorState::updatePmenuButton()
 {
+	Keyboard::C;
 	if (this->pmenu->isButtonPressed("RESUME"))
 	{
 		this->UnPausedState();
@@ -151,6 +172,10 @@ void EditorState::updatePmenuButton()
 	if (this->pmenu->isButtonPressed("SAVE"))
 	{
 		this->Tilemap->saveToFile("Ïóê.txt");
+	}
+	if (this->pmenu->isButtonPressed("LOAD"))
+	{
+		this->Tilemap->loadFromFile("Ïóê.txt");
 	}
 	if (this->pmenu->isButtonPressed("QUIT"))
 	{
@@ -174,7 +199,9 @@ void EditorState::updateGui(const float& dt)
 	this->CursorText.setPosition(MousePosView + Vector2f(15, 10));
 	ss << MousePosView.x << " " << MousePosView.y << "\n" << MousePosGrid.x << " " << MousePosGrid.y << "\n"
 		<< this->Texture_rect.left << " " << this->Texture_rect.width
-		<< "\n" << this->Texture_rect.top << " " << this->Texture_rect.height;
+		<< "\n" << this->Texture_rect.top << " " << this->Texture_rect.height
+		<< "\n" << "Collision: " << this->collision << 
+		"\n" << "Type: " << this->type;
 	this->CursorText.setString(ss.str());
 }
 
@@ -184,7 +211,7 @@ void EditorState::UpdateEditorInput(const float& dt)
 	{
 		if (!this->Texture_sel->GetActive() && !this->slidebar.getGlobalBounds().contains(Vector2f(this->MousePosWindow)))
 		{
-		this->Tilemap->AddTile(this->MousePosGrid.x, this->MousePosGrid.y, 0, this->Texture_rect);
+		this->Tilemap->AddTile(this->MousePosGrid.x, this->MousePosGrid.y, 0, this->Texture_rect, this->collision, this->type);
 		}
 		else
 		{

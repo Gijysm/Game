@@ -4,4 +4,5 @@ int main()
 {
 	Game g;
 	g.run();
+	//system("pause");
 }
