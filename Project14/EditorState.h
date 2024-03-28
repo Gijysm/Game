@@ -12,6 +12,7 @@ class TileMap;
 class EditorState:public State
 {
 private:
+	View MainView;
 	TileMap* Tilemap;
 	PauseMenu* pmenu;
 	TextureSelector* Texture_sel;
@@ -28,6 +29,7 @@ public:
 	EditorState(StateData* state_data);
 	virtual ~EditorState();
 	void InitVariables();
+	void InitView();
 	void InitBackGround();
 	void InitFont();
 	void InitButtons();

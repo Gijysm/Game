@@ -18,15 +18,18 @@ State::~State()
 {
 }
 
-void State::UpdateMousePosition()
+void State::UpdateMousePosition(View* view)
 {
 	this->MousePosScreen = Mouse::getPosition();
 	this->MousePosWindow = Mouse::getPosition(*this->window);
+	if(view)
+		this->window->setView(*view);
 	this->MousePosView = this->window->mapPixelToCoords(Mouse::getPosition(*this->window));
 	this->MousePosGrid = Vector2u(
 		static_cast<unsigned>(this->MousePosView.x) / static_cast<unsigned>(this->gridSize),
 		static_cast<unsigned>(this->MousePosView.y) / static_cast<unsigned>(this->gridSize)
 	);
+	this->window->setView(this->window->getDefaultView());
 }
 
 void State::InitKeyBinds()

@@ -51,7 +51,7 @@ public:
 	const bool& GetQuit() const;
 	const bool GetKeyTime();
 
-	virtual void UpdateMousePosition();
+	virtual void UpdateMousePosition(View* view = NULL);
 	virtual void InitKeyBinds();
 	virtual void UpdateKeyTime(const float& dt);
 	virtual void updateInput(const float& dt) = 0;

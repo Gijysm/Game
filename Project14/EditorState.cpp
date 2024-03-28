@@ -6,6 +6,7 @@ EditorState::EditorState(StateData* state_data)
 {
 	this->InitVariables();
 	this->InitBackGround();
+	this->InitView();
 	this->InitFont();
 	this->InitText();
 	this->InitKeyBinds();
@@ -29,6 +30,14 @@ void EditorState::InitVariables()
 	this->Texture_rect = IntRect(0, 0, static_cast<int>(16), static_cast<int>(16));
 	this->collision = false;
 	this->type = TileTypes::DEFAULT;
+}
+
+void EditorState::InitView()
+{
+	this->MainView.setSize(Vector2f(this->Statedata->GFXSettings->resolution.width,
+		this->Statedata->GFXSettings->resolution.height));
+	this->MainView.setCenter(this->Statedata->GFXSettings->resolution.width / 2.f,
+		this->Statedata->GFXSettings->resolution.height/ 2.f);
 }
 
 void EditorState::InitBackGround()
@@ -270,7 +279,10 @@ void EditorState::render(RenderTarget* target)
 	{
 		target = this->window;
 	}
+	target->setView(this->MainView);
 	this->Tilemap->render(*target);
+
+	target->setView(this->window->getDefaultView());
 	target->draw(this->CursorText);
 	this->renderGui(target);
 	if (paused)
