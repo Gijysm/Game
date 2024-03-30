@@ -41,7 +41,7 @@ void SettingsState::updateGui(const float& dt)
 
 	for (auto& it : this->Buttons)
 	{
-		it.second->update(this->MousePosView);
+		it.second->update(this->MousePosWindow);
 	}
 
 	if (this->Buttons["Button_Exit"]->isPressed())
@@ -55,7 +55,7 @@ void SettingsState::updateGui(const float& dt)
 	}
 	for (auto& it : this->dropdownList)
 	{
-		it.second->update(this->MousePosView,dt);
+		it.second->update(this->MousePosWindow,dt);
 	}
 
 }

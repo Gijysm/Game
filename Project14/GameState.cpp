@@ -14,12 +14,15 @@ void GameState::InitTexture()
 
 void GameState::InitPlayers()
 {
-	this->player = new Player(0, 0, this->temp);
+	this->player = new Player(500, 400, this->temp);
 }
 
 GameState::GameState(StateData* state_data)
 	:State(state_data)
 {
+	this->InitView();
+	this->InitTileMap();
+	this->InitDeferredRender();
 	this->InitFont();
 	this->InitKeyBinds();
 	this->InitTexture();
@@ -87,6 +90,21 @@ void GameState::UpdatePlayerInput(const float& dt)
 
 }
 
+void GameState::InitDeferredRender()
+{
+	this->renderTexture.create(this->Statedata->GFXSettings->resolution.width,
+		this->Statedata->GFXSettings->resolution.height);
+	this->renderSprite.setTexture(this->renderTexture.getTexture());
+	this->renderSprite.setTextureRect(IntRect(0, 0, 
+		this->Statedata->GFXSettings->resolution.width,
+		this->Statedata->GFXSettings->resolution.height));
+}
+
+void GameState::UpdateView(const float& dt)
+{
+	this->view.setCenter(this->player->getPosition());
+}
+
 void GameState::updateInput(const float& dt)
 {
 	if (Keyboard::isKeyPressed(Keyboard::Key(this->KeyBinds.at("Close"))) && this->GetKeyTime())
@@ -104,17 +122,18 @@ void GameState::updateInput(const float& dt)
 
 void GameState::update(const float& dt)
 {
-	this->UpdateMousePosition();
+	this->UpdateMousePosition(&this->view);
 	this->UpdateKeyTime(dt);
 	this->updateInput(dt);
 	if(!this->paused)
 	{
+		this->UpdateView(dt);
 		this->UpdatePlayerInput(dt);
 		this->player->update(dt);
 	}
 	else
 	{
-		this->pmenu->update(this->MousePosView);
+		this->pmenu->update(this->MousePosWindow);
 		this->updateButtons();
 	}
 }
@@ -131,20 +150,36 @@ void GameState::updateButtons()
 	}
 }
 
+void GameState::InitView()
+{
+	this->view.setSize(Vector2f(this->Statedata->GFXSettings->resolution.width,
+		this->Statedata->GFXSettings->resolution.height));
+	this->view.setCenter(this->Statedata->GFXSettings->resolution.width / 2.f,
+		this->Statedata->GFXSettings->resolution.height / 2.f);
+}
+
 void GameState::render(RenderTarget* target)
 {
 	if (!target)
 	{
 		target = this->window;
 	}
-	this->player->render(*target);
+	this->renderTexture.clear();
+	this->renderTexture.setView(this->view);
+	this->Tilemap->render(renderTexture);
+	this->player->render(this->renderTexture);
 	if (this->paused)
 	{
-		this->pmenu->render(*target);
+		this->renderTexture.setView(this->renderTexture.getDefaultView());
+		this->pmenu->render(this->renderTexture);
 	}
+	this->renderTexture.display();
+	this->renderSprite.setTexture(this->renderTexture.getTexture());
+	target->draw(this->renderSprite);
 }
 
 void GameState::InitTileMap()
 {
 	this->Tilemap = new TileMap(this->Statedata->GridSize, 16, 16, 60, 60, "C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\Grass\\GRASS.png");
+	this->Tilemap->loadFromFile("ѕук.txt");
 }

@@ -77,10 +77,10 @@ void gui::Button::setId(const short unsigned id)
 	this->id = id;
 }
 
-void gui::Button::update(const Vector2f& MousePos)
+void gui::Button::update(const Vector2i& MousePos)
 {
 	this->Button_State = BTN_IDLE;
-	if (this->Shape.getGlobalBounds().contains(MousePos))
+	if (this->Shape.getGlobalBounds().contains(static_cast<Vector2f>(MousePos)))
 	{
 		this->Button_State = BTN_HOWER;
 		if (Mouse::isButtonPressed(Mouse::Left))
@@ -172,7 +172,7 @@ const unsigned short& gui::DropDownList::getActiveEllementId() const
 
 
 //DropDown List
-void gui::DropDownList::update(const Vector2f& MousePos, const float& dt)
+void gui::DropDownList::update(const Vector2i& MousePos, const float& dt)
 {
 	this->UpdateKeyTime(dt);
 	this->activeEllement->update(MousePos);
@@ -294,7 +294,7 @@ void gui::TextureSelector::UpdateKeyTime(const float& dt)
 void gui::TextureSelector::update(const Vector2i& MousePosWindow, const float& dt)
 {
 	UpdateKeyTime(dt);
-	this->Hide_Button->update(static_cast<Vector2f>(MousePosWindow));
+	this->Hide_Button->update(MousePosWindow);
 	if (this->Hide_Button->isPressed() && this->GetKeyTime())
 	{
 		if(this->hiden)

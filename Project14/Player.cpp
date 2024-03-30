@@ -12,7 +12,7 @@ Player::Player(float x, float y, map < string, Texture>& texture_sheet)
 
 	this->SetPosition(x, y);
 
-    this->CreateHitBoxComponent(this->sprite, 155, 50, 74, 138);
+    this->CreateHitBoxComponent(this->sprite, 130, 42, 63, 115);
 	this->CreateMovementComponent(350.f, 30.f, 5.f);
 	this->CreateAnimationComponent(texture_sheet);
     this->animationComponent->addAnimation("Idle", 10.f, 0, 0, 2, 4, 128, 64);
@@ -43,13 +43,13 @@ void Player::update(const float& dt)
     else if (this->Movecomponent->GetStates(Moving_Right))
     {
         this->sprite.setOrigin(0, 0);
-        this->sprite.setScale(3, 3);
+        this->sprite.setScale(2.5, 2.5);
         this->animationComponent->play("Run", dt, this->Movecomponent->GetVelocity().x, this->Movecomponent->GetMaxVelocity());
     }
     else if (this->Movecomponent->GetStates(Moving_Left))
     {
         this->sprite.setOrigin(130, 0);
-        this->sprite.setScale(-3, 3);
+        this->sprite.setScale(-2.5, 2.5);
         this->animationComponent->play("Run", dt, this->Movecomponent->GetVelocity().x, this->Movecomponent->GetMaxVelocity());
     }
     else if (this->Movecomponent->GetStates(Moving_Down))

@@ -156,18 +156,22 @@ void EditorState::updateInput(const float& dt)
 }
 void EditorState::KeyTime(const float& dt)
 {
-	//if (Keyboard::isKeyPressed(Keyboard::Key(this->KeyBinds.at("MOVE_LEFT"))))
-	//{
-	//}
-	//if (Keyboard::isKeyPressed(Keyboard::Key(this->KeyBinds.at("MOVE_RIGHT"))))
-	//{
-	//}
-	//if (Keyboard::isKeyPressed(Keyboard::Key(this->KeyBinds.at("MOVE_UP"))))
-	//{
-	//}
-	//if (Keyboard::isKeyPressed(Keyboard::Key(this->KeyBinds.at("MOVE_DOWN"))))
-	//{
-	//}
+	if (Keyboard::isKeyPressed(Keyboard::Key(this->KeyBinds.at("MOVE_CAMERA_LEFT"))))
+	{
+		this->MainView.move(-10, 0);
+	}
+	if (Keyboard::isKeyPressed(Keyboard::Key(this->KeyBinds.at("MOVE_CAMERA_RIGHT"))))
+	{
+		this->MainView.move(10, 0);
+	}
+	if (Keyboard::isKeyPressed(Keyboard::Key(this->KeyBinds.at("MOVE_CAMERA_UP"))))
+	{
+		this->MainView.move(0,-10);
+	}
+	if (Keyboard::isKeyPressed(Keyboard::Key(this->KeyBinds.at("MOVE_CAMERA_DOWN"))))
+	{
+		this->MainView.move(0, 10);
+	}
 
 }
 
@@ -248,15 +252,21 @@ void EditorState::renderButton(RenderTarget& target)
 void EditorState::renderGui(RenderTarget* target)
 {
 	if(!this->Texture_sel->GetActive())
+	{
+		target->setView(this->MainView);
 		target->draw(this->SelectorRect);
+	}
+	target->setView(this->window->getDefaultView());
 	this->Texture_sel->render(*target);
-	target->draw(this->CursorText);
 	target->draw(this->slidebar);
+
+	target->setView(this->MainView);
+	target->draw(this->CursorText);
 }
 
 void EditorState::update(const float& dt)
 {
-	this->UpdateMousePosition();
+	this->UpdateMousePosition(&this->MainView);
 	this->UpdateKeyTime(dt);
 	this->updateInput(dt);
 	if (!this->paused)
@@ -267,7 +277,7 @@ void EditorState::update(const float& dt)
 	}
 	else
 	{
-		this->pmenu->update(this->MousePosView);
+		this->pmenu->update(this->MousePosWindow);
 		this->updatePmenuButton();
 	}
 	//cout << this->MousePosView.x << "   " << this->MousePosView.y << "\n";
@@ -283,10 +293,10 @@ void EditorState::render(RenderTarget* target)
 	this->Tilemap->render(*target);
 
 	target->setView(this->window->getDefaultView());
-	target->draw(this->CursorText);
 	this->renderGui(target);
 	if (paused)
 	{
+		target->setView(this->window->getDefaultView());
 		this->renderPmenuButton(*target);
 	}
 

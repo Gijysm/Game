@@ -121,7 +121,7 @@ AnimationComponent::AnimationComponent(Sprite& sprite, map<string, Texture>& tex
     : sprite(sprite), textureSheet(textureSheet), 
     Lastanimation(NULL), AnimationPriority(NULL)
 {
-    this->sprite.setScale(3, 3);
+    this->sprite.setScale(2.5, 2.5);
 }
 
 AnimationComponent::~AnimationComponent()

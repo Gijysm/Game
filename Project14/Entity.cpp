@@ -49,6 +49,11 @@ void Entity::CreateAnimationComponent(map < string, Texture>& texture)
 	this->animationComponent = new AnimationComponent(this->sprite, texture);
 }
 
+const Vector2f& Entity::getPosition() const
+{
+	return this->sprite.getPosition();
+}
+
 void Entity::move(const float dir_x, const float dir_y, const float& dt)
 {
 	if(this->Movecomponent)

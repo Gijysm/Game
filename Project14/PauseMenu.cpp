@@ -52,7 +52,7 @@ void PauseMenu::AddButtons(const string& key, const float& y, const string& name
 		Color(30, 30, 70, 230));
 }
 
-void PauseMenu::update(const Vector2f& mousePosition)
+void PauseMenu::update(const Vector2i& mousePosition)
 {
 	for (auto &i : PauseMenu_Btn)
 	{

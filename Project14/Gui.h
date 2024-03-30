@@ -47,7 +47,7 @@ namespace gui
 		void setText(const string text);
 		void setId(const short unsigned id);
 
-		void update(const Vector2f& MousePos);
+		void update(const  Vector2i& MousePos);
 		void render(RenderTarget& target);
 	};
 	class DropDownList
@@ -68,7 +68,7 @@ namespace gui
 		void UpdateKeyTime(const float& dt);
 		const bool GetKeyTime();
 		const unsigned short& getActiveEllementId() const;
-		void update(const Vector2f& MousePos, const float& dt);
+		void update(const Vector2i& MousePos, const float& dt);
 		void render(RenderTarget& target);
 	};
 	class TextureSelector

@@ -24,7 +24,7 @@ public:
 
 	const bool isButtonPressed(const string& key);
 	void AddButtons(const string& key, const float& y, const string& name);
-	void update(const Vector2f& mousePosition);
+	void update(const Vector2i& mousePosition);
 	void render(RenderTarget& target);
 };
 
