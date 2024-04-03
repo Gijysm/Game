@@ -32,6 +32,10 @@ public:
 	const float& GetMaxVelocity() const;
 	const Vector2f& GetVelocity() const;
 
+	void stopVelocity();
+	void stopVelocityX();
+	void stopVelocityY();
+
 	const bool GetStates(const short unsigned State) const;
 
 	void update(const float& dt);

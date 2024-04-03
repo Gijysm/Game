@@ -22,6 +22,22 @@ const Vector2f& MovementComponent::GetVelocity() const
 	return this->velocity;
 }
 
+void MovementComponent::stopVelocity()
+{
+	this->velocity.x = 0.f;
+	this->velocity.y = 0.f;
+}
+
+void MovementComponent::stopVelocityX()
+{
+	this->velocity.x = 0.f;
+}
+
+void MovementComponent::stopVelocityY()
+{
+	this->velocity.y = 0.f;
+}
+
 const bool MovementComponent::GetStates(const short unsigned State) const
 {
 	switch (State)

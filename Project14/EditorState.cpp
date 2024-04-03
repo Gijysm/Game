@@ -91,7 +91,7 @@ void EditorState::InitPmenu()
 
 void EditorState::InitTileMap()
 {
-	this->Tilemap = new TileMap(this->Statedata->GridSize,16,16, 60, 60, "C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\Grass\\GRASS.png");
+	this->Tilemap = new TileMap(this->Statedata->GridSize,16,16, 30, 30, "C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\Grass\\GRASS.png");
 }
 
 void EditorState::InitGui()
@@ -156,21 +156,22 @@ void EditorState::updateInput(const float& dt)
 }
 void EditorState::KeyTime(const float& dt)
 {
+	int cam_speed = 30;
 	if (Keyboard::isKeyPressed(Keyboard::Key(this->KeyBinds.at("MOVE_CAMERA_LEFT"))))
 	{
-		this->MainView.move(-10, 0);
+		this->MainView.move(-cam_speed * dt, 0);
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Key(this->KeyBinds.at("MOVE_CAMERA_RIGHT"))))
 	{
-		this->MainView.move(10, 0);
+		this->MainView.move(cam_speed * dt, 0);
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Key(this->KeyBinds.at("MOVE_CAMERA_UP"))))
 	{
-		this->MainView.move(0,-10);
+		this->MainView.move(0,-cam_speed * dt);
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Key(this->KeyBinds.at("MOVE_CAMERA_DOWN"))))
 	{
-		this->MainView.move(0, 10);
+		this->MainView.move(0, cam_speed * dt);
 	}
 
 }

@@ -21,6 +21,9 @@ public:
 	virtual ~Tile();
 
 	const string getAsString() const;
+	const bool& getCollision() const;
+	const bool intersects(const FloatRect bounds) const;
+	const Vector2f& getPosition() const;
 
 	void update();
 	void render(RenderTarget& target);

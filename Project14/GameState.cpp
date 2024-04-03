@@ -100,9 +100,15 @@ void GameState::InitDeferredRender()
 		this->Statedata->GFXSettings->resolution.height));
 }
 
+void GameState::UpdateTileMap(const float& dt)
+{
+	//this->Tilemap->update();
+	this->Tilemap->updateCollision(player);
+}
+
 void GameState::UpdateView(const float& dt)
 {
-	this->view.setCenter(this->player->getPosition());
+	this->view.setCenter(floor(this->player->getPosition().x), floor(this->player->getPosition().y));
 }
 
 void GameState::updateInput(const float& dt)
@@ -130,6 +136,7 @@ void GameState::update(const float& dt)
 		this->UpdateView(dt);
 		this->UpdatePlayerInput(dt);
 		this->player->update(dt);
+		this->UpdateTileMap(dt);
 	}
 	else
 	{
@@ -166,7 +173,7 @@ void GameState::render(RenderTarget* target)
 	}
 	this->renderTexture.clear();
 	this->renderTexture.setView(this->view);
-	this->Tilemap->render(renderTexture);
+	this->Tilemap->render(renderTexture,this->player);
 	this->player->render(this->renderTexture);
 	if (this->paused)
 	{
@@ -174,12 +181,12 @@ void GameState::render(RenderTarget* target)
 		this->pmenu->render(this->renderTexture);
 	}
 	this->renderTexture.display();
-	this->renderSprite.setTexture(this->renderTexture.getTexture());
+	//this->renderSprite.setTexture(this->renderTexture.getTexture());
 	target->draw(this->renderSprite);
 }
 
 void GameState::InitTileMap()
 {
-	this->Tilemap = new TileMap(this->Statedata->GridSize, 16, 16, 60, 60, "C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\Grass\\GRASS.png");
+	this->Tilemap = new TileMap(this->Statedata->GridSize, 16, 16, 30, 30, "C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\Grass\\GRASS.png");
 	this->Tilemap->loadFromFile("ѕук.txt");
 }

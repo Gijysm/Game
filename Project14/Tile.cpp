@@ -33,6 +33,21 @@ const string Tile::getAsString() const
 	return ss.str();
 }
 
+const bool& Tile::getCollision() const
+{
+	return this->collision;
+}
+
+const bool Tile::intersects(const FloatRect bounds) const
+{
+	return this->shape.getGlobalBounds().intersects(bounds);
+}
+
+const Vector2f& Tile::getPosition() const
+{
+	return this->shape.getPosition();
+}
+
 void Tile::update()
 {
 }

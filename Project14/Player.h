@@ -15,6 +15,7 @@ public:
 	Player(float x, float y, map < string, Texture>& texture);
 	virtual ~Player();
 	void update(const float& dt);
+	void render(RenderTarget& target);
 };
 
 #endif

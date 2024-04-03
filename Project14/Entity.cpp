@@ -22,7 +22,35 @@ Entity::~Entity()
 
 void Entity::SetPosition(const float x, const float y)
 {
-	this->sprite.setPosition(x, y);
+	if (this->hitboxComponent)
+		this->hitboxComponent->setPosition(x, y);
+	else
+		this->sprite.setPosition(x, y);
+
+}
+
+void Entity::stopVelocity()
+{
+	if (this->Movecomponent)
+	{
+		this->Movecomponent->stopVelocity();
+	}
+}
+
+void Entity::stopVelocityX()
+{
+	if (this->Movecomponent)
+	{
+		this->Movecomponent->stopVelocityX();
+	}
+}
+
+void Entity::stopVelocityY()
+{
+	if (this->Movecomponent)
+	{
+		this->Movecomponent->stopVelocityY();
+	}
 }
 
 void Entity::CreateHitBoxComponent(Sprite& sprite, float off_set_x, float off_set_y,
@@ -51,7 +79,25 @@ void Entity::CreateAnimationComponent(map < string, Texture>& texture)
 
 const Vector2f& Entity::getPosition() const
 {
+	if (this->hitboxComponent)
+		return this->hitboxComponent->getPosition();
 	return this->sprite.getPosition();
+}
+
+const Vector2u Entity::getGridPos(const unsigned Gridsize) const
+{
+	if (this->hitboxComponent)
+		return Vector2u(static_cast<unsigned>(this->hitboxComponent->getPosition().x) / Gridsize,
+			static_cast<unsigned>(this->hitboxComponent->getPosition().y) / Gridsize);
+	return Vector2u(static_cast<unsigned>(this->sprite.getPosition().x) / Gridsize,
+		static_cast<unsigned>(this->sprite.getPosition().y) / Gridsize);
+}
+
+const FloatRect& Entity::getGlobalBounds() const
+{
+	if(this->hitboxComponent)
+		return this->hitboxComponent->getGlobalBounds();
+	return this->sprite.getGlobalBounds();
 }
 
 void Entity::move(const float dir_x, const float dir_y, const float& dt)
@@ -64,10 +110,6 @@ void Entity::move(const float dir_x, const float dir_y, const float& dt)
 
 void Entity::update(const float& dt)
 {
-	if (this->Movecomponent)
-	{
-		this->Movecomponent->update(dt);
-	}
 }
 
 void Entity::render(RenderTarget& target)

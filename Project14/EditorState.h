@@ -18,6 +18,7 @@ private:
 	TextureSelector* Texture_sel;
 	RectangleShape slidebar;
 	RectangleShape SelectorRect;
+	RectangleShape collisionbox;
 	Font font;
 	Text CursorText;
 	IntRect Texture_rect;

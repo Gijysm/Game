@@ -35,6 +35,7 @@ public:
 	void InitFont();
 	void InitPmenu();
 	void InitTileMap();
+	void UpdateTileMap(const float& dt);
 	void InitDeferredRender();
 	void UpdateView(const float& dt);
 	void updateButtons();

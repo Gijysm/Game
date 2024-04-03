@@ -20,7 +20,13 @@ public:
 	Entity();
 	virtual ~Entity();
 
+	virtual const Vector2f& getPosition() const;
+	virtual const Vector2u getGridPos(const unsigned Gridsize) const;
+	virtual const FloatRect& getGlobalBounds() const;
 	virtual void SetPosition(const float x, const float y);
+	virtual void stopVelocity();
+	virtual void stopVelocityX();
+	virtual void stopVelocityY();
 	void CreateHitBoxComponent(Sprite& sprite,
 		float off_set_x, float off_set_y,
 		float width, float height);
@@ -28,11 +34,10 @@ public:
 	void CreateMovementComponent(const float MaxVelocity,
 		const float& acceleration, const float& deceleration);
 	void CreateAnimationComponent(map < string, Texture>& texture);
-	virtual const Vector2f& getPosition() const;
 	virtual void move(const float dir_x, const float dir_y, const float& dt);
 
-	virtual void update(const float& dt);
-	virtual void render(RenderTarget& target);
+	virtual void update(const float& dt) = 0;
+	virtual void render(RenderTarget& target) = 0;
 };
 
 
