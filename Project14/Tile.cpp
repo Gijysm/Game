@@ -40,7 +40,7 @@ const bool& Tile::getCollision() const
 
 const bool Tile::intersects(const FloatRect bounds) const
 {
-	return this->shape.getGlobalBounds().intersects(bounds);
+	return this->shape.getGlobalBounds().intersects(bounds) ;
 }
 
 const Vector2f& Tile::getPosition() const

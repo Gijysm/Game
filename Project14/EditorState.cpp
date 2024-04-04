@@ -91,7 +91,7 @@ void EditorState::InitPmenu()
 
 void EditorState::InitTileMap()
 {
-	this->Tilemap = new TileMap(this->Statedata->GridSize,16,16, 30, 30, "C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\Grass\\GRASS.png");
+	this->Tilemap = new TileMap(this->Statedata->GridSize,16,16, 20, 30, "C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\Grass\\GRASS.png");
 }
 
 void EditorState::InitGui()

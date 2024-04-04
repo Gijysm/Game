@@ -175,6 +175,7 @@ void GameState::render(RenderTarget* target)
 	this->renderTexture.setView(this->view);
 	this->Tilemap->render(renderTexture,this->player);
 	this->player->render(this->renderTexture);
+	this->Tilemap->updateCollision(player);
 	if (this->paused)
 	{
 		this->renderTexture.setView(this->renderTexture.getDefaultView());
@@ -187,6 +188,6 @@ void GameState::render(RenderTarget* target)
 
 void GameState::InitTileMap()
 {
-	this->Tilemap = new TileMap(this->Statedata->GridSize, 16, 16, 30, 30, "C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\Grass\\GRASS.png");
+	this->Tilemap = new TileMap(this->Statedata->GridSize, 16, 16, 20, 30, "C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\Grass\\GRASS.png");
 	this->Tilemap->loadFromFile("ѕук.txt");
 }
