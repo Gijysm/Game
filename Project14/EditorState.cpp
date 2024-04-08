@@ -91,7 +91,7 @@ void EditorState::InitPmenu()
 
 void EditorState::InitTileMap()
 {
-	this->Tilemap = new TileMap(this->Statedata->GridSize,16,16, 20, 30, "C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\Grass\\GRASS.png");
+	this->Tilemap = new TileMap(this->Statedata->GridSize,16,16, 40, 40, "C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\Grass\\GRASS.png");
 }
 
 void EditorState::InitGui()
@@ -156,7 +156,7 @@ void EditorState::updateInput(const float& dt)
 }
 void EditorState::KeyTime(const float& dt)
 {
-	int cam_speed = 30;
+	int cam_speed = 100;
 	if (Keyboard::isKeyPressed(Keyboard::Key(this->KeyBinds.at("MOVE_CAMERA_LEFT"))))
 	{
 		this->MainView.move(-cam_speed * dt, 0);
@@ -178,7 +178,6 @@ void EditorState::KeyTime(const float& dt)
 
 void EditorState::updatePmenuButton()
 {
-	Keyboard::C;
 	if (this->pmenu->isButtonPressed("RESUME"))
 	{
 		this->UnPausedState();

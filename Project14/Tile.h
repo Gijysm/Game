@@ -22,6 +22,8 @@ public:
 
 	const string getAsString() const;
 	const bool& getCollision() const;
+	const bool& OutOfRage(Vector2f& Pos) const;
+	const FloatRect getGlobalBounds() const;
 	const bool intersects(const FloatRect bounds) const;
 	const Vector2f& getPosition() const;
 

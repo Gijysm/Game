@@ -30,8 +30,8 @@ TileMap::TileMap(float gridSize, unsigned sizex, unsigned sizey, unsigned width,
 	this->maxGridSize.y = height;
 	this->maxGridSize_T.x = sizex;
 	this->maxGridSize_T.y = sizey;
-	this->MaxSizeWorld.x = static_cast<float>(width) * gridSize;
-	this->MaxSizeWorld.y = static_cast<float>(height) * gridSize;
+	this->MaxSizeWorld.x = (static_cast<float>(width) * gridSize);
+	this->MaxSizeWorld.y = (static_cast<float>(height) * gridSize);
 	this->layers = 1;
 	this->Texture_file = texture_file;
 	this->fromX = 0;
@@ -83,6 +83,11 @@ void TileMap::AddTile(const unsigned x, const unsigned y,
 		{
 			this->T_map[x][y][z] = new Tile(x,y,this->GridSizeF, this->tileSheet,tex_rect, collision, type);
 		}
+		else if (this->T_map[x][y][z] != NULL)
+		{
+			this->RemoveTile(x, y, z);
+			this->T_map[x][y][z] = new Tile(x, y, this->GridSizeF, this->tileSheet, tex_rect, collision, type);
+		}
 	}
 }
 
@@ -107,28 +112,29 @@ void TileMap::updateCollision(Entity* entity)
 		entity->SetPosition(0.f, entity->getPosition().y);
 		entity->stopVelocityX();
 	}
-	else if (entity->getPosition().x + entity->getGlobalBounds().height >= this->MaxSizeWorld.x)
+	else if (entity->getPosition().x + (entity->getGlobalBounds().width * 2) >= this->MaxSizeWorld.x)
 	{
-		entity->SetPosition(this->MaxSizeWorld.x - entity->getGlobalBounds().height, entity->getPosition().y);
+		entity->SetPosition(this->MaxSizeWorld.x - (entity->getGlobalBounds().width*2), entity->getPosition().y);
 		entity->stopVelocityX();
 	}
-	if (entity->getPosition().y <= entity->getGlobalBounds().height-15)
+	if (entity->getPosition().y <= 0)
 	{
-		entity->SetPosition(entity->getPosition().x, entity->getGlobalBounds().height-15);
+		entity->SetPosition(entity->getPosition().x, 0);
 		entity->stopVelocityY();
 	}
-	else if (entity->getPosition().y + (entity->getGlobalBounds().height + (entity->getGlobalBounds().height / 3)) >= this->MaxSizeWorld.y)
+	else if (entity->getPosition().y + entity->getGlobalBounds().height >= this->MaxSizeWorld.y)
 	{
-		entity->SetPosition(entity->getPosition().x, this->MaxSizeWorld.y - (entity->getGlobalBounds().height +(entity->getGlobalBounds().height/3)));
+		entity->SetPosition(entity->getPosition().x, this->MaxSizeWorld.y - entity->getGlobalBounds().height - 1);
 		entity->stopVelocityY();
 	}
+
 	this->layer = 0;
 	this->fromX = entity->getGridPos(this->GridSizeF).x - 1;
 	if (this->fromX < 0)
 	{
 		this->fromX = 0;
 	}
-	else if (this->fromX > this->MaxSizeWorld.x)
+	else if (this->fromX >= this->MaxSizeWorld.x)
 	{
 		this->fromX = this->MaxSizeWorld.x;
 	}
@@ -137,7 +143,7 @@ void TileMap::updateCollision(Entity* entity)
 	{
 		this->toX = 0;
 	}
-	else if (this->toX > this->MaxSizeWorld.x)
+	else if (this->toX >= this->MaxSizeWorld.x)
 	{
 		this->toX = this->MaxSizeWorld.x;
 	}
@@ -146,7 +152,7 @@ void TileMap::updateCollision(Entity* entity)
 	{
 		this->fromY = 0;
 	}
-	else if (this->fromY > this->MaxSizeWorld.y)
+	else if (this->fromY >= this->MaxSizeWorld.y)
 	{
 		this->fromY = this->MaxSizeWorld.y;
 	}
@@ -155,7 +161,7 @@ void TileMap::updateCollision(Entity* entity)
 	{
 		this->toY = 0;
 	}
-	else if (this->toY > this->MaxSizeWorld.y)
+	else if (this->toY >= this->MaxSizeWorld.y)
 	{
 		this->toY = this->MaxSizeWorld.y;
 	}
@@ -165,9 +171,19 @@ void TileMap::updateCollision(Entity* entity)
 		{
 			if (this->T_map[x][y][layer] != NULL)
 			{
+				FloatRect playerBounds = entity->getGlobalBounds();
+				FloatRect wallBounds = this->T_map[x][y][layer]->getGlobalBounds();
 				if (this->T_map[x][y][layer]->getCollision() && this->T_map[x][y][layer]->intersects(entity->getGlobalBounds()))
 				{
 					cout << "COLLISION \n";
+					if (playerBounds.top < wallBounds.top
+						&& playerBounds.top + playerBounds.height < wallBounds.top + wallBounds.width
+						&& playerBounds.left < (wallBounds.left + wallBounds.width)
+						&& playerBounds.left + playerBounds.width > wallBounds.left)
+					{
+						entity->stopVelocity();
+						entity->SetPosition(entity->getPosition().x, wallBounds.top - playerBounds.height);
+					}
 				}
 			}
 		} 
@@ -194,7 +210,7 @@ void TileMap::saveToFile(const string file_name)
 	if(out_file.is_open())
 	{ 
 		out_file << this->maxGridSize_T.x << " " << this->maxGridSize_T.y << "\n" << this->maxGridSize.x << " " << this->maxGridSize.y << "\n"
-			<< this->GridsizeU << "\n"
+			<<  this->GridsizeU << "\n"
 			<< this->layers << "\n"
 			<< this->Texture_file << "\n";
 		for (int x = 0; x < this->maxGridSize.x; x++)
@@ -288,47 +304,47 @@ void TileMap::update()
 void TileMap::render(RenderTarget& target, Entity* entity)
 {
 	this->layer = 0;
-	if(entity)
+	if (entity)
 	{
-		this->fromX = entity->getGridPos(this->GridSizeF).x - 1;
+		this->fromX = entity->getGridPos(this->GridSizeF).x - 5;
 		if (this->fromX <= 0)
 		{
 			this->fromX = 0;
 		}
-		else if (this->fromX >= this->MaxSizeWorld.x)
+		else if (this->fromX >= this->maxGridSize.x)
 		{
-			this->fromX = this->MaxSizeWorld.x;
+			this->fromX = this->maxGridSize.x;
 		}
-		this->toX = entity->getGridPos(this->GridSizeF).x + 3;
+		this->toX = entity->getGridPos(this->GridSizeF).x + 8;
 		if (this->toX <= 0)
 		{
 			this->toX = 0;
 		}
-		else if (this->toX >= this->MaxSizeWorld.x)
+		else if (this->toX >= this->maxGridSize.x)
 		{
-			this->toX = this->MaxSizeWorld.x;
+			this->toX = this->maxGridSize.x;
 		}
-		this->fromY = entity->getGridPos(this->GridSizeF).y - 3;
+		this->fromY = entity->getGridPos(this->GridSizeF).y - 5;
 		if (this->fromY <= 0)
 		{
 			this->fromY = 0;
 		}
-		else if (this->fromY >= this->MaxSizeWorld.y)
+		else if (this->fromY >= this->maxGridSize.y)
 		{
-			this->fromY = this->MaxSizeWorld.y;
+			this->fromY = this->maxGridSize.y;
 		}
-		this->toY = entity->getGridPos(this->GridSizeF).y + 3;
+		this->toY = entity->getGridPos(this->GridSizeF).y + 8;
 		if (this->toY <= 0)
 		{
 			this->toY = 0;
 		}
-		else if (this->toY >= this->MaxSizeWorld.y)
+		else if (this->toY >= this->maxGridSize.y)
 		{
-			this->toY = this->MaxSizeWorld.y;
+			this->toY = this->maxGridSize.y;
 		}
-		for (int x = fromX; x < this->toX; x++)
+		for (int x = fromX; x != this->toX; x++)
 		{
-			for (int y = fromY; y < this->toY; y++)
+			for (int y = fromY; y != this->toY; y++)
 			{
 				if (this->T_map[x][y][layer] != NULL)
 				{

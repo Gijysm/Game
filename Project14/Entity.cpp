@@ -63,7 +63,6 @@ void Entity::CreateHitBoxComponent(Sprite& sprite, float off_set_x, float off_se
 void Entity::CreateSprite(Texture& texture)
 {
 	this->sprite.setTexture(texture);
-	this->sprite.setScale(2.5, 2.5);
 }
 
 void Entity::CreateMovementComponent(const float MaxVelocity,
@@ -95,9 +94,7 @@ const Vector2u Entity::getGridPos(const unsigned Gridsize) const
 
 const FloatRect& Entity::getGlobalBounds() const
 {
-	if(this->hitboxComponent)
 		return this->hitboxComponent->getGlobalBounds();
-	return this->sprite.getGlobalBounds();
 }
 
 void Entity::move(const float dir_x, const float dir_y, const float& dt)

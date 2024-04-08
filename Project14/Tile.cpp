@@ -38,6 +38,16 @@ const bool& Tile::getCollision() const
 	return this->collision;
 }
 
+const bool& Tile::OutOfRage(Vector2f& Pos) const
+{
+	return this->shape.getPosition() == Pos;
+}
+
+const FloatRect Tile::getGlobalBounds() const
+{
+	return this->shape.getGlobalBounds();
+}
+
 const bool Tile::intersects(const FloatRect bounds) const
 {
 	return this->shape.getGlobalBounds().intersects(bounds) ;
