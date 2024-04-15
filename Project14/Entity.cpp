@@ -65,6 +65,15 @@ void Entity::CreateSprite(Texture& texture)
 	this->sprite.setTexture(texture);
 }
 
+const FloatRect& Entity::GetNextPosition(const float& dt) const
+{
+	if (this->hitboxComponent && this->Movecomponent)
+	{
+	return this->hitboxComponent->getNextPos(Movecomponent->GetVelocity() * dt);
+	}
+	return FloatRect();
+}
+
 void Entity::CreateMovementComponent(const float MaxVelocity,
 	const float& acceleration, const float& deceleration)
 {
@@ -83,13 +92,13 @@ const Vector2f& Entity::getPosition() const
 	return this->sprite.getPosition();
 }
 
-const Vector2u Entity::getGridPos(const unsigned Gridsize) const
+const Vector2i Entity::getGridPos(const int Gridsize) const
 {
 	if (this->hitboxComponent)
-		return Vector2u(static_cast<unsigned>(this->hitboxComponent->getPosition().x) / Gridsize,
-			static_cast<unsigned>(this->hitboxComponent->getPosition().y) / Gridsize);
-	return Vector2u(static_cast<unsigned>(this->sprite.getPosition().x) / Gridsize,
-		static_cast<unsigned>(this->sprite.getPosition().y) / Gridsize);
+		return Vector2i(static_cast<int>(this->hitboxComponent->getPosition().x) / Gridsize,
+			static_cast<int>(this->hitboxComponent->getPosition().y) / Gridsize);
+	return Vector2i(static_cast<int>(this->sprite.getPosition().x) / Gridsize,
+		static_cast<int>(this->sprite.getPosition().y) / Gridsize);
 }
 
 const FloatRect& Entity::getGlobalBounds() const

@@ -4,6 +4,10 @@
 #include "HitboxComponent.h"
 #include "MovementComponent.h"
 #include "AnimationComponent.h"
+
+class MovementComponent;
+class HitboxComponent;
+class AnimationComponent;
 class Entity
 {
 private:
@@ -21,7 +25,7 @@ public:
 	virtual ~Entity();
 
 	virtual const Vector2f& getPosition() const;
-	virtual const Vector2u getGridPos(const unsigned Gridsize) const;
+	virtual const Vector2i getGridPos(const int Gridsize) const;
 	virtual const FloatRect& getGlobalBounds() const;
 	virtual void SetPosition(const float x, const float y);
 	virtual void stopVelocity();
@@ -31,6 +35,7 @@ public:
 		float off_set_x, float off_set_y,
 		float width, float height);
 	void CreateSprite(Texture& texture);
+	const FloatRect& GetNextPosition(const float& dt) const;
 	void CreateMovementComponent(const float MaxVelocity,
 		const float& acceleration, const float& deceleration);
 	void CreateAnimationComponent(map < string, Texture>& texture);

@@ -7,14 +7,14 @@ class Entity;
 class TileMap
 {
 private:
-	unsigned layers;
-	unsigned GridsizeU;
-	float GridSizeF;
+	int layers;
+	int GridsizeU;
+	int GridSizeF;
 	RectangleShape collisionbox;
-	Vector2u maxGridSize;
+	Vector2i maxGridSize;
 	Vector2u maxGridSize_T;
 	Vector2f MaxSizeWorld;
-	vector<vector<vector<Tile*>>> T_map;
+	vector<vector<vector<vector<Tile*>>>> T_map;
 	Texture tileSheet;
 	string Texture_file;
 
@@ -27,16 +27,16 @@ private:
 	void clear();
 
 public:
-	TileMap(float gridSize, unsigned sizex, unsigned sizey, unsigned width, unsigned height, const string& texture_file);
+	TileMap(float gridSize, int sizex, int sizey, int width, int height, const string& texture_file);
 	virtual ~TileMap();
 
 	const Texture* getTileSheet()const;
 
-	void AddTile(const unsigned x, const unsigned y, 
-		const unsigned z, const IntRect& tex_rect,
+	void AddTile(const int x, const int y,
+		const int z, const IntRect& tex_rect,
 		const bool& collision, const short& type);
-	void RemoveTile(const unsigned x, const unsigned y, const unsigned z);
-	void updateCollision(Entity* entity);
+	void RemoveTile(const int x, const int y, const int z);
+	void updateCollision(Entity* entity, const float& dt);
 
 	void saveToFile(const string file_name);
 	void loadFromFile(const string file_name);

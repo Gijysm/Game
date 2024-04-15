@@ -4,6 +4,9 @@
 #include "stdafx.h"
 #include "Gui.h"
 
+
+class Gui;
+
 using namespace sf;
 using namespace std;
 using namespace gui;

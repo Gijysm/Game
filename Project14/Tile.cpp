@@ -7,7 +7,7 @@ Tile::Tile()
 	this->type = false;
 }
 
-Tile::Tile(unsigned x, unsigned y, float gridSizeF, const Texture& tex,
+Tile::Tile(int x, int y, float gridSizeF, const Texture& tex,
 	const IntRect& tex_rect, bool collision, short type)
 {
 	
@@ -36,11 +36,6 @@ const string Tile::getAsString() const
 const bool& Tile::getCollision() const
 {
 	return this->collision;
-}
-
-const bool& Tile::OutOfRage(Vector2f& Pos) const
-{
-	return this->shape.getPosition() == Pos;
 }
 
 const FloatRect Tile::getGlobalBounds() const

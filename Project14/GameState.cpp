@@ -103,7 +103,7 @@ void GameState::InitDeferredRender()
 void GameState::UpdateTileMap(const float& dt)
 {
 	//this->Tilemap->update();
-	this->Tilemap->updateCollision(player);
+	this->Tilemap->updateCollision(player, dt);
 }
 
 void GameState::UpdateView(const float& dt)
@@ -135,8 +135,8 @@ void GameState::update(const float& dt)
 	{
 		this->UpdateView(dt);
 		this->UpdatePlayerInput(dt);
-		this->player->update(dt);
 		this->UpdateTileMap(dt);
+		this->player->update(dt);
 	}
 	else
 	{
@@ -175,7 +175,6 @@ void GameState::render(RenderTarget* target)
 	this->renderTexture.setView(this->view);
 	this->Tilemap->render(renderTexture,this->player);
 	this->player->render(this->renderTexture);
-	this->Tilemap->updateCollision(player);
 	if (this->paused)
 	{
 		this->renderTexture.setView(this->renderTexture.getDefaultView());
