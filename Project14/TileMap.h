@@ -32,6 +32,8 @@ public:
 
 	const Texture* getTileSheet()const;
 
+	const int getStackSize(const int x, const int y, const int layer) const;
+
 	void AddTile(const int x, const int y,
 		const int z, const IntRect& tex_rect,
 		const bool& collision, const short& type);
@@ -41,6 +43,6 @@ public:
 	void saveToFile(const string file_name);
 	void loadFromFile(const string file_name);
 	void update();
-	void render(RenderTarget& target, Entity* entity = NULL);
+	void render(RenderTarget& target,const Vector2i& GridPosition);
 };
 #endif

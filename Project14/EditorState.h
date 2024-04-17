@@ -24,6 +24,7 @@ private:
 	IntRect Texture_rect;
 	bool collision;
 	short type;
+	int layer;
 
 	map<string, gui::Button*> Buttons;
 public:

@@ -75,6 +75,21 @@ const Texture* TileMap::getTileSheet() const
 	return &this->tileSheet;
 }
 
+const int TileMap::getStackSize(const int x, const int y, const int layer) const
+{
+	if (x >= 0 && x < this->T_map.size())
+	{
+		if (y >= 0 && y < this->T_map[x].size())
+		{
+			if (layer >= 0 && layer < this->T_map[x][y].size())
+			{
+				return this->T_map[x][y][layer].size();
+			}
+		}
+	}
+	return -1;
+}
+
 void TileMap::AddTile(const int x, const int y,
 	const int z, const IntRect& tex_rect,
 	const bool& collision, const short& type)
@@ -89,9 +104,9 @@ void TileMap::AddTile(const int x, const int y,
 
 void TileMap::RemoveTile(const int x, const int y, const int z)
 {
-	if (x < this->maxGridSize.x && x > 0
-		&& y < this->maxGridSize.y && y > 0
-		&& z < this->layers && z > 0)
+	if (x < this->maxGridSize.x && x >= 0
+		&& y < this->maxGridSize.y && y >= 0
+		&& z < this->layers && z >= 0)
 	{
 		if (!this->T_map[x][y][z].empty())
 		{
@@ -333,12 +348,11 @@ void TileMap::update()
 {
 }
 
-void TileMap::render(RenderTarget& target, Entity* entity)
+void TileMap::render(RenderTarget& target,const Vector2i& GridPosition)
 {
 	this->layer = 0;
-	if (entity)
-	{
-		this->fromX = entity->getGridPos(this->GridSizeF).x - 5;
+
+		this->fromX = GridPosition.x - 5;
 		if (this->fromX <= 0)
 		{
 			this->fromX = 0;
@@ -347,7 +361,7 @@ void TileMap::render(RenderTarget& target, Entity* entity)
 		{
 			this->fromX = this->maxGridSize.x;
 		}
-		this->toX = entity->getGridPos(this->GridSizeF).x + 8;
+		this->toX = GridPosition.x + 8;
 		if (this->toX <= 0)
 		{
 			this->toX = 0;
@@ -356,7 +370,7 @@ void TileMap::render(RenderTarget& target, Entity* entity)
 		{
 			this->toX = this->maxGridSize.x;
 		}
-		this->fromY = entity->getGridPos(this->GridSizeF).y - 5;
+		this->fromY = GridPosition.y - 5;
 		if (this->fromY <= 0)
 		{
 			this->fromY = 0;
@@ -365,7 +379,7 @@ void TileMap::render(RenderTarget& target, Entity* entity)
 		{
 			this->fromY = this->maxGridSize.y;
 		}
-		this->toY = entity->getGridPos(this->GridSizeF).y + 8;
+		this->toY = GridPosition.y + 8;
 		if (this->toY <= 0)
 		{
 			this->toY = 0;
@@ -389,26 +403,4 @@ void TileMap::render(RenderTarget& target, Entity* entity)
 				}
 			}
 		}
-	}
-	else
-	{
-		for (auto& x : this->T_map)
-		{
-			for (auto& y : x)
-			{
-				for (auto& z : y)
-				{
-					for (auto* k : z)
-					{
-						k->render(target);
-						if (k->getCollision())
-						{
-							this->collisionbox.setPosition(k->getPosition());
-							target.draw(this->collisionbox);
-						}
-					}
-				}
-			}
-		}
-	}
 }

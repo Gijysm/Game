@@ -12,8 +12,8 @@ Player::Player(float x, float y, map < string, Texture>& texture_sheet)
 
 	this->SetPosition(x, y);
 
-    this->CreateHitBoxComponent(this->sprite, 130, 42, 63, 115);
-	this->CreateMovementComponent(350.f, 1500.f, 500.f);
+    this->CreateHitBoxComponent(this->sprite, 140, 42, 55, 115);
+	this->CreateMovementComponent(300.f, 1500.f, 500.f);
 	this->CreateAnimationComponent(texture_sheet);
     this->animationComponent->addAnimation("Idle", 10.f, 0, 0, 2, 4, 128, 64);
     this->animationComponent->addAnimation("Run", 8.f, 0, 0, 2, 4, 128, 64);

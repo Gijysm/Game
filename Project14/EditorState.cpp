@@ -26,6 +26,7 @@ EditorState::~EditorState()
 
 void EditorState::InitVariables()
 {
+	this->layer = 0;
 	this->paused = false;
 	this->Texture_rect = IntRect(0, 0, static_cast<int>(16), static_cast<int>(16));
 	this->collision = false;
@@ -214,7 +215,8 @@ void EditorState::updateGui(const float& dt)
 		<< this->Texture_rect.left << " " << this->Texture_rect.width
 		<< "\n" << this->Texture_rect.top << " " << this->Texture_rect.height
 		<< "\n" << "Collision: " << this->collision << 
-		"\n" << "Type: " << this->type;
+		"\n" << "Type: " << this->type
+		<< "\n" << "Tiles: " << this->Tilemap->getStackSize(this->MousePosGrid.x, this->MousePosGrid.y, this->layer);
 	this->CursorText.setString(ss.str());
 }
 
@@ -290,7 +292,7 @@ void EditorState::render(RenderTarget* target)
 		target = this->window;
 	}
 	target->setView(this->MainView);
-	this->Tilemap->render(*target);
+	this->Tilemap->render(*target, this->MousePosGrid);
 
 	target->setView(this->window->getDefaultView());
 	this->renderGui(target);
