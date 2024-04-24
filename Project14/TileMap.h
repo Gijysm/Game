@@ -15,6 +15,7 @@ private:
 	Vector2u maxGridSize_T;
 	Vector2f MaxSizeWorld;
 	vector<vector<vector<vector<Tile*>>>> T_map;
+	stack<Tile*> deferredRenderStack;
 	Texture tileSheet;
 	string Texture_file;
 
@@ -43,6 +44,7 @@ public:
 	void saveToFile(const string file_name);
 	void loadFromFile(const string file_name);
 	void update();
+	void renderDeferrent(RenderTarget& target);
 	void render(RenderTarget& target,const Vector2i& GridPosition);
 };
 #endif

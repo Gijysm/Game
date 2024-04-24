@@ -4,10 +4,12 @@
 #include "HitboxComponent.h"
 #include "MovementComponent.h"
 #include "AnimationComponent.h"
+#include "AtributeComponent.h"
 
 class MovementComponent;
 class HitboxComponent;
 class AnimationComponent;
+class AtributeComponent;
 class Entity
 {
 private:
@@ -19,7 +21,7 @@ protected:
 	HitboxComponent* hitboxComponent;
 	MovementComponent* Movecomponent;
 	AnimationComponent* animationComponent;
-
+	AtributeComponent* atributeComponent;
 public:
 	Entity();
 	virtual ~Entity();
@@ -38,6 +40,7 @@ public:
 	const FloatRect& GetNextPosition(const float& dt) const;
 	void CreateMovementComponent(const float MaxVelocity,
 		const float& acceleration, const float& deceleration);
+	void createAtributeComponent(const int level);
 	void CreateAnimationComponent(map < string, Texture>& texture);
 	virtual void move(const float dir_x, const float dir_y, const float& dt);
 

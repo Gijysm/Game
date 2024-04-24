@@ -18,6 +18,7 @@ Entity::~Entity()
 	delete this->Movecomponent;
 	delete this->animationComponent;
 	delete this->hitboxComponent;
+	delete this->atributeComponent;
 }
 
 void Entity::SetPosition(const float x, const float y)
@@ -78,6 +79,11 @@ void Entity::CreateMovementComponent(const float MaxVelocity,
 	const float& acceleration, const float& deceleration)
 {
 	this->Movecomponent = new MovementComponent(this->sprite, MaxVelocity, acceleration, deceleration);
+}
+
+void Entity::createAtributeComponent(const int level)
+{
+	this->atributeComponent = new AtributeComponent(level);
 }
 
 void Entity::CreateAnimationComponent(map < string, Texture>& texture)

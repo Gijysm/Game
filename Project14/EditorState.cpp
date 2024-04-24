@@ -293,6 +293,7 @@ void EditorState::render(RenderTarget* target)
 	}
 	target->setView(this->MainView);
 	this->Tilemap->render(*target, this->MousePosGrid);
+	this->Tilemap->renderDeferrent(*target);
 
 	target->setView(this->window->getDefaultView());
 	this->renderGui(target);

@@ -175,6 +175,7 @@ void GameState::render(RenderTarget* target)
 	this->renderTexture.setView(this->view);
 	this->Tilemap->render(renderTexture,this->player->getGridPos(this->gridSize));
 	this->player->render(this->renderTexture);
+	this->Tilemap->renderDeferrent(this->renderTexture);
 	if (this->paused)
 	{
 		this->renderTexture.setView(this->renderTexture.getDefaultView());

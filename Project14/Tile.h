@@ -4,7 +4,7 @@
 
 enum TileTypes
 {
-	DEFAULT = 0, DAMAGING
+	DEFAULT = 0, DAMAGING, DOODAD
 };
 
 class Tile
@@ -20,6 +20,7 @@ public:
 		const IntRect& tex_rect, bool collision = false, short type = TileTypes::DEFAULT);
 	virtual ~Tile();
 
+	const int& GetType() const;
 	const string getAsString() const;
 	const bool& getCollision() const;
 	const bool& OutOfRage(Vector2f& Pos) const;

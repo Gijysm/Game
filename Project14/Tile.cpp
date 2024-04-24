@@ -23,6 +23,11 @@ Tile::~Tile()
 {
 }
 
+const int& Tile::GetType() const
+{
+	return type;
+}
+
 const string Tile::getAsString() const
 {
 	stringstream ss;

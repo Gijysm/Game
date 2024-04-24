@@ -348,6 +348,15 @@ void TileMap::update()
 {
 }
 
+void TileMap::renderDeferrent(RenderTarget& target)
+{
+	while (!this->deferredRenderStack.empty())
+	{
+		this->deferredRenderStack.top()->render(target);
+		this->deferredRenderStack.pop();
+	}
+}
+
 void TileMap::render(RenderTarget& target,const Vector2i& GridPosition)
 {
 	this->layer = 0;
@@ -394,7 +403,14 @@ void TileMap::render(RenderTarget& target,const Vector2i& GridPosition)
 			{
 				for (int k = 0; k < this->T_map[x][y][this->layer].size(); k++)
 				{
-					this->T_map[x][y][layer][k]->render(target);
+					if (this->T_map[x][y][layer][k]->GetType() == TileTypes::DOODAD)
+					{
+						this->deferredRenderStack.push(this->T_map[x][y][layer][k]);
+					}
+					else
+					{
+						this->T_map[x][y][layer][k]->render(target);
+					}
 					if (this->T_map[x][y][layer][k]->getCollision())
 					{
 						this->collisionbox.setPosition(this->T_map[x][y][layer][k]->getPosition());
