@@ -3,6 +3,8 @@
 class AtributeComponent
 {
 private:
+
+public:
 	int level;
 	int exp;
 	int expnext;
@@ -21,8 +23,6 @@ private:
 	int accurity;
 	int defence;
 	int luck;
-
-public:
 	AtributeComponent(int level);
 	~AtributeComponent();
 	string DebugPrint() const;

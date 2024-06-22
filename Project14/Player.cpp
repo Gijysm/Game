@@ -26,6 +26,24 @@ Player::Player(float x, float y, map < string, Texture>& texture_sheet)
     this->animationComponent->addAnimation("Attack", 10.f, 0, 0, 8, 1, 128, 64);
 }
 
+void Player::loseHP(const int hp)
+{
+    this->atributeComponent->hp -= hp;
+    if (this->atributeComponent->hp < 0)
+    {
+		this->atributeComponent->hp = 0;
+	}
+}
+
+void Player::gainHP(const int hp)
+{
+    	this->atributeComponent->hp += hp;
+        if (this->atributeComponent->hp > this->atributeComponent->hpMax)
+        {
+		this->atributeComponent->hp = this->atributeComponent->hpMax;
+	}
+}
+
 Player::~Player()
 {
 }

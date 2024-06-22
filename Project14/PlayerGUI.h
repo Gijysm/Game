@@ -5,6 +5,8 @@ class Player;
 class PlayerGUI
 {
 private:
+	string hpBarString;
+	Text HpText;
 	Player* player;
 	RectangleShape playerHpBar;
 	RectangleShape playerHpBarBack;

@@ -44,7 +44,7 @@ void AtributeComponent::gainExp(const int exp)
 
 void AtributeComponent::update()
 {
-	this->UpdateLevel();
+	this->UpdateStats(false);
 }
 
 void AtributeComponent::UpdateStats(const bool reset)

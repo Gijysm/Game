@@ -89,10 +89,12 @@ void GameState::UpdatePlayerInput(const float& dt)
 	if (Keyboard::isKeyPressed(Keyboard::Key(this->KeyBinds.at("MOVE_UP"))))
 	{
 		player->move(0.f, -1.f, dt);
+		this->player->gainHP(1);
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Key(this->KeyBinds.at("MOVE_DOWN"))))
 	{
 		player->move(0.f, 1.f, dt);
+		this->player->loseHP(1);
 	}
 
 }
