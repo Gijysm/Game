@@ -185,11 +185,11 @@ void EditorState::updatePmenuButton()
 	}
 	if (this->pmenu->isButtonPressed("SAVE"))
 	{
-		this->Tilemap->saveToFile("Ïóê.txt");
+		this->Tilemap->saveToFile("Puk.txt");
 	}
 	if (this->pmenu->isButtonPressed("LOAD"))
 	{
-		this->Tilemap->loadFromFile("Ïóê.txt");
+		this->Tilemap->loadFromFile("Puk.txt");
 	}
 	if (this->pmenu->isButtonPressed("QUIT"))
 	{

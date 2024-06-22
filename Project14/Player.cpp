@@ -6,6 +6,11 @@ void Player::InitVariables()
     Attacking = false;
 }
 
+AtributeComponent* Player::getAtributeComponent()
+{
+    return this->atributeComponent;
+}
+
 Player::Player(float x, float y, map < string, Texture>& texture_sheet)
 {
 	this->InitVariables();
@@ -15,7 +20,7 @@ Player::Player(float x, float y, map < string, Texture>& texture_sheet)
     this->CreateHitBoxComponent(this->sprite, 140, 42, 55, 115);
 	this->CreateMovementComponent(300.f, 1500.f, 500.f);
 	this->CreateAnimationComponent(texture_sheet);
-    this->createAtributeComponent(2);
+    this->createAtributeComponent(1);
     this->animationComponent->addAnimation("Idle", 10.f, 0, 0, 2, 4, 128, 64);
     this->animationComponent->addAnimation("Run", 8.f, 0, 0, 2, 4, 128, 64);
     this->animationComponent->addAnimation("Attack", 10.f, 0, 0, 8, 1, 128, 64);
@@ -64,8 +69,6 @@ void Player::update(const float& dt)
     {
         this->atributeComponent->gainExp(20);
     }
-    system("cls");
-    cout << this->atributeComponent->DebugPrint();
 
     this->hitboxComponent->update();
 }

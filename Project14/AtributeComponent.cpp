@@ -5,9 +5,9 @@ AtributeComponent::AtributeComponent(int level)
 {
 	this->level = level;
 	this->exp = 0;
-	this->expnext = (50 / 3) * (pow(this->level, 3) -
-		6 * pow(this->level, 2) +
-		(this->level * 17) - 12);
+	this->expnext = (50 / 3) * (pow(this->level + 1, 3) -
+		6 * pow(this->level + 1, 2) +
+		(this->level + 1 * 17) - 12);
 	this->atributePoints = 2;
 
 	this->vitality = 1;
@@ -25,11 +25,13 @@ AtributeComponent::~AtributeComponent()
 
 string AtributeComponent::DebugPrint() const
 {
-	stringstream ss;
+	std::stringstream ss;
+
 	ss << "Level: " << this->level << "\n"
 		<< "Exp: " << this->exp << "\n"
-		<< "Exp next: " << this->expnext << "\n"
-		"Attp: " << this->atributePoints << "\n";
+		<< "Exp to next level: " << this->expnext << "\n"
+		<< "Atribute Points: " << this->atributePoints << "\n";
+
 	return ss.str();
 }
 

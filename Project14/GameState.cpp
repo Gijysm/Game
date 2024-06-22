@@ -17,6 +17,11 @@ void GameState::InitPlayers()
 	this->player = new Player(500, 400, this->temp);
 }
 
+void GameState::InitPlayerGUI()
+{
+	this->playerGUI = new PlayerGUI(player);
+}
+
 GameState::GameState(StateData* state_data)
 	:State(state_data)
 {
@@ -28,6 +33,7 @@ GameState::GameState(StateData* state_data)
 	this->InitTexture();
 	this->InitPmenu();
 	this->InitPlayers();
+	this->InitPlayerGUI();
 }
 void GameState::InitFont()
 {
@@ -48,6 +54,7 @@ GameState::~GameState()
 {
 	delete this->pmenu;
 	delete this->player;
+	delete this->playerGUI;
 	delete this->Tilemap;
 }
 
@@ -137,6 +144,7 @@ void GameState::update(const float& dt)
 		this->UpdatePlayerInput(dt);
 		this->UpdateTileMap(dt);
 		this->player->update(dt);
+		this->playerGUI->update(dt);
 	}
 	else
 	{
@@ -155,6 +163,11 @@ void GameState::updateButtons()
 	{
 		this->EndState();
 	}
+}
+
+void GameState::updatePlayerGUI(const float& dt)
+{
+	this->playerGUI->update(dt);
 }
 
 void GameState::InitView()
@@ -176,9 +189,10 @@ void GameState::render(RenderTarget* target)
 	this->Tilemap->render(renderTexture,this->player->getGridPos(this->gridSize));
 	this->player->render(this->renderTexture);
 	this->Tilemap->renderDeferrent(this->renderTexture);
+	this->renderTexture.setView(this->renderTexture.getDefaultView());
+	this->playerGUI->Render(this->renderTexture);
 	if (this->paused)
 	{
-		this->renderTexture.setView(this->renderTexture.getDefaultView());
 		this->pmenu->render(this->renderTexture);
 	}
 	this->renderTexture.display();
@@ -189,5 +203,5 @@ void GameState::render(RenderTarget* target)
 void GameState::InitTileMap()
 {
 	this->Tilemap = new TileMap(this->Statedata->GridSize, 16, 16, 40, 40, "C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\Grass\\GRASS.png");
-	this->Tilemap->loadFromFile("Ïóê.txt");
+	this->Tilemap->loadFromFile("Puk.txt");
 }

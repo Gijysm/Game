@@ -16,7 +16,10 @@ private:
 protected:
 
 public:
+	//Accessors
+	AtributeComponent* getAtributeComponent();
 	Player(float x, float y, map < string, Texture>& texture);
+	Vector2f GetPosition() { return this->sprite.getPosition(); }
 	virtual ~Player();
 	void update(const float& dt);
 	void render(RenderTarget& target);
