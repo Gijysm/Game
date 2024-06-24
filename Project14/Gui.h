@@ -80,6 +80,7 @@ namespace gui
 		Vector2u mousePosGrid;
 		Button* Hide_Button;
 		IntRect TextureRect;
+		float offset;
 		float gridSize;
 		bool hiden;
 		bool active;

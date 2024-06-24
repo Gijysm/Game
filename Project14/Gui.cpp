@@ -223,12 +223,12 @@ gui::TextureSelector::TextureSelector(const float& x, const float& y,
 	: active(active), gridSize(gridSize), Keytime(0), KeytimeMax(5)
 {
 	this->hiden = false;
+	this->offset = gridSize;
 	this->bounds.setSize(Vector2f(width, height));
 	this->bounds.setPosition(x, y);
 	this->bounds.setFillColor(Color(50, 50, 50, 100));
 	this->bounds.setOutlineThickness(1.f);
 	this->bounds.setOutlineColor(Color(255, 255, 255, 200));
-
 	this->sheet.setTexture(*texture_sheet);
 	this->sheet.setPosition(x, y);
 

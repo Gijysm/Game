@@ -55,8 +55,10 @@ void AtributeComponent::UpdateStats(const bool reset)
 	this->accurity = this->dexterity * 5 + this->dexterity / 2+this->intalligance / 5;
 	this->defence = this->agility * 2 / this->agility / 4 + this->intalligance / 5;
 	this->luck = this->intalligance * 2 + this->intalligance / 5;
+	this->manaMax = this->intalligance * 5 + this->intalligance + this->intalligance / 5;
 	if(reset)
 	{
+		this->mana = this->manaMax;
 		this->hp = this->hpMax;
 	}
 }

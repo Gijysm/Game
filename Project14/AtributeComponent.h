@@ -18,6 +18,10 @@ public:
 
 	int hp;
 	int hpMax;
+	int mana;
+	int manaMax;
+	int stamina;
+	int staminaMax;
 	int damageMin;
 	int damageMax;
 	int accurity;
