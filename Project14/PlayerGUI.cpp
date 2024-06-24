@@ -13,16 +13,24 @@ void PlayerGUI::InitPlayerBars()
 	this->playerBarBack.setPosition(20.f, 20.f);
 	this->playerHpBar.setSize(Vector2f(187.5f, 12.4f));
 	this->playerHpBar.setFillColor(Color::Red);
+	this->playerHpBar.setOutlineThickness(1.f);
+	this->playerHpBar.setOutlineColor(Color::White);
 	this->playerHpBar.setPosition(this->playerBarBack.getPosition());
 	this->playerManaBar.setSize(Vector2f(187.5f, 13.f));
 	this->playerManaBar.setFillColor(Color(99, 62, 213));
+	this->playerManaBar.setOutlineThickness(1.f);
+	this->playerManaBar.setOutlineColor(Color::White);
 	this->playerManaBar.setPosition(this->playerBarBack.getPosition().x, this->playerBarBack.getPosition().y + 12.f);
 	this->playerStaminBar.setSize(Vector2f(56.25f, 6.f));
 	this->playerStaminBar.setFillColor(Color(20, 255, 20));
+	this->playerStaminBar.setOutlineThickness(1.f);
+	this->playerStaminBar.setOutlineColor(Color::White);
 	this->playerStaminBar.setPosition(this->player->getPosition().x, this->player->getPosition().y - 90.f);
 	this->playerExpBar.setSize(Vector2f(-125, 12.4));
 	this->playerExpBar.setFillColor(Color(255, 223, 0, 200));
-	this->playerExpBar.setPosition(this->player->getPosition().x - 10, this->player->getPosition().y + 33);
+	this->playerExpBar.setOutlineThickness(1.f);
+	this->playerExpBar.setOutlineColor(Color::White);
+	this->playerExpBar.setPosition(this->player->getPosition().x - 15, this->player->getPosition().y + 33);
 	// Text
 	this->HpText.setFont(this->font);
 	this->HpText.setCharacterSize(27);
@@ -36,6 +44,10 @@ void PlayerGUI::InitPlayerBars()
 	this->ExpText.setCharacterSize(27);
 	this->ExpText.setFillColor(Color::Yellow);
 	this->ExpText.setPosition(210 + 54 + 54, 23);
+	this->LevelText.setFont(this->font);
+	this->LevelText.setCharacterSize(27);
+	this->LevelText.setFillColor(Color::White);
+	this->LevelText.setPosition(this->player->getPosition().x + 22.5, this->player->getPosition().y - 120.f);
 }
 
 PlayerGUI::PlayerGUI(Player* player)
@@ -77,6 +89,8 @@ void PlayerGUI::UpdateExpBar()
 	this->ExpBarString = std::to_string(this->player->getAtributeComponent()->exp) + "/" +
 		std::to_string(this->player->getAtributeComponent()->expnext);
 	this->ExpText.setString(this->ExpBarString);
+	this->LevelText.setString(std::to_string(this->player->getAtributeComponent()->level));
+	this->UpdateColor(this->player->getAtributeComponent()->level, 5, this->LevelText);
 }
 
 void PlayerGUI::update(const float& dt)
@@ -88,18 +102,26 @@ void PlayerGUI::update(const float& dt)
 
 void PlayerGUI::UpdateColor(int Exp, int zmina, RectangleShape& shape)
 {
-	// Використання лічильника для обмеження частоти зміни кольору
-	this->colorChangeCounter++;
-	bool colorChange = false;
-
-	if (this->colorChangeCounter >= 60) // Зміна кольору кожні 60 кадрів
+	if (Exp % zmina == 0 && !Layerchanged) // Зміна кольору, якщо Exp кратний zmina і колір ще не змінювався
 	{
-		if (Exp % zmina == 0) // Перевірка умови зміни кольору
-		{
-			shape.setFillColor(Color(rand() % 255, rand() % 255, rand() % 255, 150));
-		}
-
-		this->colorChangeCounter = 0; // Скидання лічильника після зміни кольору
+		shape.setFillColor(Color(rand() % 256, rand() % 256, rand() % 256, 150));
+		Layerchanged = true; // Прапорець встановлюється, щоб уникнути повторної зміни кольору
+	}
+	else if (Exp % zmina != 0) // Скидання прапорця, коли умова більше не виконується
+	{
+		Layerchanged = false;
+	}
+}
+void PlayerGUI::UpdateColor(int Exp, int zmina, Text& shape)
+{
+	if (Exp % zmina == 0 && !Textchanged) // Зміна кольору, якщо Exp кратний zmina і колір ще не змінювався
+	{
+		shape.setFillColor(Color(rand() % 256, rand() % 256, rand() % 256));
+		Textchanged = true; // Прапорець встановлюється, щоб уникнути повторної зміни кольору
+	}
+	else if (Exp % zmina != 0) // Скидання прапорця, коли умова більше не виконується
+	{
+		Textchanged = false;
 	}
 }
 
@@ -128,4 +150,5 @@ void PlayerGUI::RenderExpBar(RenderTarget& target)
 {
 		target.draw(this->playerExpBar);
 	target.draw(this->ExpText);
+	target.draw(this->LevelText);
 }

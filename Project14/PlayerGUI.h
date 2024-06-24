@@ -5,12 +5,14 @@ class Player;
 class PlayerGUI
 {
 private:
-	int colorChangeCounter;
-
+	int colorChangeCounterProgressBar;
+	bool Textchanged = false;
+	bool Layerchanged = false;
 	string hpBarString;
 	string ManaBarString;
 	string ExpBarString;
 	Text HpText;
+	Text LevelText;
 	Text ManaText;
 	Text ExpText;
 	Player* player;
@@ -32,6 +34,7 @@ private:
 		void UpdateExpBar();
 		void update(const float& dt);
 		void UpdateColor(int Exp, int zmina, RectangleShape& shape);
+		void UpdateColor(int Exp, int zmina, Text& shape);
 		void Render(RenderTarget& target);
 		void RenderHpBar(RenderTarget& target);
 		void RenderManaBar(RenderTarget& target);

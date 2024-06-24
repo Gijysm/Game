@@ -84,10 +84,10 @@ void EditorState::InitKeyBinds()
 void EditorState::InitPmenu()
 {
 	this->pmenu = new PauseMenu(*this->window, this->font);
-	this->pmenu->AddButtons("RESUME", 250, "Resume");
-	this->pmenu->AddButtons("SAVE", 350, "SAVE");
-	this->pmenu->AddButtons("LOAD", 450, "Load");
-	this->pmenu->AddButtons("QUIT", 550, "Quit");
+	this->pmenu->AddButtons("RESUME", this->p2pY(33), "Resume");
+	this->pmenu->AddButtons("SAVE", this->p2pY(46), "SAVE");
+	this->pmenu->AddButtons("LOAD", this->p2pY(60), "Load");
+	this->pmenu->AddButtons("QUIT", this->p2pY(74), "Quit");
 }
 
 void EditorState::InitTileMap()

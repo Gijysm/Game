@@ -60,6 +60,16 @@ const bool State::GetKeyTime()
 	return false;
 }
 
+const float State::p2pX(const float perc)
+{
+	return std::floor(static_cast<float>(this->Statedata->GFXSettings->resolution.width) * (perc / 100.f));
+}
+
+const float State::p2pY(const float perc)
+{
+	return std::floor(static_cast<float>(this->Statedata->GFXSettings->resolution.height) * (perc / 100.f));
+}
+
 void State::EndState()
 {
 	this->Exit = true;

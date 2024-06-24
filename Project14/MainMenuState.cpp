@@ -33,27 +33,27 @@ void MainMenuState::InitFont()
 void MainMenuState::InitButtons()
 {
 	using namespace gui;
-	this->MainMenuState_Btn["Button_NewGame"] = new Button(100, 100, 150, 50,
+	this->MainMenuState_Btn["Button_NewGame"] = new Button(this->p2pX(8), this->p2pY(13), 150, 50,
 		&this->font, "New Game", 30, Color(100, 100, 200, 50),
 		Color(50, 150, 200, 125),
 		Color(30, 30, 70, 180), Color(100, 100, 200, 150),
 		Color(50, 150, 200, 185),
 		Color(30, 30, 70, 230));
 
-	this->MainMenuState_Btn["Button_Settings"] = new Button(100, 200, 150, 50,
+	this->MainMenuState_Btn["Button_Settings"] = new Button(this->p2pX(8), this->p2pY(27), 150, 50,
 		&this->font, "Settings", 30, Color(100, 100, 200, 50),
-		Color(50, 150, 200, 125),
-		Color(30, 30, 70, 180), Color(100, 100, 200, 150),
-		Color(50, 150, 200, 185),
-		Color(30, 30, 70, 230));
-
-	this->MainMenuState_Btn["Button_Edit"] = new Button(100, 350, 150, 50,
-		&this->font, "Edit", 30, Color(100, 100, 200, 50),
-		Color(50, 150, 200, 125),
-		Color(30, 30, 70, 180), Color(100, 100, 200, 150),
-		Color(50, 150, 200, 185),
-		Color(30, 30, 70, 230));
-	this->MainMenuState_Btn["Button_Exit"] = new Button(100, 500, 150, 50,
+		Color(50, 150, 200, 125),							
+		Color(30, 30, 70, 180), Color(100, 100, 200, 150),	
+		Color(50, 150, 200, 185),							
+		Color(30, 30, 70, 230));							
+															
+	this->MainMenuState_Btn["Button_Edit"] = new Button(this->p2pX(8), this->p2pY(47), 150, 50,
+		&this->font, "Edit", 30, Color(100, 100, 200, 50),	
+		Color(50, 150, 200, 125),							
+		Color(30, 30, 70, 180), Color(100, 100, 200, 150),	
+		Color(50, 150, 200, 185),							
+		Color(30, 30, 70, 230));							
+	this->MainMenuState_Btn["Button_Exit"] = new Button(this->p2pX(8), this->p2pY(68), 150, 50,
 		&this->font, "Exit", 30, Color(255, 0, 0, 50),
 		Color(255, 100, 100, 125),
 		Color(150, 0, 0, 180), Color(255, 0, 0, 150),
