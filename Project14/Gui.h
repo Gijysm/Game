@@ -6,6 +6,9 @@ enum Button_States{BTN_IDLE = 0,
 BTN_HOWER, BTN_ACTIVE};
 namespace gui
 {
+	const float p2pX(const float perc, VideoMode vm);
+	const float p2pY(const float perc, VideoMode vm);
+	const unsigned CharacterSize(VideoMode vm);
 	class Button
 	{
 	private:
@@ -67,6 +70,7 @@ namespace gui
 
 		void UpdateKeyTime(const float& dt);
 		const bool GetKeyTime();
+
 		const unsigned short& getActiveEllementId() const;
 		void update(const Vector2i& MousePos, const float& dt);
 		void render(RenderTarget& target);

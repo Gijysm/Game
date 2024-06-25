@@ -24,6 +24,7 @@ class State
 private:
 
 protected:
+
 	RenderWindow* window;
 	bool Exit;
 	bool paused;
@@ -45,6 +46,7 @@ protected:
 	Vector2f MousePosView;
 	Vector2i MousePosGrid;
 public:
+	VideoMode vm;
 	State(StateData* state_data);
 	virtual ~State();
 
@@ -56,8 +58,7 @@ public:
 	virtual void UpdateKeyTime(const float& dt);
 	virtual void updateInput(const float& dt) = 0;
 
-	const float p2pX(const float perc);
-	const float p2pY(const float perc);
+
 	void EndState();
 	void PausedState();
 	void UnPausedState();

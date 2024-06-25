@@ -341,3 +341,18 @@ void gui::TextureSelector::render(RenderTarget& target)
 		}
 	}
 }
+
+const float gui::p2pX(const float perc, VideoMode vm)
+{
+	return std::floor(static_cast<float>(vm.width) * (perc / 100.f));
+}
+
+const float gui::p2pY(const float perc, VideoMode vm)
+{
+	return std::floor(static_cast<float>(vm.height) * (perc / 100.f));
+}
+
+const unsigned gui::CharacterSize(VideoMode vm)
+{
+	return static_cast<unsigned>((vm.width + vm.height) / 60.f);
+}

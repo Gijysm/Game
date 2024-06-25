@@ -83,11 +83,12 @@ void EditorState::InitKeyBinds()
 
 void EditorState::InitPmenu()
 {
+	vm = this->Statedata->GFXSettings->resolution;
 	this->pmenu = new PauseMenu(*this->window, this->font);
-	this->pmenu->AddButtons("RESUME", this->p2pY(33), "Resume");
-	this->pmenu->AddButtons("SAVE", this->p2pY(46), "SAVE");
-	this->pmenu->AddButtons("LOAD", this->p2pY(60), "Load");
-	this->pmenu->AddButtons("QUIT", this->p2pY(74), "Quit");
+	this->pmenu->AddButtons("RESUME", gui::p2pY(33, vm), "Resume");
+	this->pmenu->AddButtons("SAVE", gui::p2pY(46, vm), "SAVE");
+	this->pmenu->AddButtons("LOAD", gui::p2pY(60, vm), "Load");
+	this->pmenu->AddButtons("QUIT", gui::p2pY(74, vm), "Quit");
 }
 
 void EditorState::InitTileMap()

@@ -10,6 +10,7 @@ SettingsState::SettingsState(StateData* state_data)
 	this->InitKeyBinds();
 	this->InitGui(); 
 	this->initText();
+	
 }
 
 SettingsState::~SettingsState()
@@ -131,15 +132,17 @@ void SettingsState::InitFont()
 
 void SettingsState::InitGui()
 {
-
-	this->Buttons["Button_Exit"] = new gui::Button(this->p2pX(85), this->p2pY(85), 150, 50,
-		&this->font, "Back", 30, Color(255, 0, 0, 50),
+	vm = this->Statedata->GFXSettings->resolution;
+	this->Buttons["Button_Exit"] = new gui::Button(gui::p2pX(85, vm), gui::p2pY(85, vm), 
+		gui::p2pX(12, vm), gui::p2pY(7, vm),
+		&this->font, "Back", gui::CharacterSize(vm), Color(255, 0, 0, 50),
 		Color(255, 100, 100, 125),
 		Color(150, 0, 0, 180), Color(255, 0, 0, 150),
 		Color(255, 100, 100, 185),
 		Color(150, 0, 0, 230));
-	this->Buttons["APPLY"] = new gui::Button(this->p2pX(5), this->p2pY(85), 150, 50,
-		&this->font, "Apply", 30, Color(255, 0, 0, 50),
+	this->Buttons["APPLY"] = new gui::Button(gui::p2pX(5, vm), gui::p2pY(85, vm), 
+		gui::p2pX(12, vm), gui::p2pY(7, vm),
+		&this->font, "Apply", gui::CharacterSize(vm), Color(255, 0, 0, 50),
 		Color(255, 100, 100, 125),
 		Color(150, 0, 0, 180), Color(255, 0, 0, 150),
 		Color(255, 100, 100, 185),
@@ -149,7 +152,7 @@ void SettingsState::InitGui()
 	{
 		modes_str.push_back(to_string(i.width) + 'X' + to_string(i.height));
 	}
-	this->dropdownList["RESOLUTION"] = new gui::DropDownList(this->p2pX(45), this->p2pY(13), 200, 50, font, modes_str.data(), modes_str.size());
+	this->dropdownList["RESOLUTION"] = new gui::DropDownList(gui::p2pX(45, vm), gui::p2pY(13, vm), gui::p2pX(16, vm), gui::p2pY(7, vm), font, modes_str.data(), modes_str.size());
 }
 
 void SettingsState::InitKeyBinds()
@@ -171,9 +174,10 @@ void SettingsState::InitKeyBinds()
 
 void SettingsState::initText()
 {
+	vm = this->Statedata->GFXSettings->resolution;
 	this->optionsText.setFont(this->font);
 
-	this->optionsText.setPosition(Vector2f(this->p2pX(10), this->p2pY(13)));
+	this->optionsText.setPosition(Vector2f(gui::p2pX(10, vm), gui::p2pY(13, vm)));
 
 	this->optionsText.setCharacterSize(30);
 	this->optionsText.setFillColor(Color(255, 255, 255, 200));;
