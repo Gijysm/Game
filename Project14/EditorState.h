@@ -14,6 +14,8 @@ class EditorState:public State
 private:
 	View MainView;
 	TileMap* Tilemap;
+	Button* Hide_Button;
+	bool hiden;
 	PauseMenu* pmenu;
 	TextureSelector* Texture_sel;
 	RectangleShape slidebar;

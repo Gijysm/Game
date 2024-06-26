@@ -95,7 +95,7 @@ namespace gui
 			const float& width, const float& height, 
 			const float& gridSize, 
 			const Texture* texture_sheet, Font& font, 
-			const string& str);
+			const string& str, VideoMode vm);
 		~TextureSelector();
 
 		const bool &GetActive() const;

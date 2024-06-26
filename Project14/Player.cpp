@@ -13,6 +13,7 @@ AtributeComponent* Player::getAtributeComponent()
 
 Player::Player(float x, float y, map < string, Texture>& texture_sheet)
 {
+    
 	this->InitVariables();
 
 	this->SetPosition(x, y);

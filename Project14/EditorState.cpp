@@ -83,12 +83,12 @@ void EditorState::InitKeyBinds()
 
 void EditorState::InitPmenu()
 {
-	vm = this->Statedata->GFXSettings->resolution;
-	this->pmenu = new PauseMenu(*this->window, this->font);
-	this->pmenu->AddButtons("RESUME", gui::p2pY(33, vm), "Resume");
-	this->pmenu->AddButtons("SAVE", gui::p2pY(46, vm), "SAVE");
-	this->pmenu->AddButtons("LOAD", gui::p2pY(60, vm), "Load");
-	this->pmenu->AddButtons("QUIT", gui::p2pY(74, vm), "Quit");
+
+	this->pmenu = new PauseMenu(vm, this->font);
+	this->pmenu->AddButtons("RESUME", gui::p2pY(33, vm),gui::CharacterSize(vm), "Resume");
+	this->pmenu->AddButtons("SAVE", gui::p2pY(46, vm)  ,gui::CharacterSize(vm), "SAVE");
+	this->pmenu->AddButtons("LOAD", gui::p2pY(60, vm)  ,gui::CharacterSize(vm), "Load");
+	this->pmenu->AddButtons("QUIT", gui::p2pY(74, vm)  ,gui::CharacterSize(vm), "Quit");
 }
 
 void EditorState::InitTileMap()
@@ -111,7 +111,7 @@ void EditorState::InitGui()
 
 	this->Texture_sel = new gui::TextureSelector(16, 16, 400, 224, 16,
 		this->Tilemap->getTileSheet(), this->font,
-		"Hide_Tile");
+		"Hide_Tile", vm);
 }
 
 void EditorState::InitText()

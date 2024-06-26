@@ -98,6 +98,7 @@ const Vector2f& Entity::getPosition() const
 	return this->sprite.getPosition();
 }
 
+
 const Vector2i Entity::getGridPos(const int Gridsize) const
 {
 	if (this->hitboxComponent)

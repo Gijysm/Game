@@ -12,6 +12,7 @@ State::State(StateData* state_data)
 	this->Keytime = 0;
 	this->KeytimeMax = 3;
 	this->gridSize = state_data->GridSize;
+	vm = this->Statedata->GFXSettings->resolution;
 }
 
 State::~State()

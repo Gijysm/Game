@@ -25,7 +25,6 @@ protected:
 public:
 	Entity();
 	virtual ~Entity();
-
 	virtual const Vector2f& getPosition() const;
 	virtual const Vector2i getGridPos(const int Gridsize) const;
 	virtual const FloatRect& getGlobalBounds() const;
@@ -33,6 +32,7 @@ public:
 	virtual void stopVelocity();
 	virtual void stopVelocityX();
 	virtual void stopVelocityY();
+
 	void CreateHitBoxComponent(Sprite& sprite,
 		float off_set_x, float off_set_y,
 		float width, float height);

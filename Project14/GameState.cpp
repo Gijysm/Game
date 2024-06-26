@@ -14,7 +14,7 @@ void GameState::InitTexture()
 
 void GameState::InitPlayers()
 {
-	this->player = new Player(500, 400, this->temp);
+	this->player = new Player(gui::p2pX(50, vm), gui::p2pY(50, vm), this->temp);
 }
 
 void GameState::InitPlayerGUI()
@@ -44,12 +44,11 @@ void GameState::InitFont()
 }
 void GameState::InitPmenu()
 {
-	vm = this->Statedata->GFXSettings->resolution;
-	this->pmenu = new PauseMenu(*this->window, this->font);
-	this->pmenu->AddButtons("RESUME", gui::p2pY(33, vm), "Resume");
-	this->pmenu->AddButtons("SAVE", gui::p2pY(46, vm), "SAVE");
-	this->pmenu->AddButtons("LOAD", gui::p2pY(60, vm), "Load");
-	this->pmenu->AddButtons("QUIT", gui::p2pY(74, vm), "Quit");
+	this->pmenu = new PauseMenu(vm, this->font);
+	this->pmenu->AddButtons("RESUME", gui::p2pY(33, vm),gui::CharacterSize(vm), "Resume");
+	this->pmenu->AddButtons("SAVE", gui::p2pY(46, vm)  ,gui::CharacterSize(vm), "SAVE");
+	this->pmenu->AddButtons("LOAD", gui::p2pY(60, vm)  ,gui::CharacterSize(vm), "Load");
+	this->pmenu->AddButtons("QUIT", gui::p2pY(74, vm)  ,gui::CharacterSize(vm), "Quit");
 }
 GameState::~GameState()
 {

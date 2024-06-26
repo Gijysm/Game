@@ -3,7 +3,6 @@
 GraphicsSettings::GraphicsSettings()
 {
 	this->title = "DEFAULT";
-	this->resolution = VideoMode::getDesktopMode();
 	this->fullscreen = false;
 	this->Vertical_sync = false;
 	this->FrameRateLimit = 120;

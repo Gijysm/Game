@@ -9,16 +9,12 @@ void MainMenuState::InitVariables()
 
 void MainMenuState::InitBackGround()
 {
-	this->BackGround.setSize(
-		Vector2f(
-			static_cast<float>(this->window->getSize().x),
-			static_cast<float>(this->window->getSize().y)
-		)
-	);
+
 	if (!this->BackGroundTexture.loadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\Background\\20240122151658_1.jpg"))
 	{
 		throw "FAILED LOAD IMAGE";
 	}
+
 	this->BackGround.setTexture(&this->BackGroundTexture);
 }
 
@@ -32,7 +28,6 @@ void MainMenuState::InitFont()
 
 void MainMenuState::InitButtons()
 {
-	vm = this->Statedata->GFXSettings->resolution;
 	using namespace gui;
 	this->MainMenuState_Btn["Button_NewGame"] = new Button(gui::p2pX(8,vm), gui::p2pY(13, vm),
 		gui::p2pX(12, vm), gui::p2pY(7, vm),
@@ -148,8 +143,15 @@ void MainMenuState::update(const float& dt)
 {
 	this->UpdateMousePosition();
 	this->updateInput(dt);
-	//cout << this->MousePosView.x << "   " << this->MousePosView.y << "\n";
+	this->BackGround.setSize(
+		Vector2f(
+			static_cast<float>(this->Statedata->GFXSettings->resolution.width),
+			static_cast<float>(this->Statedata->GFXSettings->resolution.height)
+		)
+	);
+
 	this->updateButton();
+
 }
 
 void MainMenuState::render(RenderTarget* target)
@@ -158,15 +160,16 @@ void MainMenuState::render(RenderTarget* target)
 	{
 		target = this->window;
 	}
+
 	target->draw(this->BackGround);
 	this->renderButton(*target);
 
-	/*Text MouseText;
-	MouseText.setPosition(MousePosView + Vector2f(15, 10));
-	MouseText.setFont(font);
-	MouseText.setCharacterSize(15);
+	Text mousetext;
+	mousetext.setPosition(MousePosView + Vector2f(15, 10));
+	mousetext.setFont(font);
+	mousetext.setCharacterSize(15);
 	stringstream ss;
 	ss << MousePosView.x << " " << MousePosView.y;
-	MouseText.setString(ss.str());
-	target->draw(MouseText);*/
+	mousetext.setString(ss.str());
+	target->draw(mousetext);
 }

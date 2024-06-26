@@ -21,12 +21,12 @@ private:
 
 	map<string, Button*> PauseMenu_Btn;
 public:
-	PauseMenu(RenderWindow& window, Font& font);
+	PauseMenu(VideoMode vm, Font& font);
 	virtual ~PauseMenu();
 	map<string, Button*>& GetButtons();
 
 	const bool isButtonPressed(const string& key);
-	void AddButtons(const string& key, const float& y, const string& name);
+	void AddButtons(const string& key, const float& y, const int CharacterSize, const string& name);
 	void update(const Vector2i& mousePosition);
 	void render(RenderTarget& target);
 };

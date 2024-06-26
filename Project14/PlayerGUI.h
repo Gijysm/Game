@@ -1,6 +1,7 @@
 #ifndef PLAYERGUI
 #define PLAYERGUI
 #include "Player.h"
+#include "Gui.h"
 class Player;
 class PlayerGUI
 {
@@ -32,6 +33,7 @@ private:
 		void UpdateHpBar();
 		void UpdateManaBar();
 		void UpdateExpBar();
+
 		void update(const float& dt);
 		void UpdateColor(int Exp, int zmina, RectangleShape& shape);
 		void UpdateColor(int Exp, int zmina, Text& shape);

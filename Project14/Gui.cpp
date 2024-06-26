@@ -219,7 +219,7 @@ gui::TextureSelector::TextureSelector(const float& x, const float& y,
 	const float& width, const float& height, 
 	const float& gridSize, 
 	const Texture* texture_sheet, Font& font,
-	const string& str)
+	const string& str, VideoMode vm)
 	: active(active), gridSize(gridSize), Keytime(0), KeytimeMax(5)
 {
 	this->hiden = false;
@@ -250,8 +250,8 @@ gui::TextureSelector::TextureSelector(const float& x, const float& y,
 
 	this->TextureRect.width = static_cast<int>(gridSize);
 	this->TextureRect.height = static_cast<int>(gridSize);
-	this->Hide_Button = new Button(1100, 620, 140, 50,
-		&font, str, 30, Color(100, 100, 200, 50),
+	this->Hide_Button = new Button(gui::p2pX(85, vm), gui::p2pY(85, vm), gui::p2pX(12, vm), gui::p2pY(7, vm),
+		&font, str, gui::CharacterSize(vm), Color(100, 100, 200, 50),
 		Color(50, 150, 200, 125),
 		Color(30, 30, 70, 180), Color(100, 100, 200, 150),
 		Color(50, 150, 200, 185),
