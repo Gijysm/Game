@@ -4,12 +4,30 @@
 
 void GameState::InitTexture()
 {
-	temp["Idle"].loadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\Player\\Idle.png");
-	this->texture["Idle"] = temp["Idle"];
-	temp["Run"].loadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\Player\\Run.png");
-	this->texture["Run"] = temp["Run"];
-	temp["Attack"].loadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\Player\\Attacks.png");
-	this->texture["Attack"] = temp["Attack"];
+	temp["Idle_Top"].loadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Back animations\\spr_player_back_idle.png");
+	this->texture["Idle_Top"] = temp["Idle_Top"];																													     							 
+	temp["Run_Top"].loadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Back animations\\spr_player_back_walk.png");
+	this->texture["Run_Top"] = temp["Run_Top"];																															 							 
+	temp["Attack_Top"].loadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Back animations\\spr_player_back_attack.png");
+	this->texture["Attack_Top"] = temp["Attack_Top"];
+	temp["Idle_Left"].loadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Side animations\\spr_player_left_walk.png");
+	this->texture["Idle_Left"] = temp["Idle_Left"];																																		   
+	temp["Run_Left"].loadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Side animations\\spr_player_left_walk.png");
+	this->texture["Run_Left"] = temp["Run_Left"];																														  				   
+	temp["Attack_Left"].loadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Side animations\\spr_player_right_attack.png");
+	this->texture["Attack_Left"] = temp["Attack_Left"];																																		
+	temp["Idle_Right"].loadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Side animations\\spr_player_right_attack.png");
+	this->texture["Idle_Right"] = temp["Idle_Right"];																													  				
+	temp["Run_Right"].loadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Side animations\\spr_player_right_walk.png");
+	this->texture["Run_Right"] = temp["Run_Right"];																														  
+	temp["Attack_Right"].loadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Side animations\\spr_player_right_attack.png");
+	this->texture["Attack_Right"] = temp["Attack_Right"];
+	temp["Idle_Bottom"].loadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Front animations\\spr_player_front_idle.png");
+	this->texture["Idle_Bottom"] = temp["Idle_Bottom"];
+	temp["Run_Bottom"].loadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Front animations\\spr_player_front_walk.png");
+	this->texture["Run_Bottom"] = temp["Run_Bottom"];
+	temp["Attack_Bottom"].loadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Front animations\\spr_player_front_attack.png");
+	this->texture["Attack_Bottom"] = temp["Attack_Bottom"];
 }
 
 void GameState::InitPlayers()
@@ -186,21 +204,30 @@ void GameState::render(RenderTarget* target)
 	{
 		target = this->window;
 	}
+
 	this->renderTexture.clear();
 	this->renderTexture.setView(this->view);
-	this->Tilemap->render(renderTexture,this->player->getGridPos(this->gridSize));
+
+	this->Tilemap->render(renderTexture, this->player->getGridPos(this->gridSize));
 	this->player->render(this->renderTexture);
 	this->Tilemap->renderDeferrent(this->renderTexture);
+
+	// Draw the render sprite
+	target->draw(this->renderSprite);
+
 	this->renderTexture.setView(this->renderTexture.getDefaultView());
 	this->playerGUI->Render(this->renderTexture);
+
+	// Render pause menu if paused
 	if (this->paused)
 	{
 		this->pmenu->render(this->renderTexture);
 	}
+
 	this->renderTexture.display();
-	//this->renderSprite.setTexture(this->renderTexture.getTexture());
 	target->draw(this->renderSprite);
 }
+
 
 void GameState::InitTileMap()
 {

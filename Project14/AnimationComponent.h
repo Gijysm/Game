@@ -65,6 +65,17 @@ public:
         {
             timer = 0.f;
 
+            if (currentRect.left != endRect.left)
+            {
+                currentRect.left += width;
+            }
+            else
+			{
+				currentRect = startRect;
+				this->done = true;
+			}
+            /*
+            OLD ALGORITHM
             if (currentRect.top != endRect.top || currentRect.left != endRect.left)
             {
                 currentRect.left += width;
@@ -81,7 +92,7 @@ public:
                         }
                     }
                 }
-            }
+            }*/
 
             sprite.setTextureRect(currentRect);
             
@@ -98,7 +109,17 @@ public:
         if (timer >= animationTimer)
         {
             timer = 0.f;
-
+            if (currentRect.left != endRect.left)
+            {
+                currentRect.left += width;
+            }
+            else
+            {
+                currentRect = startRect;
+                this->done = true;
+            }
+            /*
+            OLD ALGORITHM
             if (currentRect.top != endRect.top || currentRect.left != endRect.left)
             {
                 currentRect.left += width;
@@ -115,7 +136,7 @@ public:
                         }
                     }
                 }
-            }
+            }*/
             sprite.setTextureRect(currentRect);
             
         }
