@@ -34,9 +34,11 @@ private:
 		void UpdateManaBar();
 		void UpdateExpBar();
 
+		void UpdateDynamicalElliments();
 		void update(const float& dt);
 		void UpdateColor(int Exp, int zmina, RectangleShape& shape);
 		void UpdateColor(int Exp, int zmina, Text& shape);
+		void Render_Dynamical(RenderTarget& target);
 		void Render(RenderTarget& target);
 		void RenderHpBar(RenderTarget& target);
 		void RenderManaBar(RenderTarget& target);

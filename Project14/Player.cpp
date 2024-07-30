@@ -18,7 +18,7 @@ Player::Player(float x, float y, map < string, Texture>& texture_sheet)
 
 	this->SetPosition(x, y);
 
-    this->CreateHitBoxComponent(this->sprite, 140, 42, 55, 115);
+    this->CreateHitBoxComponent(this->sprite, 50, 55, 55, 55);
 	this->CreateMovementComponent(300.f, 1500.f, 500.f);
 	this->CreateAnimationComponent(texture_sheet);
     this->createAtributeComponent(0);
@@ -54,6 +54,29 @@ void Player::gainHP(const int hp)
 	}
 }
 
+string Player::directionToString(Direction dir)
+{
+    switch (dir)
+    {
+    case Direction::Top:
+        return "Top";
+        break;
+    case Direction::Right:
+        return "Right";
+        break;
+    case Direction::Bottom:
+        return "Bottom";
+        break;
+    case Direction::Left:
+        return "Left";
+        break;
+    default:
+        return "Bottom";
+        break;
+    }
+	
+}
+
 Player::~Player()
 {
 }
@@ -66,28 +89,34 @@ void Player::update(const float& dt)
     }
     if (this->Attacking)
     {
-        if (this->animationComponent->play("Attack_Top", dt, true))
+        if (this->animationComponent->play("Attack_" + directionToString(dir), dt, true))
             this->Attacking = false;
     }
     if (this->Movecomponent->GetStates(Idle))
     {
-        this->animationComponent->play("Idle_Top", dt);
+        this->animationComponent->play("Idle_" + directionToString(dir), dt);
     }
     else if (this->Movecomponent->GetStates(Moving_Right))
     {
         this->animationComponent->play("Run_Right", dt, this->Movecomponent->GetVelocity().x, this->Movecomponent->GetMaxVelocity());
+        dir = Direction::Right;
     }
     else if (this->Movecomponent->GetStates(Moving_Left))
     {
         this->animationComponent->play("Run_Left", dt, this->Movecomponent->GetVelocity().x, this->Movecomponent->GetMaxVelocity());
+        dir = Direction::Left;
+
     }
     else if (this->Movecomponent->GetStates(Moving_Down))
     {
         this->animationComponent->play("Run_Bottom", dt, this->Movecomponent->GetVelocity().y, this->Movecomponent->GetMaxVelocity());
+        dir = Direction::Bottom;
+
     }
     else if (this->Movecomponent->GetStates(Moving_Up))
     {
         this->animationComponent->play("Run_Top", dt, this->Movecomponent->GetVelocity().y, this->Movecomponent->GetMaxVelocity());
+        dir = Direction::Top;
     }
     if (Keyboard::isKeyPressed(Keyboard::E)) // ?????? ????? !this->Attacking
     {

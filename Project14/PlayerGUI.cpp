@@ -28,7 +28,7 @@ void PlayerGUI::InitPlayerBars()
     this->playerManaBar.setOutlineColor(Color::White);
     this->playerManaBar.setPosition(this->playerBarBack.getPosition().x, (this->playerBarBack.getPosition().y * 2));
 
-    this->playerStaminBar.setSize(Vector2f(screenWidth * 0.0375f, screenHeight * 0.008f));
+    this->playerStaminBar.setSize(Vector2f(this->player->GetSize().x, screenHeight * 0.008f));
     this->playerStaminBar.setFillColor(Color(20, 255, 20));
     this->playerStaminBar.setOutlineThickness(1.f);
     this->playerStaminBar.setOutlineColor(Color::White);
@@ -97,13 +97,20 @@ void PlayerGUI::UpdateManaBar()
 void PlayerGUI::UpdateExpBar()
 {
     float ExpPercent = static_cast<float>(this->player->getAtributeComponent()->exp) / this->player->getAtributeComponent()->expnext;
-    this->playerExpBar.setSize(Vector2f(11, -(125 * ExpPercent)));
+    this->playerExpBar.setSize(Vector2f(11, -(this->player->GetSize().y * ExpPercent)));
     this->UpdateColor(this->player->getAtributeComponent()->exp, 10, this->playerExpBar);
     this->ExpBarString = std::to_string(this->player->getAtributeComponent()->exp) + "/" +
         std::to_string(this->player->getAtributeComponent()->expnext);
     this->ExpText.setString(this->ExpBarString);
     this->LevelText.setString(std::to_string(this->player->getAtributeComponent()->level));
     this->UpdateColor(this->player->getAtributeComponent()->level, 5, this->LevelText);
+}
+
+void PlayerGUI::UpdateDynamicalElliments()
+{
+    this->playerExpBar.setPosition(this->player->getPosition().x - 15, this->player->getPosition().y + 55);
+    this->playerStaminBar.setPosition(this->player->getPosition().x, this->player->getPosition().y - 12);
+    this->LevelText.setPosition(this->playerStaminBar.getPosition().x + (this->playerStaminBar.getSize().x / 2.75), this->playerStaminBar.getPosition().y - 30);
 }
 
 void PlayerGUI::update(const float& dt)
@@ -141,18 +148,21 @@ void PlayerGUI::UpdateColor(int Exp, int zmina, Text& shape)
     }
 }
 
+void PlayerGUI::Render_Dynamical(RenderTarget& target)
+{
+    this->RenderExpBar(target);
+}
+
 void PlayerGUI::Render(RenderTarget& target)
 {
     this->RenderHpBar(target);
     this->RenderManaBar(target);
-    this->RenderExpBar(target);
 }
 
 void PlayerGUI::RenderHpBar(RenderTarget& target)
 {
     target.draw(this->playerBarBack);
     target.draw(this->playerHpBar);
-    target.draw(this->playerStaminBar);
     target.draw(this->HpText);
 }
 
@@ -160,11 +170,12 @@ void PlayerGUI::RenderManaBar(RenderTarget& target)
 {
     target.draw(this->playerManaBar);
     target.draw(this->ManaText);
+    target.draw(this->ExpText);
 }
 
 void PlayerGUI::RenderExpBar(RenderTarget& target)
 {
     target.draw(this->playerExpBar);
-    target.draw(this->ExpText);
+    target.draw(this->playerStaminBar);
     target.draw(this->LevelText);
 }

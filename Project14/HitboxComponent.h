@@ -16,6 +16,10 @@ public:
 
 	const FloatRect& getNextPos(const Vector2f& velocity);
 	const Vector2f& getPosition()const;
+	const Vector2f& GetSize()
+	{
+		return this->hitbox.getSize();
+	}
 	const FloatRect& getGlobalBounds() const;
 	void setPosition(const Vector2f& position);
 	void setPosition(const float x, const float y);

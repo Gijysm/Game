@@ -45,6 +45,6 @@ public:
 	void loadFromFile(const string file_name);
 	void update();
 	void renderDeferrent(RenderTarget& target);
-	void render(RenderTarget& target,const Vector2i& GridPosition);
+	void render(RenderTarget& target,const Vector2i& GridPosition, bool Visability);
 };
 #endif

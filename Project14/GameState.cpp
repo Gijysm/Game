@@ -10,13 +10,13 @@ void GameState::InitTexture()
 	this->texture["Run_Top"] = temp["Run_Top"];																															 							 
 	temp["Attack_Top"].loadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Back animations\\spr_player_back_attack.png");
 	this->texture["Attack_Top"] = temp["Attack_Top"];
-	temp["Idle_Left"].loadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Side animations\\spr_player_left_walk.png");
+	temp["Idle_Left"].loadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Side animations\\spr_player_left_idle.png");
 	this->texture["Idle_Left"] = temp["Idle_Left"];																																		   
 	temp["Run_Left"].loadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Side animations\\spr_player_left_walk.png");
 	this->texture["Run_Left"] = temp["Run_Left"];																														  				   
-	temp["Attack_Left"].loadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Side animations\\spr_player_right_attack.png");
+	temp["Attack_Left"].loadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Side animations\\spr_player_left_attack.png");
 	this->texture["Attack_Left"] = temp["Attack_Left"];																																		
-	temp["Idle_Right"].loadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Side animations\\spr_player_right_attack.png");
+	temp["Idle_Right"].loadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Side animations\\spr_player_right_idle.png");
 	this->texture["Idle_Right"] = temp["Idle_Right"];																													  				
 	temp["Run_Right"].loadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Side animations\\spr_player_right_walk.png");
 	this->texture["Run_Right"] = temp["Run_Right"];																														  
@@ -165,6 +165,7 @@ void GameState::update(const float& dt)
 		this->UpdateTileMap(dt);
 		this->player->update(dt);
 		this->playerGUI->update(dt);
+		this->playerGUI->UpdateDynamicalElliments();
 	}
 	else
 	{
@@ -208,22 +209,27 @@ void GameState::render(RenderTarget* target)
 	this->renderTexture.clear();
 	this->renderTexture.setView(this->view);
 
-	this->Tilemap->render(renderTexture, this->player->getGridPos(this->gridSize));
+	this->Tilemap->render(renderTexture, this->player->getGridPos(this->gridSize),false);
+	//Text mousetext;
+	//mousetext.setFont(this->font);
+	//mousetext.setCharacterSize(15);
+	//mousetext.setPosition(MousePosView + Vector2f(5, 10));
+
+	//stringstream ss;
+	//ss << MousePosView.x << " " << MousePosView.y;
+	//mousetext.setString(ss.str());
+
+	//this->renderTexture.draw(mousetext);
 	this->player->render(this->renderTexture);
 	this->Tilemap->renderDeferrent(this->renderTexture);
-
-	// Draw the render sprite
-	target->draw(this->renderSprite);
-
+	this->playerGUI->Render_Dynamical(renderTexture);
 	this->renderTexture.setView(this->renderTexture.getDefaultView());
 	this->playerGUI->Render(this->renderTexture);
-
 	// Render pause menu if paused
 	if (this->paused)
 	{
 		this->pmenu->render(this->renderTexture);
 	}
-
 	this->renderTexture.display();
 	target->draw(this->renderSprite);
 }

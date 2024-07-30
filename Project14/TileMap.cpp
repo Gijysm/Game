@@ -357,7 +357,7 @@ void TileMap::renderDeferrent(RenderTarget& target)
 	}
 }
 
-void TileMap::render(RenderTarget& target,const Vector2i& GridPosition)
+void TileMap::render(RenderTarget& target,const Vector2i& GridPosition, bool Visability)
 {
 	this->layer = 0;
 
@@ -414,7 +414,10 @@ void TileMap::render(RenderTarget& target,const Vector2i& GridPosition)
 					if (this->T_map[x][y][layer][k]->getCollision())
 					{
 						this->collisionbox.setPosition(this->T_map[x][y][layer][k]->getPosition());
-						target.draw(this->collisionbox);
+						if(Visability)
+						{
+							target.draw(this->collisionbox);
+						}
 					}
 				}
 			}

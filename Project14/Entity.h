@@ -37,6 +37,9 @@ public:
 		float off_set_x, float off_set_y,
 		float width, float height);
 	void CreateSprite(Texture& texture);
+	Vector2f GetSize() { 
+	return this->hitboxComponent->GetSize(); 
+	};
 	const FloatRect& GetNextPosition(const float& dt) const;
 	void CreateMovementComponent(const float MaxVelocity,
 		const float& acceleration, const float& deceleration);
