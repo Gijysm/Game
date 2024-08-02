@@ -83,7 +83,7 @@ void Game::InitVariabes()
 {
     this->window = NULL;
     this->dt = 0;
-    this->GridSize = 64;
+    this->GridSize = 46;
 }
 
 void Game::InitStateData()

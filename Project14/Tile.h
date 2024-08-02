@@ -11,7 +11,7 @@ class Tile
 {
 private:
 protected:
-	RectangleShape shape;
+	Sprite shape;
 	short type;  
 	bool collision;
 public:
@@ -29,7 +29,7 @@ public:
 	const Vector2f& getPosition() const;
 
 	void update();
-	void render(RenderTarget& target);
+	void render(RenderTarget& target, Shader* shader = NULL, Vector2f PlayerPos = Vector2f());
 };
 
 #endif

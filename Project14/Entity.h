@@ -26,6 +26,7 @@ public:
 	Entity();
 	virtual ~Entity();
 	virtual const Vector2f& getPosition() const;
+	virtual const Vector2f getCenter() const;
 	virtual const Vector2i getGridPos(const int Gridsize) const;
 	virtual const FloatRect& getGlobalBounds() const;
 	virtual void SetPosition(const float x, const float y);
@@ -48,7 +49,7 @@ public:
 	virtual void move(const float dir_x, const float dir_y, const float& dt);
 
 	virtual void update(const float& dt) = 0;
-	virtual void render(RenderTarget& target) = 0;
+	virtual void render(RenderTarget& target, Shader* shader) = 0;
 };
 
 

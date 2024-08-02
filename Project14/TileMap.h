@@ -44,7 +44,8 @@ public:
 	void saveToFile(const string file_name);
 	void loadFromFile(const string file_name);
 	void update();
-	void renderDeferrent(RenderTarget& target);
-	void render(RenderTarget& target,const Vector2i& GridPosition, bool Visability);
+	void renderDeferrent(RenderTarget& target, Shader* shader = NULL, const Vector2f PlayerPos = Vector2f());
+	void render(RenderTarget& target,const Vector2i& GridPosition, Shader* shader = NULL,
+		const Vector2f PlayerPos = Vector2f(), bool Visability = true);
 };
 #endif

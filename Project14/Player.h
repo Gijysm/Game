@@ -35,7 +35,7 @@ public:
 	void gainEXP(const int exp);
 	virtual ~Player();
 	void update(const float& dt);
-	void render(RenderTarget& target);
+	void render(RenderTarget& target, Shader* shader = NULL);
 };
 
 #endif

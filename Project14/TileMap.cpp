@@ -348,20 +348,24 @@ void TileMap::update()
 {
 }
 
-void TileMap::renderDeferrent(RenderTarget& target)
+void TileMap::renderDeferrent(RenderTarget& target, Shader* shader, const Vector2f PlayerPos)
 {
 	while (!this->deferredRenderStack.empty())
 	{
-		this->deferredRenderStack.top()->render(target);
+		if (shader)
+		this->deferredRenderStack.top()->render(target, shader, PlayerPos);
+		else
+			this->deferredRenderStack.top()->render(target);
 		this->deferredRenderStack.pop();
 	}
 }
 
-void TileMap::render(RenderTarget& target,const Vector2i& GridPosition, bool Visability)
+void TileMap::render(RenderTarget& target,const Vector2i& GridPosition,
+	Shader* shader, const Vector2f PlayerPos, bool Visability)
 {
 	this->layer = 0;
 
-		this->fromX = GridPosition.x - 5;
+		this->fromX = GridPosition.x - 8;
 		if (this->fromX <= 0)
 		{
 			this->fromX = 0;
@@ -370,7 +374,7 @@ void TileMap::render(RenderTarget& target,const Vector2i& GridPosition, bool Vis
 		{
 			this->fromX = this->maxGridSize.x;
 		}
-		this->toX = GridPosition.x + 8;
+		this->toX = GridPosition.x + 13;
 		if (this->toX <= 0)
 		{
 			this->toX = 0;
@@ -379,7 +383,7 @@ void TileMap::render(RenderTarget& target,const Vector2i& GridPosition, bool Vis
 		{
 			this->toX = this->maxGridSize.x;
 		}
-		this->fromY = GridPosition.y - 5;
+		this->fromY = GridPosition.y - 8;
 		if (this->fromY <= 0)
 		{
 			this->fromY = 0;
@@ -388,7 +392,7 @@ void TileMap::render(RenderTarget& target,const Vector2i& GridPosition, bool Vis
 		{
 			this->fromY = this->maxGridSize.y;
 		}
-		this->toY = GridPosition.y + 8;
+		this->toY = GridPosition.y + 13;
 		if (this->toY <= 0)
 		{
 			this->toY = 0;
@@ -409,7 +413,10 @@ void TileMap::render(RenderTarget& target,const Vector2i& GridPosition, bool Vis
 					}
 					else
 					{
-						this->T_map[x][y][layer][k]->render(target);
+						if(shader)
+							this->T_map[x][y][layer][k]->render(target, shader, PlayerPos);
+						else
+							this->T_map[x][y][layer][k]->render(target);
 					}
 					if (this->T_map[x][y][layer][k]->getCollision())
 					{

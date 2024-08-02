@@ -98,6 +98,17 @@ const Vector2f& Entity::getPosition() const
 	return this->sprite.getPosition();
 }
 
+const Vector2f Entity::getCenter() const
+{
+	if (this->hitboxComponent)
+		return this->hitboxComponent->getPosition() + 
+		Vector2f(this->hitboxComponent->getGlobalBounds().width / 2.f,
+			this->hitboxComponent->getGlobalBounds().height / 2.f);
+	return this->sprite.getPosition() +
+		Vector2f(this->sprite.getGlobalBounds().width / 2.f,
+				 this->sprite.getGlobalBounds().height / 2.f);
+}
+
 
 const Vector2i Entity::getGridPos(const int Gridsize) const
 {
@@ -125,7 +136,7 @@ void Entity::update(const float& dt)
 {
 }
 
-void Entity::render(RenderTarget& target)
+void Entity::render(RenderTarget& target, Shader* shader)
 {
 	target.draw(this->sprite);
 	if (this->hitboxComponent)

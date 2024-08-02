@@ -20,6 +20,7 @@ private:
 	View view;
 	TileMap* Tilemap;
 	PauseMenu* pmenu;
+	Shader core_shader;
 	RenderTexture renderTexture;
 	Sprite renderSprite;
 	map<string, Texture> temp;
@@ -29,6 +30,7 @@ private:
 	void InitView();
 	void InitKeyBinds();
 	void InitTexture();
+	void InitShaders();
 	void InitPlayers();
 	void InitPlayerGUI();
 	void InitFont();

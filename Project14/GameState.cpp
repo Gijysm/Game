@@ -30,6 +30,15 @@ void GameState::InitTexture()
 	this->texture["Attack_Bottom"] = temp["Attack_Bottom"];
 }
 
+void GameState::InitShaders()
+{
+	if (!this->core_shader.loadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\Shaders\\Vertex_Shader.glslv"
+		, "C:\\Users\\popka\\source\\repos\\Project14\\Shaders\\Fragment_Shader.glslf"))
+	{
+		cerr << "ERROR::GAMESTATE::COULD NOT LOAD SHADERS" << "\n";
+	}
+}
+
 void GameState::InitPlayers()
 {
 	this->player = new Player(gui::p2pX(50, vm), gui::p2pY(50, vm), this->temp);
@@ -49,6 +58,7 @@ GameState::GameState(StateData* state_data)
 	this->InitFont();
 	this->InitKeyBinds();
 	this->InitTexture();
+	this->InitShaders();
 	this->InitPmenu();
 	this->InitPlayers();
 	this->InitPlayerGUI();
@@ -209,7 +219,7 @@ void GameState::render(RenderTarget* target)
 	this->renderTexture.clear();
 	this->renderTexture.setView(this->view);
 
-	this->Tilemap->render(renderTexture, this->player->getGridPos(this->gridSize),false);
+	this->Tilemap->render(renderTexture, this->player->getGridPos(static_cast<int>(this->gridSize)),&this->core_shader, this->player->getCenter(), false);
 	//Text mousetext;
 	//mousetext.setFont(this->font);
 	//mousetext.setCharacterSize(15);
@@ -220,8 +230,8 @@ void GameState::render(RenderTarget* target)
 	//mousetext.setString(ss.str());
 
 	//this->renderTexture.draw(mousetext);
-	this->player->render(this->renderTexture);
-	this->Tilemap->renderDeferrent(this->renderTexture);
+	this->player->render(this->renderTexture, &core_shader);
+	this->Tilemap->renderDeferrent(this->renderTexture, &this->core_shader, this->player->getCenter());
 	this->playerGUI->Render_Dynamical(renderTexture);
 	this->renderTexture.setView(this->renderTexture.getDefaultView());
 	this->playerGUI->Render(this->renderTexture);

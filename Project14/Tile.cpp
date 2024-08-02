@@ -10,11 +10,14 @@ Tile::Tile()
 Tile::Tile(int x, int y, float gridSizeF, const Texture& tex,
 	const IntRect& tex_rect, bool collision, short type)
 {
-	
-	this->shape.setSize(Vector2f(gridSizeF, gridSizeF));
-	this->shape.setTexture(&tex);
-	this->shape.setPosition(static_cast<float>(x) * gridSizeF, static_cast<float>(y) * gridSizeF);
+	this->shape.setTexture(tex);
 	this->shape.setTextureRect(tex_rect);
+
+	float scaleX = gridSizeF / static_cast<float>(tex_rect.width);
+	float scaleY = gridSizeF / static_cast<float>(tex_rect.height);
+	this->shape.setScale(scaleX, scaleY);
+
+	this->shape.setPosition(static_cast<float>(x) * gridSizeF, static_cast<float>(y) * gridSizeF);
 	this->collision = collision;
 	this->type = type; 
 }
@@ -62,7 +65,14 @@ void Tile::update()
 {
 }
 
-void Tile::render(RenderTarget& target)
+void Tile::render(RenderTarget& target, Shader* shader, Vector2f PlayerPos)
 {
-	target.draw(this->shape);
+	if(shader)
+	{
+		shader->setUniform("hasTexture", true);
+		shader->setUniform("lightPos", PlayerPos);
+		target.draw(this->shape, shader);
+	}
+	else
+		target.draw(this->shape);
 }
