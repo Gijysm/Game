@@ -31,6 +31,7 @@ void EditorState::InitVariables()
 	this->Texture_rect = IntRect(0, 0, static_cast<int>(16), static_cast<int>(16));
 	this->collision = false;
 	this->type = TileTypes::DEFAULT;
+	this->TileAddLock = false;
 }
 
 void EditorState::InitView()
@@ -48,7 +49,7 @@ void EditorState::InitBackGround()
 
 void EditorState::InitFont()
 {
-	if (!this->font.loadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\Font\\DungeonFont.ttf"))
+	if (!this->font.loadFromFile("..\\Font\\DungeonFont.ttf"))
 	{
 		throw "Error";
 	}
@@ -62,7 +63,7 @@ void EditorState::InitButtons()
 
 void EditorState::InitKeyBinds()
 {
-	ifstream ifs("C:\\Users\\popka\\source\\repos\\Project14\\Config\\EditorKey_binds.ini");
+	ifstream ifs("..\\Config\\EditorKey_binds.ini");
 
 	if (ifs.is_open())
 	{
@@ -93,7 +94,7 @@ void EditorState::InitPmenu()
 
 void EditorState::InitTileMap()
 {
-	this->Tilemap = new TileMap(this->Statedata->GridSize,16,16, 40, 40, "C:\\Users\\popka\\source\\repos\\Project14\\All_Texture\\Grass\\GRASS.png");
+	this->Tilemap = new TileMap(this->Statedata->GridSize,16,16, 40, 40, "..\\All_Texture\\Grass\\GRASS.png");
 }
 
 void EditorState::InitGui()
@@ -154,6 +155,13 @@ void EditorState::updateInput(const float& dt)
 	{
 		if(this->type > 0)
 			--this->type;
+	}
+	if (Keyboard::isKeyPressed(Keyboard::Key(this->KeyBinds.at("TOGGLE_TILE_LOCK"))) && this->GetKeyTime())
+	{
+		if (this->TileAddLock)
+			TileAddLock = false;
+		else
+			TileAddLock = true;
 	}
 }
 void EditorState::KeyTime(const float& dt)
@@ -217,7 +225,10 @@ void EditorState::updateGui(const float& dt)
 		<< "\n" << this->Texture_rect.top << " " << this->Texture_rect.height
 		<< "\n" << "Collision: " << this->collision << 
 		"\n" << "Type: " << this->type
-		<< "\n" << "Tiles: " << this->Tilemap->getStackSize(this->MousePosGrid.x, this->MousePosGrid.y, this->layer);
+		<< "\n" << "Tiles: " << this->Tilemap->getStackSize(this->MousePosGrid.x,
+			this->MousePosGrid.y,
+			this->layer)
+		<< "\n" << "Tile_lock: " << this->TileAddLock;
 	this->CursorText.setString(ss.str());
 }
 
@@ -227,7 +238,17 @@ void EditorState::UpdateEditorInput(const float& dt)
 	{
 		if (!this->Texture_sel->GetActive() && !this->slidebar.getGlobalBounds().contains(Vector2f(this->MousePosWindow)))
 		{
-		this->Tilemap->AddTile(this->MousePosGrid.x, this->MousePosGrid.y, 0, this->Texture_rect, this->collision, this->type);
+			if (this->TileAddLock)
+			{
+				if (this->Tilemap->TileIsEmpty(this->MousePosGrid.x, this->MousePosGrid.y, 0))
+				{
+					this->Tilemap->AddTile(this->MousePosGrid.x, this->MousePosGrid.y, 0, this->Texture_rect, this->collision, this->type);
+				}
+			}
+			else
+			{
+				this->Tilemap->AddTile(this->MousePosGrid.x, this->MousePosGrid.y, 0, this->Texture_rect, this->collision, this->type);
+			}
 		}
 		else
 		{

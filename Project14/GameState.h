@@ -23,6 +23,8 @@ private:
 	Shader core_shader;
 	RenderTexture renderTexture;
 	Sprite renderSprite;
+	Texture Weapon;
+	Vector2i viewPos;
 	map<string, Texture> temp;
 	Player* player;
 	PlayerGUI* playerGUI;

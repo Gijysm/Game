@@ -11,7 +11,7 @@ AtributeComponent* Player::getAtributeComponent()
     return this->atributeComponent;
 }
 
-Player::Player(float x, float y, map < string, Texture>& texture_sheet)
+Player::Player(float x, float y, map < string, Texture>& texture_sheet, Texture& Weapon)
 {
     
 	this->InitVariables();
@@ -22,6 +22,7 @@ Player::Player(float x, float y, map < string, Texture>& texture_sheet)
 	this->CreateMovementComponent(300.f, 1500.f, 500.f);
 	this->CreateAnimationComponent(texture_sheet);
     this->createAtributeComponent(0);
+    this->CreateWeapon(Weapon);
     this->animationComponent->addAnimation("Idle_Top", 10.f, 0, 0, 11, 0, 64, 64);
     this->animationComponent->addAnimation("Idle_Left", 10.f, 0, 0, 11, 0, 64, 64);
     this->animationComponent->addAnimation("Idle_Right", 10.f, 0, 0, 11, 0, 64, 64);
@@ -36,23 +37,6 @@ Player::Player(float x, float y, map < string, Texture>& texture_sheet)
     this->animationComponent->addAnimation("Attack_Bottom", 10.f, 0, 0, 6, 0, 64, 64);
 }
 
-void Player::loseHP(const int hp)
-{
-    this->atributeComponent->hp -= hp;
-    if (this->atributeComponent->hp < 0)
-    {
-		this->atributeComponent->hp = 0;
-	}
-}
-
-void Player::gainHP(const int hp)
-{
-    	this->atributeComponent->hp += hp;
-        if (this->atributeComponent->hp > this->atributeComponent->hpMax)
-        {
-		this->atributeComponent->hp = this->atributeComponent->hpMax;
-	}
-}
 
 string Player::directionToString(Direction dir)
 {
@@ -80,9 +64,16 @@ string Player::directionToString(Direction dir)
 Player::~Player()
 {
 }
-void Player::update(const float& dt)
+void Player::update(const float& dt, Vector2f& mouse_view_pos)
 {
     this->Movecomponent->update(dt);
+    this->weapon->updatePosition(dt, Vector2f(this->getCenter().x, this->getPosition().y));
+    float dX, dY;
+    dX = mouse_view_pos.x - weapon->getPosition().x;
+    dY = mouse_view_pos.y - weapon->getPosition().y;
+    const float PI = 3.14159265;
+    float deg = atan2(dY, dX) * 180 / PI;
+    this->weapon->setRotation(deg + 90);
     if (Mouse::isButtonPressed(Mouse::Button::Left)) // ?????? ????? !this->Attacking
     {
         this->Attacking = true;
@@ -133,8 +124,13 @@ void Player::render(RenderTarget& target, Shader* shader)
         shader->setUniform("hasTexture", true);
         shader->setUniform("lightPos", this->getCenter());
         target.draw(this->sprite, shader);
+
+        this->weapon->render(target, shader, getCenter());
     }
     else
-		target.draw(this->sprite);
-    this->hitboxComponent->render(target);
+    {
+        target.draw(this->sprite);
+        this->weapon->render(target);
+        this->hitboxComponent->render(target);
+    }
 }

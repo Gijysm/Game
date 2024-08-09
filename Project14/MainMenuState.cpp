@@ -10,7 +10,7 @@ void MainMenuState::InitVariables()
 void MainMenuState::InitBackGround()
 {
 
-	if (!this->BackGroundTexture.loadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\Background\\20240122151658_1.jpg"))
+	if (!this->BackGroundTexture.loadFromFile("..\\Background\\20240122151658_1.jpg"))
 	{
 		throw "FAILED LOAD IMAGE";
 	}
@@ -20,7 +20,7 @@ void MainMenuState::InitBackGround()
 
 void MainMenuState::InitFont()
 {
-	if (!this->font.loadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\Font\\DungeonFont.ttf"))
+	if (!this->font.loadFromFile("..\\Font\\DungeonFont.ttf"))
 	{
 		throw "Error";
 	}
@@ -63,7 +63,7 @@ void MainMenuState::InitButtons()
 
 void MainMenuState::InitKeyBinds()
 {
-	ifstream ifs("C:\\Users\\popka\\source\\repos\\Project14\\Config\\MainMenuKey_binds.ini");
+	ifstream ifs("..\\Config\\MainMenuKey_binds.ini");
 
 	if (ifs.is_open())
 	{

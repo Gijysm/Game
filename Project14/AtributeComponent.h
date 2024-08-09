@@ -31,6 +31,9 @@ public:
 	~AtributeComponent();
 	string DebugPrint() const;
 	void calculateExpNext();
+	void loseHP(const int hp);
+	void gainHP(const int hp);
+	void loseEXP(const int exp);
 	void gainExp(const int exp);
 	void levelUp();
 	void update();

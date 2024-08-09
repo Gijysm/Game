@@ -44,7 +44,7 @@ Game::~Game()
 
 void Game::InitKeys()
 {
-    ifstream ifs("C:\\Users\\popka\\source\\repos\\Project14\\Config\\Sup_Keys.ini");
+    ifstream ifs("C:\\Users\\popka\\source\\repos\\Gijysm\\Game\\Config\\Sup_Keys.ini");
 
     if (ifs.is_open())
     {
@@ -97,7 +97,7 @@ void Game::InitStateData()
 
 void Game::InitGraphicsSettings()
 {
-    this->GFXSettings.LoadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\Config\\Wincon.ini");
+    this->GFXSettings.LoadFromFile("..\\Config\\Wincon.ini");
 
     // Debug output for graphics settings
     std::cout << "Graphics settings loaded with resolution: "

@@ -5,6 +5,7 @@
 #include "MovementComponent.h"
 #include "AnimationComponent.h"
 #include "AtributeComponent.h"
+#include "Weapon.h"
 
 class MovementComponent;
 class HitboxComponent;
@@ -18,6 +19,7 @@ private:
 
 protected:
 	Sprite sprite;
+	Weapon* weapon;
 	HitboxComponent* hitboxComponent;
 	MovementComponent* Movecomponent;
 	AnimationComponent* animationComponent;
@@ -42,13 +44,14 @@ public:
 	return this->hitboxComponent->GetSize(); 
 	};
 	const FloatRect& GetNextPosition(const float& dt) const;
+	void CreateWeapon(Texture texture);
 	void CreateMovementComponent(const float MaxVelocity,
 		const float& acceleration, const float& deceleration);
 	void createAtributeComponent(const int level);
 	void CreateAnimationComponent(map < string, Texture>& texture);
 	virtual void move(const float dir_x, const float dir_y, const float& dt);
 
-	virtual void update(const float& dt) = 0;
+	virtual void update(const float& dt, Vector2f& mouse_view_pos) = 0;
 	virtual void render(RenderTarget& target, Shader* shader) = 0;
 };
 

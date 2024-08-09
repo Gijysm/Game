@@ -26,15 +26,11 @@ public:
 	//Accessors
 
 	AtributeComponent* getAtributeComponent();
-	Player(float x, float y, map < string, Texture>& texture);
+	Player(float x, float y, map < string, Texture>& texture, Texture& Weapon);
 	Vector2f GetPosition() { return this->sprite.getPosition(); }
-	void loseHP(const int hp);
-	void gainHP(const int hp);
 	string directionToString(Direction dir);
-	void loseEXP(const int exp);
-	void gainEXP(const int exp);
 	virtual ~Player();
-	void update(const float& dt);
+	void update(const float& dt, Vector2f& mouse_view_pos);
 	void render(RenderTarget& target, Shader* shader = NULL);
 };
 

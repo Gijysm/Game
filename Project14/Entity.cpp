@@ -6,6 +6,7 @@ void Entity::InitVariables()
 	this->animationComponent = NULL;
 	this->Movecomponent = NULL;
 	this->hitboxComponent = NULL;
+	this->animationComponent = NULL;
 }
 
 Entity::Entity()
@@ -75,6 +76,11 @@ const FloatRect& Entity::GetNextPosition(const float& dt) const
 	return FloatRect();
 }
 
+void Entity::CreateWeapon(Texture texture)
+{
+	this->weapon = new Weapon(texture, Vector2f(this->getPosition().x + 10, this->getPosition().y));
+}
+
 void Entity::CreateMovementComponent(const float MaxVelocity,
 	const float& acceleration, const float& deceleration)
 {
@@ -101,12 +107,18 @@ const Vector2f& Entity::getPosition() const
 const Vector2f Entity::getCenter() const
 {
 	if (this->hitboxComponent)
-		return this->hitboxComponent->getPosition() + 
-		Vector2f(this->hitboxComponent->getGlobalBounds().width / 2.f,
-			this->hitboxComponent->getGlobalBounds().height / 2.f);
-	return this->sprite.getPosition() +
-		Vector2f(this->sprite.getGlobalBounds().width / 2.f,
-				 this->sprite.getGlobalBounds().height / 2.f);
+		return 
+			this->hitboxComponent->getPosition() + 
+				Vector2f(
+						this->hitboxComponent->getGlobalBounds().width / 2.f,
+						this->hitboxComponent->getGlobalBounds().height / 2.f
+				);
+		return 
+			this->sprite.getPosition() +
+				Vector2f(
+						 this->sprite.getGlobalBounds().width / 2.f,
+						 this->sprite.getGlobalBounds().height / 2.f
+				);
 }
 
 
@@ -132,15 +144,11 @@ void Entity::move(const float dir_x, const float dir_y, const float& dt)
 	}
 }
 
-void Entity::update(const float& dt)
+void Entity::update(const float& dt, Vector2f& mouse_view_pos)
 {
 }
 
 void Entity::render(RenderTarget& target, Shader* shader)
 {
 	target.draw(this->sprite);
-	if (this->hitboxComponent)
-	{
-		this->hitboxComponent->render(target);
-	}
 }

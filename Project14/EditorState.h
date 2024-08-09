@@ -25,6 +25,7 @@ private:
 	Text CursorText;
 	IntRect Texture_rect;
 	bool collision;
+	bool TileAddLock;
 	short type;
 	int layer;
 

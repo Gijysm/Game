@@ -2,7 +2,7 @@
 
 void PlayerGUI::InitFont()
 {
-    this->font.loadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\Font\\DungeonFont.ttf");
+    this->font.loadFromFile("..\\Font\\DungeonFont.ttf");
 }
 
 void PlayerGUI::InitPlayerBars()

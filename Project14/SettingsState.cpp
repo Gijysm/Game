@@ -129,7 +129,7 @@ void SettingsState::InitBackGround()
 
 void SettingsState::InitFont()
 {
-    if (!this->font.loadFromFile("C:\\Users\\popka\\source\\repos\\Project14\\Font\\DungeonFont.ttf"))
+    if (!this->font.loadFromFile("..\\Font\\DungeonFont.ttf"))
     {
         throw "Error: Could not load font.";
     }
@@ -165,7 +165,7 @@ void SettingsState::InitGui()
 
 void SettingsState::InitKeyBinds()
 {
-    ifstream ifs("C:\\Users\\popka\\source\\repos\\Project14\\Config\\MainMenuKey_binds.ini");
+    ifstream ifs("..\\Config\\MainMenuKey_binds.ini");
 
     if (ifs.is_open())
     {

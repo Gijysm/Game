@@ -22,7 +22,23 @@ AtributeComponent::AtributeComponent(int level)
 AtributeComponent::~AtributeComponent()
 {
 }
+void AtributeComponent::loseHP(const int hp)
+{
+	this->hp -= hp;
+	if (this->hp < 0)
+	{
+		this->hp = 0;
+	}
+}
 
+void AtributeComponent::gainHP(const int hp)
+{
+	this->hp += hp;
+	if (this->hp > this->hpMax)
+	{
+		this->hp = this->hpMax;
+	}
+}
 string AtributeComponent::DebugPrint() const
 {
 	std::stringstream ss;

@@ -10,7 +10,7 @@ State::State(StateData* state_data)
 	this->states = state_data->states;
 	this->supportedKey = state_data->supportedKey;
 	this->Keytime = 0;
-	this->KeytimeMax = 3;
+	this->KeytimeMax = 1.5;
 	this->gridSize = state_data->GridSize;
 	vm = this->Statedata->GFXSettings->resolution;
 }

@@ -308,14 +308,10 @@ void gui::TextureSelector::update(const Vector2i& MousePosWindow, const float& d
 	}
 	if(!this->hiden)
 	{
+		this->active = false;
 		if (this->bounds.getGlobalBounds().contains(static_cast<Vector2f>(MousePosWindow)))
+		{
 			this->active = true;
-		else
-		{
-			this->active = false;
-		}
-		if (this->active)
-		{
 			this->mousePosGrid.x = ((MousePosWindow.x - static_cast<int>(this->bounds.getPosition().x)) / static_cast<unsigned>(gridSize));
 			this->mousePosGrid.y = ((MousePosWindow.y - static_cast<int>(this->bounds.getPosition().y)) / static_cast<unsigned>(gridSize));
 			this->selector.setPosition(this->bounds.getPosition().x + this->mousePosGrid.x * this->gridSize,
