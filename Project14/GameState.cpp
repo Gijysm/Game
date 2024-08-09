@@ -281,4 +281,5 @@ void GameState::render(RenderTarget* target)
 void GameState::InitTileMap()
 {
 	this->Tilemap = new TileMap("Puk.txt");
+
 }
