@@ -111,6 +111,9 @@
     <ClCompile Include="Medium_range_weapon.cpp">
       <Filter>Player\Weapon</Filter>
     </ClCompile>
+    <ClCompile Include="SkillComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="State.h">
@@ -178,6 +181,9 @@
     </ClInclude>
     <ClInclude Include="Medium_range_weapon.h">
       <Filter>Player\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="SkillComponent.h">
+      <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -5,12 +5,14 @@
 #include "MovementComponent.h"
 #include "AnimationComponent.h"
 #include "AtributeComponent.h"
+#include "SkillComponent.h"
 #include "Peak.h"
 
 class MovementComponent;
 class HitboxComponent;
 class AnimationComponent;
 class AtributeComponent;
+class SkillComponent;
 class Entity
 {
 private:
@@ -24,6 +26,7 @@ protected:
 	MovementComponent* Movecomponent;
 	AnimationComponent* animationComponent;
 	AtributeComponent* atributeComponent;
+	SkillComponent* skillComponent;
 public:
 	Entity();
 	virtual ~Entity();
@@ -40,13 +43,12 @@ public:
 		float off_set_x, float off_set_y,
 		float width, float height);
 	void CreateSprite(Texture& texture);
-	Vector2f GetSize() { 
-	return this->hitboxComponent->GetSize(); 
-	};
+	Vector2f GetSize() { return this->hitboxComponent->GetSize(); };
 	const FloatRect& GetNextPosition(const float& dt) const;
 	void CreateWeapon(Texture texture);
+	void CreateSkillComponent();
 	void CreateMovementComponent(const float MaxVelocity,
-		const float& acceleration, const float& deceleration);
+								 const float& acceleration, const float& deceleration);
 	void createAtributeComponent(const int level);
 	void CreateAnimationComponent(map < string, Texture>& texture);
 	virtual void move(const float dir_x, const float dir_y, const float& dt);

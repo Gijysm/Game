@@ -7,6 +7,7 @@ void Entity::InitVariables()
 	this->Movecomponent = NULL;
 	this->hitboxComponent = NULL;
 	this->animationComponent = NULL;
+	this->skillComponent = NULL;
 }
 
 Entity::Entity()
@@ -20,6 +21,7 @@ Entity::~Entity()
 	delete this->animationComponent;
 	delete this->hitboxComponent;
 	delete this->atributeComponent;
+	delete this->skillComponent;
 }
 
 void Entity::SetPosition(const float x, const float y)
@@ -79,6 +81,11 @@ const FloatRect& Entity::GetNextPosition(const float& dt) const
 void Entity::CreateWeapon(Texture texture)
 {
 	this->peak = new Peak(texture, Vector2f(this->getPosition().x + 10, this->getPosition().y));
+}
+
+void Entity::CreateSkillComponent()
+{
+	this->skillComponent = new SkillComponent();
 }
 
 void Entity::CreateMovementComponent(const float MaxVelocity,

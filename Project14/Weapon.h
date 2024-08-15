@@ -6,6 +6,8 @@ protected:
 	Sprite sprite;
 	Texture texture;
 	Vector2f position;
+	int MinDamage,
+		MaxDamage;
 public:
 	Weapon(Texture& texture, Vector2f Position);
 	 ~Weapon();
