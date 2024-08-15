@@ -67,13 +67,13 @@ Player::~Player()
 void Player::update(const float& dt, Vector2f& mouse_view_pos)
 {
     this->Movecomponent->update(dt);
-    this->weapon->updatePosition(dt, Vector2f(this->getCenter().x, this->getPosition().y));
+    this->peak->updatePosition(dt, Vector2f(this->getCenter().x, this->getPosition().y));
     float dX, dY;
-    dX = mouse_view_pos.x - weapon->getPosition().x;
-    dY = mouse_view_pos.y - weapon->getPosition().y;
+    dX = mouse_view_pos.x - peak->getPosition().x;
+    dY = mouse_view_pos.y - peak->getPosition().y;
     const float PI = 3.14159265;
     float deg = atan2(dY, dX) * 180 / PI;
-    this->weapon->setRotation(deg + 90);
+    this->peak->setRotation(deg + 90);
     if (Mouse::isButtonPressed(Mouse::Button::Left)) // ?????? ????? !this->Attacking
     {
         this->Attacking = true;
@@ -125,12 +125,12 @@ void Player::render(RenderTarget& target, Shader* shader)
         shader->setUniform("lightPos", this->getCenter());
         target.draw(this->sprite, shader);
 
-        this->weapon->render(target, shader, getCenter());
+        this->peak->render(target, shader, getCenter());
     }
     else
     {
         target.draw(this->sprite);
-        this->weapon->render(target);
+        this->peak->render(target);
         this->hitboxComponent->render(target);
     }
 }

@@ -78,7 +78,7 @@ const FloatRect& Entity::GetNextPosition(const float& dt) const
 
 void Entity::CreateWeapon(Texture texture)
 {
-	this->weapon = new Weapon(texture, Vector2f(this->getPosition().x + 10, this->getPosition().y));
+	this->peak = new Peak(texture, Vector2f(this->getPosition().x + 10, this->getPosition().y));
 }
 
 void Entity::CreateMovementComponent(const float MaxVelocity,

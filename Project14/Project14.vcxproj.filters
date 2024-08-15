@@ -34,6 +34,9 @@
     <Filter Include="Map">
       <UniqueIdentifier>{49b6a255-7061-4664-aa1b-9b014c6631d6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Player\Weapon">
+      <UniqueIdentifier>{e3ee05e1-8534-4389-8669-7583d84d9b50}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -96,11 +99,17 @@
     <ClCompile Include="PlayerGUI.cpp">
       <Filter>GUI</Filter>
     </ClCompile>
-    <ClCompile Include="Weapon.cpp">
-      <Filter>Player</Filter>
-    </ClCompile>
     <ClCompile Include="AtributeComponent.cpp">
       <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Weapon.cpp">
+      <Filter>Player\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Peak.cpp">
+      <Filter>Player\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Medium_range_weapon.cpp">
+      <Filter>Player\Weapon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -158,11 +167,17 @@
     <ClInclude Include="PlayerGUI.h">
       <Filter>GUI</Filter>
     </ClInclude>
-    <ClInclude Include="Weapon.h">
-      <Filter>Player</Filter>
-    </ClInclude>
     <ClInclude Include="AtributeComponent.h">
       <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon.h">
+      <Filter>Player\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Peak.h">
+      <Filter>Player\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Medium_range_weapon.h">
+      <Filter>Player\Weapon</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

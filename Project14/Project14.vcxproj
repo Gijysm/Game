@@ -145,8 +145,10 @@
     <ClCompile Include="HitboxComponent.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainMenuState.cpp" />
+    <ClCompile Include="Medium_range_weapon.cpp" />
     <ClCompile Include="MovementComponent.cpp" />
     <ClCompile Include="PauseMenu.cpp" />
+    <ClCompile Include="Peak.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerGUI.cpp" />
     <ClCompile Include="SettingsState.cpp" />
@@ -170,8 +172,10 @@
     <ClInclude Include="GameState.h" />
     <ClInclude Include="HitboxComponent.h" />
     <ClInclude Include="MainMenuState.h" />
+    <ClInclude Include="Medium_range_weapon.h" />
     <ClInclude Include="MovementComponent.h" />
     <ClInclude Include="PauseMenu.h" />
+    <ClInclude Include="Peak.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerGUI.h" />
     <ClInclude Include="SettingsState.h" />

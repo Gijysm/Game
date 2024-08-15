@@ -5,7 +5,7 @@
 #include "MovementComponent.h"
 #include "AnimationComponent.h"
 #include "AtributeComponent.h"
-#include "Weapon.h"
+#include "Peak.h"
 
 class MovementComponent;
 class HitboxComponent;
@@ -19,7 +19,7 @@ private:
 
 protected:
 	Sprite sprite;
-	Weapon* weapon;
+	Peak* peak;
 	HitboxComponent* hitboxComponent;
 	MovementComponent* Movecomponent;
 	AnimationComponent* animationComponent;
