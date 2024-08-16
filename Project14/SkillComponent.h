@@ -1,15 +1,25 @@
 #ifndef SKILLCOMPONENT_H
 #define SKILLCOMPONENT_H
 
+enum SKILLS{
+	Health = 0,
+	Melle,
+	Ranged,
+	Endurance,
+	Accuracy,
+	Defence,
+	Mining,
+	Woodcutting
+};
+
 class SkillComponent
 {
 private:
-
-public:
 	class Skill
 	{
 	private:
-		int level,
+		int Type,
+			level,
 			LevelCap,
 			exp,
 			expNext;
@@ -21,6 +31,7 @@ public:
 			this->expNext = 75;
 		}
 	public:
+		inline const int& getType() const { return this->Type; }
 		inline const int& getLevel() const { return this->level; }
 		inline const int& getExp() const { return this->exp; }
 		inline const int& getExpNext() const { return this->expNext; }
@@ -39,7 +50,7 @@ public:
 						{
 							this->level++;
 							
-							this->expNext = pow(this->level, 2.75) + this->level * 9.5 + this->expNext * 1.5;
+							this->expNext = std::pow(this->level, 2.75) + this->level * 9.5 + this->expNext * 1.5;
 						}
 					}
 				}
@@ -54,16 +65,17 @@ public:
 						{
 							this->level--;
 
-							this->expNext = pow(this->level, 2.75) + this->level * 9.5 + this->expNext * 1.5;
+							this->expNext = std::pow(this->level, 2.75) + this->level * 9.5 + this->expNext * 1.5;
 						}
 					}
 				}
 			}
 		}
 		void setLevel(const int level) { this->level = level; }
-		void setLevel(const int LevelCap) { this->LevelCap = LevelCap; }
-		Skill()
+		void setLevelCap(const int LevelCap) { this->LevelCap = LevelCap; }
+		Skill(const int type)
 		{
+			this->Type = type;
 			this->InitComponents();
 		}
 
@@ -75,9 +87,16 @@ public:
 		{
 		}
 	};
+	vector<Skill> skills;
+public:
+
 	SkillComponent();
 	virtual ~SkillComponent();
 
+	void InitSkills();
+
+	const void gainExp(const int skill, const int exp);
+	const int getSkillLevel(const int index) const;
 };
 
 #endif // !SKILLCOMPONENT_H

@@ -21,6 +21,8 @@ Player::Player(float x, float y, map < string, Texture>& texture_sheet, Texture&
     this->CreateHitBoxComponent(this->sprite, 50, 55, 55, 55);
 	this->CreateMovementComponent(300.f, 1500.f, 500.f);
 	this->CreateAnimationComponent(texture_sheet);
+    this->CreateSkillComponent();
+    cout << this->skillComponent->getSkillLevel(SKILLS::Health) << endl;
     this->createAtributeComponent(0);
     this->CreateWeapon(Weapon);
     this->animationComponent->addAnimation("Idle_Top", 10.f, 0, 0, 11, 0, 64, 64);

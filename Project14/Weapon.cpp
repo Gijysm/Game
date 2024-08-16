@@ -1,5 +1,4 @@
 #include "stdafx.h"
-#include "stdafx.h"
 #include "Weapon.h"
 
 Weapon::Weapon(Texture& texture, Vector2f Position)

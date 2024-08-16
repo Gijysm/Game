@@ -149,6 +149,11 @@ void Entity::move(const float dir_x, const float dir_y, const float& dt)
 	{
 		this->Movecomponent->move(dir_x, dir_y,dt);
 	}
+	if (this->skillComponent)
+	{
+		this->skillComponent->gainExp(SKILLS::Endurance,1);
+		cout << this->skillComponent->getSkillLevel(SKILLS::Endurance) << endl;
+	}
 }
 
 void Entity::update(const float& dt, Vector2f& mouse_view_pos)
