@@ -338,6 +338,68 @@ void gui::TextureSelector::render(RenderTarget& target)
 	}
 }
 
+gui::ProgressBar::ProgressBar(float dx, float dy, float width,
+	float height, int MaxHp, VideoMode vm, Font* font): maxValue(MaxHp),
+x(gui::p2pX(dx, vm)), y(gui::p2pY(dy, vm)),screenWidth(gui::p2pX( width, vm)),
+screenHeight(gui::p2pY(height, vm))
+{
+
+	this->maxWidth = screenHeight * 0.15;
+	// Player bars    
+	this->Back.setSize(Vector2f(screenWidth * 0.2f, screenHeight * 0.03f));
+	this->Back.setFillColor(Color(50, 50, 50, 200));
+	this->Back.setPosition(gui::p2pX(1.5, vm), gui::p2pY(1.5,vm));
+	if(font)
+	{
+		this->text.setFont(*font);
+		this->text.setCharacterSize(static_cast<unsigned int>(screenHeight * 0.0269f));
+		this->text.setFillColor(Color::Red);
+		this->text.setPosition(gui::p2pX(11.5, vm), gui::p2pY(2.25, vm));
+	}
+	this->lineer.setSize(Vector2f(screenWidth * 0.125f, screenHeight * 0.013f));
+	this->lineer.setFillColor(Color::Red);
+	this->lineer.setOutlineThickness(1.f);
+	this->lineer.setOutlineColor(Color::White);
+	this->lineer.setPosition(this->Back.getPosition().x, (this->Back.getPosition().y));
+
+}
+
+gui::ProgressBar::~ProgressBar()
+{
+}
+
+const Vector2f gui::ProgressBar::GetPositionB() const
+{
+	return this->lineer.getPosition();
+}
+
+const Vector2f gui::ProgressBar::GetPositionBB() const
+{
+	return this->Back.getPosition();
+}
+
+const Vector2f gui::ProgressBar::GetPositionT()const
+{
+	return this->text.getPosition();
+}
+
+void gui::ProgressBar::Update(const int& current_value)
+{
+	float percent = static_cast<float>(current_value) / this->maxValue;
+	this->lineer.setSize(Vector2f(static_cast<float>(floor(this->maxWidth * percent)),
+		this->lineer.getSize().y));
+	this->ProgressBarString = std::to_string(current_value) + "/" +
+		std::to_string(this->maxValue);
+	this->text.setString(this->ProgressBarString);
+}
+
+void gui::ProgressBar::Render(RenderTarget& target)
+{
+	target.draw(this->Back);
+	target.draw(this->lineer);
+	target.draw(this->text);
+}
+
 const float gui::p2pX(const float perc, VideoMode vm)
 {
 	return std::floor(static_cast<float>(vm.width) * (perc / 100.f));

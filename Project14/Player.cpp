@@ -6,25 +6,8 @@ void Player::InitVariables()
     Attacking = false;
 }
 
-AtributeComponent* Player::getAtributeComponent()
+void Player::InitAnnimations()
 {
-    return this->atributeComponent;
-}
-
-Player::Player(float x, float y, map < string, Texture>& texture_sheet, Texture& Weapon)
-{
-    
-	this->InitVariables();
-
-	this->SetPosition(x, y);
-
-    this->CreateHitBoxComponent(this->sprite, 50, 55, 55, 55);
-	this->CreateMovementComponent(300.f, 1500.f, 500.f);
-	this->CreateAnimationComponent(texture_sheet);
-    this->CreateSkillComponent();
-    cout << this->skillComponent->getSkillLevel(SKILLS::Health) << endl;
-    this->createAtributeComponent(0);
-    this->CreateWeapon(Weapon);
     this->animationComponent->addAnimation("Idle_Top", 10.f, 0, 0, 11, 0, 64, 64);
     this->animationComponent->addAnimation("Idle_Left", 10.f, 0, 0, 11, 0, 64, 64);
     this->animationComponent->addAnimation("Idle_Right", 10.f, 0, 0, 11, 0, 64, 64);
@@ -37,6 +20,27 @@ Player::Player(float x, float y, map < string, Texture>& texture_sheet, Texture&
     this->animationComponent->addAnimation("Attack_Left", 10.f, 0, 0, 6, 0, 64, 64);
     this->animationComponent->addAnimation("Attack_Right", 10.f, 0, 0, 6, 0, 64, 64);
     this->animationComponent->addAnimation("Attack_Bottom", 10.f, 0, 0, 6, 0, 64, 64);
+}
+
+AtributeComponent* Player::getAtributeComponent()
+{
+    return this->atributeComponent;
+}
+
+Player::Player(float x, float y, map < string, Texture>& texture_sheet, Texture& Weapon)
+{
+    
+	this->InitVariables();
+
+    this->CreateHitBoxComponent(this->sprite, 50, 55, 55, 55);
+	this->CreateMovementComponent(300.f, 1500.f, 500.f);
+	this->CreateAnimationComponent(texture_sheet);
+    this->CreateSkillComponent();
+    cout << this->skillComponent->getSkillLevel(SKILLS::Health) << endl;
+    this->createAtributeComponent(0);
+    this->SetPosition(x, y);
+    this->CreateWeapon(Weapon);
+    this->InitAnnimations();
 }
 
 

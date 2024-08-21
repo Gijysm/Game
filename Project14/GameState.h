@@ -31,6 +31,7 @@ private:
 	Font font;
 	void InitView();
 	void InitKeyBinds();
+	void InitAnimations();
 	void InitTexture();
 	void InitShaders();
 	void InitPlayers();

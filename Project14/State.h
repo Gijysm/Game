@@ -28,7 +28,7 @@ protected:
 	RenderWindow* window;
 	bool Exit;
 	bool paused;
-	map<string, Texture> texture;
+
 
 
 	stack<State*>* states;

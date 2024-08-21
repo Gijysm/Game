@@ -25,6 +25,8 @@ protected:
 public:
 	//Accessors
 
+	void InitAnnimations();
+	
 	AtributeComponent* getAtributeComponent();
 	Player(float x, float y, map < string, Texture>& texture, Texture& Weapon);
 	Vector2f GetPosition() { return this->sprite.getPosition(); }

@@ -9,17 +9,14 @@ private:
 	int colorChangeCounterProgressBar;
 	bool Textchanged = false;
 	bool Layerchanged = false;
-	string hpBarString;
 	string ManaBarString;
 	string ExpBarString;
-	Text HpText;
 	Text LevelText;
 	Text ManaText;
 	Text ExpText;
 	Player* player;
-	RectangleShape playerHpBar;
+	gui::ProgressBar* hpBar;
 	RectangleShape playerExpBar;
-	RectangleShape playerBarBack;
 	RectangleShape playerManaBar;
 	RectangleShape playerStaminBar;
 	Font font;

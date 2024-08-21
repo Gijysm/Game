@@ -106,6 +106,32 @@ namespace gui
 		void update(const Vector2i& MousePosWindow, const float& dt);
 		void render(RenderTarget& target);
 	};
+	class ProgressBar
+	{
+	private:
+		float x;
+		float y;
+		float screenWidth ;
+		float screenHeight;
+		
+		string ProgressBarString;
+		Text text;
+		float maxWidth;
+		int maxValue;
+		int current_value;
+		RectangleShape lineer;
+		RectangleShape Back;
+	public:
+		ProgressBar(float dx, float dy, float width, float height, int MaxHp, VideoMode vm, Font* font = NULL);
+		~ProgressBar();
+
+		const Vector2f GetPositionB()const ;
+		const Vector2f GetPositionBB()const ;
+		const Vector2f GetPositionT()const ;
+		
+		void Update(const int& current_value);
+		void Render(RenderTarget& target);
+	};
 }
 
 #endif // !BUTTON_H

@@ -12,21 +12,12 @@ void PlayerGUI::InitPlayerBars()
     float screenHeight = static_cast<float>(vm.height);
 
     // Player bars    
-    this->playerBarBack.setSize(Vector2f(screenWidth * 0.2f, screenHeight * 0.03f));
-    this->playerBarBack.setFillColor(Color(50, 50, 50, 200));
-    this->playerBarBack.setPosition(gui::p2pX(1.5, vm), gui::p2pY(1.5,vm));
-
-    this->playerHpBar.setSize(Vector2f(screenWidth * 0.125f, screenHeight * 0.015f));
-    this->playerHpBar.setFillColor(Color::Red);
-    this->playerHpBar.setOutlineThickness(1.f);
-    this->playerHpBar.setOutlineColor(Color::White);
-    this->playerHpBar.setPosition(this->playerBarBack.getPosition().x, (this->playerBarBack.getPosition().y));
-
+    this->hpBar = new gui::ProgressBar(0,0,125, 116,this->player->getAtributeComponent()->hpMax, vm, &font);
     this->playerManaBar.setSize(Vector2f(screenWidth * 0.125f, screenHeight * 0.016f));
     this->playerManaBar.setFillColor(Color(99, 62, 213));
     this->playerManaBar.setOutlineThickness(1.f);
     this->playerManaBar.setOutlineColor(Color::White);
-    this->playerManaBar.setPosition(this->playerBarBack.getPosition().x, (this->playerBarBack.getPosition().y * 2));
+    this->playerManaBar.setPosition(this->hpBar->GetPositionBB().x, (this->hpBar->GetPositionBB().y * 2));
 
     this->playerStaminBar.setSize(Vector2f(this->player->GetSize().x, screenHeight * 0.008f));
     this->playerStaminBar.setFillColor(Color(20, 255, 20));
@@ -41,15 +32,11 @@ void PlayerGUI::InitPlayerBars()
     this->playerExpBar.setPosition(this->player->getPosition().x - gui::p2pX(8, vm), this->player->getPosition().y + gui::p2pY(7.5, vm));
 
     // Text
-    this->HpText.setFont(this->font);
-    this->HpText.setCharacterSize(static_cast<unsigned int>(screenHeight * 0.03f));
-    this->HpText.setFillColor(Color::Red);
-    this->HpText.setPosition(gui::p2pX(11.5, vm), gui::p2pY(2.25, vm));
-
+    
     this->ManaText.setFont(this->font);
     this->ManaText.setCharacterSize(static_cast<unsigned int>(screenHeight * 0.03f));
     this->ManaText.setFillColor(Color(99, 62, 213));
-    this->ManaText.setPosition(HpText.getPosition().x +60, HpText.getPosition().y);
+    this->ManaText.setPosition(this->hpBar->GetPositionT().x +60, this->hpBar->GetPositionT().y);
 
     this->ExpText.setFont(this->font);
     this->ExpText.setCharacterSize(static_cast<unsigned int>(screenHeight * 0.03f));
@@ -72,16 +59,12 @@ PlayerGUI::PlayerGUI(Player* player)
 
 PlayerGUI::~PlayerGUI()
 {
+    delete this->hpBar;
 }
 
 void PlayerGUI::UpdateHpBar()
 {
-    // Використання плаваючої точки для обчислення hpPercent
-    float hpPercent = static_cast<float>(this->player->getAtributeComponent()->hp) / this->player->getAtributeComponent()->hpMax;
-    this->playerHpBar.setSize(Vector2f(187.5f * hpPercent, this->playerHpBar.getSize().y));
-    this->hpBarString = std::to_string(this->player->getAtributeComponent()->hp) + "/" +
-        std::to_string(this->player->getAtributeComponent()->hpMax);
-    this->HpText.setString(this->hpBarString);
+this->hpBar->Update(this->player->getAtributeComponent()->hp);
 }
 
 void PlayerGUI::UpdateManaBar()
@@ -161,9 +144,7 @@ void PlayerGUI::Render(RenderTarget& target)
 
 void PlayerGUI::RenderHpBar(RenderTarget& target)
 {
-    target.draw(this->playerBarBack);
-    target.draw(this->playerHpBar);
-    target.draw(this->HpText);
+    this->hpBar->Render(target);
 }
 
 void PlayerGUI::RenderManaBar(RenderTarget& target)
