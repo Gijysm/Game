@@ -7,6 +7,7 @@ class Player;
 class PlayerGUI
 {
 private:
+	VideoMode vm;
 	int colorChangeCounterProgressBar;
 	bool Textchanged = false;
 	bool Layerchanged = false;

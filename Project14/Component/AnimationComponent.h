@@ -2,6 +2,8 @@
 #define ANIMATIONCOMPONENT_H
 #include "..//stdafx.h"
 
+class Animation;
+
 class AnimationComponent
 {
 private:

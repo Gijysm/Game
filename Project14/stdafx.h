@@ -1,10 +1,15 @@
 #ifndef HEADER_H
 #define HEADER_H
-#include <SFML/Audio.hpp>
-#include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Network.hpp>
+
+#include <././SFML/Audio.hpp>
+#include <././SFML/Graphics.hpp>
+#include <././SFML/Window.hpp>
+#include <././SFML/System.hpp>
+#include <././SFML/Network.hpp>
+
+#include <././SFML/Graphics/View.hpp>
+#include <././SFML/Graphics/Font.hpp>
+#include <././SFML/Graphics/RenderTexture.hpp>
 
 #include <sstream>
 #include <fstream>

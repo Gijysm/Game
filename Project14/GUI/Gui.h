@@ -19,7 +19,8 @@ namespace gui
 
 		RectangleShape Shape;
 		Font* font;
-		Text Text;
+		sf::Text text; // Instead of Text Text;
+
 		short unsigned id;
 
 		Color Idle_Color;
@@ -106,6 +107,11 @@ namespace gui
 		void update(const Vector2i& MousePosWindow, const float& dt);
 		void render(RenderTarget& target);
 	};
+	enum F_ont
+	{
+		Width,
+		Height
+	};
 	class ProgressBar
 	{
 	private:
@@ -116,28 +122,37 @@ namespace gui
 		
 		string ProgressBarString;
 		Text text;
-		float maxWidth;
-		int maxValue;
-		int current_value;
+		float maxWidth,maxHeight;
+		int maxValue,
+		current_value,
+		size_Text;
 		RectangleShape lineer;
 		RectangleShape Back;
+		const void SetSizeLineer(const float& x, const float& y);
+		const void SetSizeText(const float& size);
+		const void SetSizeBack(const float& x, const float& y);
 	public:
-		ProgressBar(float dx, float dy, float width,
-			float height, int XpositionText =0,
-			int YpositionText = 0,  int MaxHp = 100,
+		ProgressBar(float dx = 0, float dy = 0, float width = 0,
+			float height = 0, int Character_size = 0, int XpositionText =0,
+			int YpositionText = 0,  int MaxHp  = 0,
 			VideoMode vm = VideoMode(), Font* font = NULL,
 		Color colorText = Color(), Color colorLineer = Color());
         void LoadBack(float dx, float dy, float width,
-                      	float height, VideoMode vm);
+                      	float height);
 		~ProgressBar();
 
-		const Vector2f GetPositionB()const ;
-		const unsigned int GetSizeT() ;
-		const Vector2f GetPositionBB()const ;
+		const Vector2f GetPositionLineer()const ;
+		const Vector2f GetSizeLineer()const ;
+		const unsigned int GetSizeText() ;
+		const Vector2f GetPositionBack()const ;
 		const Vector2f GetPositionT()const ;
-		void SetPosition(const float& x, const float& y);
+		const void SetPositionLineer(const float& x, const float& y);
+		const void SetPositionText(const float& x, const float& y);
+		const void SetPositionBack(const float& x, const float& y);
 		
-		void Update(const int& current_value);
+		void Update(const int& current_value, const int& Max_value = 0, const F_ont& font = F_ont::Width);
+		void RenderLineer(RenderTarget& target);
+		void RenderText(RenderTarget& target);
 		void Render(RenderTarget& target);
 		void RenderBack(RenderTarget& target);
 	};

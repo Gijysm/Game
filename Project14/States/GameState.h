@@ -1,6 +1,10 @@
 #ifndef GAMESTATE_H
 #define GAMESTATE_H
 
+#include <SFML/Graphics/View.hpp>
+#include <SFML/Graphics/Font.hpp>
+#include <SFML/Graphics/RenderTexture.hpp>
+
 #include "..//States/State.h"
 #include "..//GUI/PauseMenu.h"
 #include "..//Map/TileMap.h"
@@ -17,18 +21,18 @@ class PauseMenu;
 class GameState:public State
 {
 private:
-	View view;
+	sf::View view;
 	TileMap* Tilemap;
 	PauseMenu* pmenu;
 	Shader core_shader;
-	RenderTexture renderTexture;
+	sf::RenderTexture renderTexture;
 	Sprite renderSprite;
 	Texture Weapon;
 	Vector2i viewPos;
 	map<string, Texture> temp;
 	Player* player;
 	PlayerGUI* playerGUI;
-	Font font;
+	sf::Font font;
 	void InitView();
 	void InitKeyBinds();
 	void InitAnimations();

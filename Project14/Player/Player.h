@@ -28,7 +28,7 @@ public:
 	void InitAnnimations();
 	
 	AtributeComponent* getAtributeComponent();
-	Player(float x, float y, map < string, Texture>& texture, Texture& Weapon);
+	Player(float x, float y, std::map<std::string, sf::Texture>& textures, sf::Texture& texture);
 	Vector2f GetPosition() { return this->sprite.getPosition(); }
 	string directionToString(Direction dir);
 	virtual ~Player();

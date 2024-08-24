@@ -19,14 +19,14 @@ gui::Button::Button(float x, float y, float Width, float height,
 	this->Button_State = BTN_IDLE;
 
 	this->font = font;
-	this->Text.setFont(*this->font);
-	this->Text.setString(text);
-	this->Text.setFillColor(Text_idle_Color);
-	this->Text.setCharacterSize(Character_size);
+	this->text.setFont(*this->font);
+	this->text.setString(text);
+	this->text.setFillColor(Text_idle_Color);
+	this->text.setCharacterSize(Character_size);
 
-	this->Text.setPosition(
-		this->Shape.getPosition().x + (this->Shape.getGlobalBounds().width / 2.f) - this->Text.getGlobalBounds().width / 2.f,
-		this->Shape.getPosition().y + (this->Shape.getGlobalBounds().height / 2.f) - this->Text.getGlobalBounds().height / 2.f
+	this->text.setPosition(
+		this->Shape.getPosition().x + (this->Shape.getGlobalBounds().width / 2.f) - this->text.getGlobalBounds().width / 2.f,
+		this->Shape.getPosition().y + (this->Shape.getGlobalBounds().height / 2.f) - this->text.getGlobalBounds().height / 2.f
 	);
 
 	this->Text_idle_Color = Text_idle_Color;
@@ -59,7 +59,7 @@ const bool gui::Button::isPressed() const
 
 const string gui::Button::getText() const
 {
-	return this->Text.getString();
+	return this->text.getString();
 }
 
 const short unsigned& gui::Button::getId() const
@@ -69,7 +69,7 @@ const short unsigned& gui::Button::getId() const
 
 void gui::Button::setText(const string text)
 {
-	this->Text.setString(text);
+	this->text.setString(text);
 }
 
 void gui::Button::setId(const short unsigned id)
@@ -92,22 +92,22 @@ void gui::Button::update(const Vector2i& MousePos)
 	{
 	case BTN_IDLE:
 		this->Shape.setFillColor(Idle_Color);
-		this->Text.setFillColor(Text_idle_Color);
+		this->text.setFillColor(Text_idle_Color);
 		this->Shape.setOutlineColor(this->OutLine_Idle_Color);
 		break;
 	case BTN_HOWER:
 		this->Shape.setFillColor(Hower_Color);
-		this->Text.setFillColor(Text_hower_Color);
+		this->text.setFillColor(Text_hower_Color);
 		this->Shape.setOutlineColor(this->OutLine_Hower_Color);
 		break;
 	case BTN_ACTIVE:
 		this->Shape.setFillColor(Active_Color);
-		this->Text.setFillColor(Text_active_Color);
+		this->text.setFillColor(Text_active_Color);
 		this->Shape.setOutlineColor(this->OutLine_Active_Color);
 		break;
 	default:
 		this->Shape.setFillColor(Color::Red);
-		this->Text.setFillColor(Color::Red);
+		this->text.setFillColor(Color::Red);
 		this->Shape.setOutlineColor(Color::Transparent);
 	}
 }
@@ -115,7 +115,7 @@ void gui::Button::update(const Vector2i& MousePos)
 void gui::Button::render(RenderTarget& target)
 {
 	target.draw(this->Shape);
-	target.draw(this->Text);
+	target.draw(this->text);
 }
 
 gui::DropDownList::DropDownList(float x, float y, float width, float height, Font& font, string list[],
@@ -338,52 +338,73 @@ void gui::TextureSelector::render(RenderTarget& target)
 	}
 }
 
-gui::ProgressBar::ProgressBar(float dx, float dy, float width, float height, int XpositionText,
-	int YpositionText,  int MaxHp, VideoMode vm, Font* font,
-		Color colorText, Color colorLineer): maxValue(MaxHp),
-x(gui::p2pX(dx, vm)), y(gui::p2pY(dy, vm)),screenWidth(gui::p2pX( width, vm)),
-screenHeight(gui::p2pY(height, vm))
+const void gui::ProgressBar::SetSizeLineer(const float& width, const float& height)
 {
+	this->lineer.setSize(Vector2f(width,height));
+}
+const void gui::ProgressBar::SetSizeText(const float& size)
+{
+	this->text.setCharacterSize(size);
+}
+const void gui::ProgressBar::SetSizeBack(const float& width, const float& height)
+{
+	this->Back.setSize(Vector2f(width,height));
+}
 
-	this->maxWidth = screenHeight * 0.15;
+gui::ProgressBar::ProgressBar(float dx, float dy, float width, float height, int Character_size, int XpositionText,
+                              int YpositionText,  int MaxHp, VideoMode vm, Font* font,
+                              Color colorText, Color colorLineer): maxValue(MaxHp),
+                                                                   x(dx), y(dy),screenWidth(width),
+                                                                   screenHeight(height)
+{
+	this->maxHeight = screenHeight * 0.5;
+	this->maxWidth =  screenWidth * 0.5;
+	size_Text = Character_size;
 	// Player bars    
 	if(font)
 	{
 		this->text.setFont(*font);
-		this->text.setCharacterSize(static_cast<unsigned int>(screenHeight * 0.0269f));
+		this->SetSizeText(size_Text);
 		this->text.setFillColor(colorText);
-		this->text.setPosition(XpositionText, YpositionText);
+		this->SetPositionText(XpositionText, YpositionText);
 	}
-	this->lineer.setSize(Vector2f(screenWidth * 0.125f, screenHeight * 0.013f));
+	this->SetSizeLineer(screenWidth,screenHeight);
 	this->lineer.setFillColor(colorLineer);
 	this->lineer.setOutlineThickness(1.f);
 	this->lineer.setOutlineColor(Color::White);
-	this->lineer.setPosition(dx, dy);
+	this->SetPositionLineer(dx,dy);
 
 }
 
-void gui::ProgressBar::LoadBack(float dx, float dy, float width, float height, VideoMode vm)
+void gui::ProgressBar::LoadBack(float dx, float dy, float width, float height)
 {
-	this->Back.setSize(Vector2f(screenWidth * 0.2f, screenHeight * 0.03f));
+	width *= 1.25;
+	height *= 3;
+	this->SetSizeBack(width, height);
 	this->Back.setFillColor(Color(50, 50, 50, 200));
-	this->Back.setPosition(gui::p2pX(1.5, vm), gui::p2pY(1.5,vm));
+	this->SetPositionBack(dx, dy);
 }
 
 gui::ProgressBar::~ProgressBar()
 {
 }
 
-const Vector2f gui::ProgressBar::GetPositionB() const
+const Vector2f gui::ProgressBar::GetPositionLineer() const
 {
 	return this->lineer.getPosition();
 }
 
-const unsigned int gui::ProgressBar::GetSizeT()
+const Vector2f gui::ProgressBar::GetSizeLineer() const
+{
+	return this->lineer.getSize();
+}
+
+const unsigned int gui::ProgressBar::GetSizeText()
 {
 	return this->text.getCharacterSize();
 }
 
-const Vector2f gui::ProgressBar::GetPositionBB() const
+const Vector2f gui::ProgressBar::GetPositionBack() const
 {
 	return this->Back.getPosition();
 }
@@ -393,26 +414,60 @@ const Vector2f gui::ProgressBar::GetPositionT()const
 	return this->text.getPosition();
 }
 
-void gui::ProgressBar::SetPosition(const float& x, const float& y)
+const void gui::ProgressBar::SetPositionLineer(const float& x, const float& y)
 {
 	this->lineer.setPosition(x, y);
 }
 
-void gui::ProgressBar::Update(const int& current_value)
+const void gui::ProgressBar::SetPositionText(const float& x, const float& y)
 {
-	float percent = static_cast<float>(current_value) / this->maxValue;
-	this->lineer.setSize(Vector2f(static_cast<float>(floor(this->maxWidth * percent)),
-		this->lineer.getSize().y));
-	this->ProgressBarString = std::to_string(current_value) + "/" +
-		std::to_string(this->maxValue);
-	this->text.setString(this->ProgressBarString);
+	this->text.setPosition(x,y);
+}
+
+const void gui::ProgressBar::SetPositionBack(const float& x, const float& y)
+{
+	this->Back.setPosition(x, y);
+}
+
+void gui::ProgressBar::Update(const int& current_value, const int& Max_value, const F_ont& font)
+{
+	if(Max_value > this->maxValue)
+		this->maxValue = Max_value;
+	if(font == F_ont::Width)
+	{	
+		float percent = static_cast<float>(current_value) / this->maxValue;
+		this->SetSizeLineer(static_cast<float>(floor(this->maxWidth * percent)),
+			this->lineer.getSize().y);
+		this->ProgressBarString = std::to_string(current_value) + "/" +
+			std::to_string(this->maxValue);
+		this->text.setString(this->ProgressBarString);
+	}
+	else if(font == F_ont::Height)
+	{
+		float percent = static_cast<float>(current_value) / this->maxValue;
+		this->SetSizeLineer(11, -(this->maxHeight * percent));
+		//this->UpdateColor(this->player->getAtributeComponent()->exp, 10, this->playerExpBar);
+		this->ProgressBarString = std::to_string(current_value) + "/" +
+			std::to_string(this->maxValue);
+		this->text.setString(this->ProgressBarString);
+		//this->LevelText.setString(std::to_string(this->player->getAtributeComponent()->level));
+		//this->UpdateColor(this->player->getAtributeComponent()->level, 5, this->LevelText);
+	}
 }
 
 void gui::ProgressBar::Render(RenderTarget& target)
 {
-		target.draw(this->Back);
-	target.draw(this->lineer);
+	this->RenderBack(target);
+	this->RenderText(target);
+	this->RenderLineer(target);
+}
+void gui::ProgressBar::RenderText(RenderTarget& target)
+{
 	target.draw(this->text);
+}
+void gui::ProgressBar::RenderLineer(RenderTarget& target)
+{
+	target.draw(this->lineer);
 }
 void gui::ProgressBar::RenderBack(RenderTarget& target)
 {
