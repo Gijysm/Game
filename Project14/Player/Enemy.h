@@ -2,8 +2,11 @@
 #define ENEMY_H
 
 #include "..//Player//Entity.h"
+#include "../Map/EnemySpawner.h"
 
 class Entity;
+class EnemySpawner;
+
 // enum Direction
 // {
 //     Top = 0,
@@ -12,10 +15,10 @@ class Entity;
 //     Left
 // };
 
-class Enemy:public Entity
+class Enemy:protected Entity
 {
 private:
-
+    EnemySpawner& spawner;
     // Direction dir;
     bool Attacking;
     void InitVariables();
@@ -28,7 +31,7 @@ public:
     void InitAnnimations();
 	
     AtributeComponent* getAtributeComponent();
-    Enemy(float x, float y, std::map<std::string, sf::Texture>& textures, sf::Texture texture = Texture());
+    Enemy(EnemySpawner& spawner,float x, float y, std::map<std::string, sf::Texture>& textures, sf::Texture texture = Texture());
     Vector2f GetPosition() { return this->sprite.getPosition(); }
     // string directionToString(Direction dir);
     virtual ~Enemy();

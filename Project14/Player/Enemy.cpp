@@ -26,11 +26,11 @@ void Enemy::InitAnnimations()
 //     return this->atributeComponent;
 // }
 
-Enemy::Enemy(float x, float y, map < string, Texture>& texture_sheet, Texture Weapon)
+Enemy::Enemy(EnemySpawner& spawner,float x, float y,
+    map < string, Texture>& texture_sheet, Texture Weapon) : spawner(spawner)
 {
     
 	this->InitVariables();
-
     this->CreateHitBoxComponent(this->sprite, 50, 55, 55, 55);
 	this->CreateMovementComponent(300.f, 1500.f, 500.f);
 	this->CreateAnimationComponent(texture_sheet);

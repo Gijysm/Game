@@ -33,7 +33,6 @@ private:
 	Texture Weapon;
 	Vector2i viewPos;
 	map<string, Texture> temp;
-	Enemy* Goat;
 	Player* player;
 	PlayerGUI* playerGUI;
 	sf::Font font;

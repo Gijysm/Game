@@ -63,7 +63,6 @@ GameState::~GameState()
 	delete this->player;
 	delete this->playerGUI;
 	delete this->Tilemap;
-	delete this->Goat;
 }
 
 
@@ -199,7 +198,6 @@ void GameState::update(const float& dt)
 		this->UpdatePlayerInput(dt);
 		this->UpdateTileMap(dt);
 		this->player->update(dt, this->MousePosView);
-		this->Goat->update(dt, this->MousePosView);
 		this->playerGUI->update(dt);
 		this->playerGUI->UpdateDynamicalElliments();
 	}
@@ -239,7 +237,6 @@ void GameState::InitView()
 
 void GameState::InitEnemy()
 {
-	this->Goat = new Enemy(gui::p2pX(50, vm), gui::p2pY(50, vm), this->temp);
 }
 
 void GameState::render(RenderTarget* target)
@@ -268,7 +265,6 @@ void GameState::render(RenderTarget* target)
 
 	//this->renderTexture.draw(mousetext);
 	this->player->render(this->renderTexture, &core_shader);
-	this->Goat->render(this->renderTexture, &core_shader);
 	this->Tilemap->renderDeferrent(this->renderTexture, &this->core_shader, this->player->getCenter());
 	this->playerGUI->Render_Dynamical(renderTexture);
 	this->renderTexture.setView(this->renderTexture.getDefaultView());
