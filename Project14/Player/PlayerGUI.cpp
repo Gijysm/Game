@@ -25,8 +25,6 @@ void PlayerGUI::InitPlayerBars()
      gui::CharacterSize(vm) ,this->hpBar->GetPositionT().x + (this->hpBar->GetSizeText() * 2), this->hpBar->GetPositionT().y,
     this->player->getAtributeComponent()->manaMax, vm, &font, Color::Blue,Color::Blue);
     
-
-    {
         this->StaminaBar = new gui::ProgressBar(this->player->getPosition().x - gui::p2pX(7.5, vm),
            this->player->getPosition().y - gui::p2pY(6, vm),
            this->player->GetSize().x,  (screenHeight * 0.03f), gui::CharacterSize(vm)
@@ -38,7 +36,6 @@ void PlayerGUI::InitPlayerBars()
             this->player->GetSize().y * 2 , gui::CharacterSize(vm) ,
             this->ManaBar->GetPositionT().x + (this->ManaBar->GetSizeText() * 2), gui::p2pY(2.25, vm),
             this->player->getAtributeComponent()->expnext, vm, &font, Color::Yellow,Color(255, 223, 0, 200));
-    }
 
     // Text
     
@@ -105,12 +102,12 @@ void PlayerGUI::update(const float& dt)
 
 void PlayerGUI::UpdateColor(int Exp, int zmina, RectangleShape& shape)
 {
-    if (Exp % zmina == 0 && !Layerchanged) // Зміна кольору, якщо Exp кратний zmina і колір ще не змінювався
+    if (Exp % zmina == 0 && !Layerchanged)
     {
         shape.setFillColor(Color(rand() % 256, rand() % 256, rand() % 256, 150));
-        Layerchanged = true; // Прапорець встановлюється, щоб уникнути повторної зміни кольору
+        Layerchanged = true; 
     }
-    else if (Exp % zmina != 0) // Скидання прапорця, коли умова більше не виконується
+    else if (Exp % zmina != 0)
     {
         Layerchanged = false;
     }
@@ -118,12 +115,12 @@ void PlayerGUI::UpdateColor(int Exp, int zmina, RectangleShape& shape)
 
 void PlayerGUI::UpdateColor(int Exp, int zmina, Text& shape)
 {
-    if (Exp % zmina == 0 && !Textchanged) // Зміна кольору, якщо Exp кратний zmina і колір ще не змінювався
+    if (Exp % zmina == 0 && !Textchanged) 
     {
         shape.setFillColor(Color(rand() % 256, rand() % 256, rand() % 256));
-        Textchanged = true; // Прапорець встановлюється, щоб уникнути повторної зміни кольору
+        Textchanged = true; 
     }
-    else if (Exp % zmina != 0) // Скидання прапорця, коли умова більше не виконується
+    else if (Exp % zmina != 0) 
     {
         Textchanged = false;
     }

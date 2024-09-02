@@ -33,18 +33,18 @@ const Vector2f& Weapon::getPosition() const
 }
 
 void Weapon::updatePosition(const float& dt, Vector2f Position)
-{
-		this->sprite.setPosition(Position);
-}
+				{
+				this->sprite.setPosition(Position);
+				}
 
 void Weapon::render(RenderTarget& target, Shader* shader, Vector2f Pos)
-{
-	if(shader)
-	{
-		shader->setUniform("hasTexture", true);
-		shader->setUniform("lightPos", Pos);
-		target.draw(this->sprite, shader);
-	}
-	else
-		target.draw(this->sprite);
-}
+				{
+					if(shader)
+					{
+						shader->setUniform("hasTexture", true);
+						shader->setUniform("lightPos", Pos);
+						target.draw(this->sprite, shader);
+					}
+					else
+						target.draw(this->sprite);
+				}

@@ -32,6 +32,7 @@ public:
 	Vector2f GetPosition() { return this->sprite.getPosition(); }
 	string directionToString(Direction dir);
 	virtual ~Player();
+	void updateAnimation(const float& dt);
 	void update(const float& dt, Vector2f& mouse_view_pos);
 	void render(RenderTarget& target, Shader* shader = NULL);
 };

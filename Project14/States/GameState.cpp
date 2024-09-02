@@ -39,6 +39,7 @@ GameState::GameState(StateData* state_data)
 	this->InitPmenu();
 	this->InitAnimations();
 	this->InitPlayers();
+	this->InitEnemy();
 	this->InitPlayerGUI();
 }
 void GameState::InitFont()
@@ -62,6 +63,7 @@ GameState::~GameState()
 	delete this->player;
 	delete this->playerGUI;
 	delete this->Tilemap;
+	delete this->Goat;
 }
 
 
@@ -84,18 +86,21 @@ void GameState::InitKeyBinds()
 
 void GameState::InitAnimations()
 {
-	temp["Idle_Top"].loadFromFile("..\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Back animations\\spr_player_back_idle.png");
-	temp["Run_Top"].loadFromFile("..\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Back animations\\spr_player_back_walk.png");
-	temp["Attack_Top"].loadFromFile("..\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Back animations\\spr_player_back_attack.png");
-	temp["Idle_Left"].loadFromFile("..\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Side animations\\spr_player_left_idle.png");
-	temp["Run_Left"].loadFromFile("..\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Side animations\\spr_player_left_walk.png");
-	temp["Attack_Left"].loadFromFile("..\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Side animations\\spr_player_left_attack.png");
-	temp["Idle_Right"].loadFromFile("..\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Side animations\\spr_player_right_idle.png");
-	temp["Run_Right"].loadFromFile("..\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Side animations\\spr_player_right_walk.png");
-	temp["Attack_Right"].loadFromFile("..\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Side animations\\spr_player_right_attack.png");
-	temp["Idle_Bottom"].loadFromFile("..\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Front animations\\spr_player_front_idle.png");
-	temp["Run_Bottom"].loadFromFile("..\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Front animations\\spr_player_front_walk.png");
-	temp["Attack_Bottom"].loadFromFile("..\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Front animations\\spr_player_front_attack.png");
+	//Player
+	{
+		temp["Idle_Top"].loadFromFile("..\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Back animations\\spr_player_back_idle.png");
+		temp["Run_Top"].loadFromFile("..\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Back animations\\spr_player_back_walk.png");
+		temp["Attack_Top"].loadFromFile("..\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Back animations\\spr_player_back_attack.png");
+		temp["Idle_Left"].loadFromFile("..\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Side animations\\spr_player_left_idle.png");
+		temp["Run_Left"].loadFromFile("..\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Side animations\\spr_player_left_walk.png");
+		temp["Attack_Left"].loadFromFile("..\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Side animations\\spr_player_left_attack.png");
+		temp["Idle_Right"].loadFromFile("..\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Side animations\\spr_player_right_idle.png");
+		temp["Run_Right"].loadFromFile("..\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Side animations\\spr_player_right_walk.png");
+		temp["Attack_Right"].loadFromFile("..\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Side animations\\spr_player_right_attack.png");
+		temp["Idle_Bottom"].loadFromFile("..\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Front animations\\spr_player_front_idle.png");
+		temp["Run_Bottom"].loadFromFile("..\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Front animations\\spr_player_front_walk.png");
+		temp["Attack_Bottom"].loadFromFile("..\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Front animations\\spr_player_front_attack.png");
+	}
 }
 
 void GameState::UpdatePlayerInput(const float& dt)
@@ -194,6 +199,7 @@ void GameState::update(const float& dt)
 		this->UpdatePlayerInput(dt);
 		this->UpdateTileMap(dt);
 		this->player->update(dt, this->MousePosView);
+		this->Goat->update(dt, this->MousePosView);
 		this->playerGUI->update(dt);
 		this->playerGUI->UpdateDynamicalElliments();
 	}
@@ -231,6 +237,11 @@ void GameState::InitView()
 		this->Statedata->GFXSettings->resolution.height / 2.f);
 }
 
+void GameState::InitEnemy()
+{
+	this->Goat = new Enemy(gui::p2pX(50, vm), gui::p2pY(50, vm), this->temp);
+}
+
 void GameState::render(RenderTarget* target)
 {
 	if (!target)
@@ -257,11 +268,11 @@ void GameState::render(RenderTarget* target)
 
 	//this->renderTexture.draw(mousetext);
 	this->player->render(this->renderTexture, &core_shader);
+	this->Goat->render(this->renderTexture, &core_shader);
 	this->Tilemap->renderDeferrent(this->renderTexture, &this->core_shader, this->player->getCenter());
 	this->playerGUI->Render_Dynamical(renderTexture);
 	this->renderTexture.setView(this->renderTexture.getDefaultView());
 	this->playerGUI->Render(this->renderTexture);
-	// Render pause menu if paused
 	if (this->paused)
 	{
 		this->pmenu->render(this->renderTexture);

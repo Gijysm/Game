@@ -17,8 +17,8 @@ public:
 	 void setPosition(const Vector2f& position);
 	 void setRotation(const float& rotation);
 	 const Vector2f& getPosition() const;
-	 void updatePosition(const float& dt, Vector2f Position);
-	 void render(RenderTarget& target, Shader* shader = NULL, Vector2f Pos = Vector2f());
+	 virtual void updatePosition(const float& dt, Vector2f Position) = 0;
+	 virtual void render(RenderTarget& target, Shader* shader = NULL, Vector2f Pos = Vector2f())= 0;
 };
 
 #endif // !WEAPON_H

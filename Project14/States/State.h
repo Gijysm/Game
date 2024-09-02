@@ -1,6 +1,5 @@
 #ifndef STATE_H
 #define STATE_H
-#include "..//Player//Player.h"
 #include "..//Graphics//GraphicsSettings.h"
 
 class Player;

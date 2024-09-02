@@ -8,8 +8,11 @@
 #include "..//States/State.h"
 #include "..//GUI/PauseMenu.h"
 #include "..//Map/TileMap.h"
+#include "..//Player//Player.h"
+#include "..//Player/Enemy.h"
 #include "..//Player/PlayerGUI.h"
 
+class Enemy;
 class Player;
 class PlayerGUI;
 class sf::View;
@@ -30,10 +33,12 @@ private:
 	Texture Weapon;
 	Vector2i viewPos;
 	map<string, Texture> temp;
+	Enemy* Goat;
 	Player* player;
 	PlayerGUI* playerGUI;
 	sf::Font font;
 	void InitView();
+	void InitEnemy();
 	void InitKeyBinds();
 	void InitAnimations();
 	void InitTexture();

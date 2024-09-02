@@ -70,16 +70,9 @@ string Player::directionToString(Direction dir)
 Player::~Player()
 {
 }
-void Player::update(const float& dt, Vector2f& mouse_view_pos)
+
+void Player::updateAnimation(const float& dt)
 {
-    this->Movecomponent->update(dt);
-    this->peak->updatePosition(dt, Vector2f(this->getCenter().x, this->getPosition().y));
-    float dX, dY;
-    dX = mouse_view_pos.x - peak->getPosition().x;
-    dY = mouse_view_pos.y - peak->getPosition().y;
-    const float PI = 3.14159265;
-    float deg = atan2(dY, dX) * 180 / PI;
-    this->peak->setRotation(deg + 90);
     if (Mouse::isButtonPressed(Mouse::Button::Left)) // ?????? ????? !this->Attacking
     {
         this->Attacking = true;
@@ -115,6 +108,15 @@ void Player::update(const float& dt, Vector2f& mouse_view_pos)
         this->animationComponent->play("Run_Top", dt, this->Movecomponent->GetVelocity().y, this->Movecomponent->GetMaxVelocity());
         dir = Direction::Top;
     }
+}
+
+void Player::update(const float& dt, Vector2f& mouse_view_pos)
+{
+    this->Movecomponent->update(dt);
+    this->peak->updatePosition(dt, mouse_view_pos,Vector2f(this->getCenter().x, this->getPosition().y));
+
+    this->updateAnimation(dt);
+   
     if (Keyboard::isKeyPressed(Keyboard::E)) // ?????? ????? !this->Attacking
     {
         this->atributeComponent->gainExp(20);
