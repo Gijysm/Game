@@ -10,23 +10,18 @@ uniform vec2 lightPos;
 
 void main()
 {
-    // Ambient освітлення
     vec4 ambient = vec4(0.085, 0.02, 0.3, 1.0);
 
-    // Перетворення позиції світла у координати виду
     vec2 light = (gl_ModelViewProjectionMatrix * vec4(lightPos, 0.0, 1.0)).xy;
 
-    // Вектор від світла до фрагмента
     vec2 lightToFrag = light - vert_pos.xy;
     lightToFrag.y = lightToFrag.y / 1.7;
 
-    // Довжина вектора (відстань)
+
     float vecLength = clamp(length(lightToFrag) * 3.85, 0.4, 0.985);
 
-    // Зчитуємо піксель з текстури
     vec4 pixel = texture2D(texture, gl_TexCoord[0].xy);
 
-    // Обчислюємо кінцевий колір з урахуванням освітлення
     vec4 finalColor;
     if (hasTexture == true)
     {

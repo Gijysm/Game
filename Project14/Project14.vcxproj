@@ -814,6 +814,8 @@
       <AdditionalIncludeDirectories>C:\Users\popka\RiderProjects\Game\packages\sfml_graphics.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_network.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_audio.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_window.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_system.2.6.0\build\native\../..//build/native/include/;</AdditionalIncludeDirectories>
     </ClCompile>
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Map\Editor Modes\DefaultEditorMode.cpp" />
+    <ClCompile Include="Map\Editor Modes\EditorMode.cpp" />
     <ClCompile Include="Map\EnemySpawner.cpp" />
     <ClCompile Include="Map\Tile.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -1806,6 +1808,8 @@
     <ClInclude Include="Graphics\GraphicsSettings.h" />
     <ClInclude Include="GUI\Gui.h" />
     <ClInclude Include="GUI\PauseMenu.h" />
+    <ClInclude Include="Map\Editor Modes\DefaultEditorMode.h" />
+    <ClInclude Include="Map\Editor Modes\EditorMode.h" />
     <ClInclude Include="Map\EnemySpawner.h" />
     <ClInclude Include="Map\Tile.h" />
     <ClInclude Include="Map\TileMap.h" />

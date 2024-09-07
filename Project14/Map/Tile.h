@@ -4,7 +4,7 @@
 
 enum TileTypes
 {
-	DEFAULT = 0, DAMAGING, DOODAD
+	DEFAULT = 0, DAMAGING, DOODAD, ENEMYSPAWNER
 };
 
 class Tile

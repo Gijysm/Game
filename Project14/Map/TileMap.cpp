@@ -146,7 +146,7 @@ void TileMap::RemoveTile(const int x, const int y, const int z)
 	}
 }
 
-void TileMap::updateCollision(Entity* entity, const float& dt)
+void TileMap::update(Entity* entity, const float& dt)
 {
 	if (entity->getPosition().x < 0)
 	{
@@ -215,6 +215,7 @@ void TileMap::updateCollision(Entity* entity, const float& dt)
 			{
 				for (int k = 0; k < this->T_map[x][y][this->layer].size(); k++)
 				{
+					this->T_map[x][y][layer][k]->update();
 					FloatRect playerBounds = entity->getGlobalBounds();
 					FloatRect NextPosition = entity->GetNextPosition(dt);
 					FloatRect wallBounds = this->T_map[x][y][layer][k]->getGlobalBounds();
@@ -387,9 +388,6 @@ gridPos x y, Texture rect x, y
 	in_file.close();
 }
 
-void TileMap::update()
-{
-}
 
 void TileMap::renderDeferrent(RenderTarget& target, Shader* shader, const Vector2f PlayerPos)
 {

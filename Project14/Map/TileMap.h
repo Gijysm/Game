@@ -41,14 +41,13 @@ public:
 		const int z, const IntRect& tex_rect,
 		const bool& collision, const short& type);
 	void RemoveTile(const int x, const int y, const int z);
-	void updateCollision(Entity* entity, const float& dt);
+	void update(Entity* entity, const float& dt);
 
 	const Vector2i& GetMaxSizeGrid() const;
 	const Vector2f& GetMaxSizeF() const;
 
 	void saveToFile(const string file_name);
 	void loadFromFile(const string file_name);
-	void update();
 	void renderDeferrent(RenderTarget& target, Shader* shader = NULL, const Vector2f PlayerPos = Vector2f());
 	void render(RenderTarget& target,const Vector2i& GridPosition, Shader* shader = NULL,
 		const Vector2f PlayerPos = Vector2f(), bool Visability = true);

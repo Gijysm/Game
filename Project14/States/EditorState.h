@@ -4,11 +4,20 @@
 #include "../GUI/Gui.h"
 #include "../GUI/PauseMenu.h"
 #include "../Map/TileMap.h"
+#include "../Map/Editor Modes/EditorMode.h"
 
 class State;
+class StateData;
 class Gui;
 class PauseMenu;
 class TileMap;
+class EditorMode;
+
+enum class EditorModes
+{
+ DEFAULT = 0, ENEMY	
+};
+
 class EditorState:public State
 {
 private:

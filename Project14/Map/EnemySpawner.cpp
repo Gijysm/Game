@@ -1,7 +1,10 @@
 ﻿#include "..//stdafx.h"
 #include "EnemySpawner.h"
 
-EnemySpawner::EnemySpawner(Vector2i Grid_position, float gridsize, int type, int amount, int time_To_Spawn, int max_Distance)
+EnemySpawner::EnemySpawner(int x, int y, float gridsize, const Texture& tex,
+        const IntRect& tex_rect,int type,
+    int amount,
+    int time_To_Spawn, int max_Distance):Tile(x, y, gridsize, tex, tex_rect, false, TileTypes::ENEMYSPAWNER)
 {
     this->shape.setSize(Vector2f(gridsize, gridsize));
     this->shape.setPosition(Vector2f(Grid_position));

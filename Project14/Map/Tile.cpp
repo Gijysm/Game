@@ -63,6 +63,7 @@ const Vector2f& Tile::getPosition() const
 
 void Tile::update()
 {
+	this->shape.setColor(Color::Red);
 }
 
 void Tile::render(RenderTarget& target, Shader* shader, Vector2f PlayerPos)

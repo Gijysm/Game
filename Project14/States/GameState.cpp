@@ -138,7 +138,7 @@ void GameState::InitDeferredRender()
 void GameState::UpdateTileMap(const float& dt)
 {
 	//this->Tilemap->update();
-	this->Tilemap->updateCollision(player, dt);
+	this->Tilemap->update(player, dt);
 }
 
 void GameState::UpdateView(const float& dt)

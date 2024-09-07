@@ -1,7 +1,10 @@
 ﻿#ifndef ENEMY_SPAWNER_H
 #define ENEMY_SPAWNER_H
+#include "../Map/Tile.h"
 
-class EnemySpawner
+class Tile;
+
+class EnemySpawner: public Tile
 {
 private:
     RectangleShape shape;
@@ -14,7 +17,8 @@ private:
     float maxDistance;
 protected:
 public:
-    EnemySpawner(Vector2i Grid_position, float gridsize,int type,
+    EnemySpawner(int x, int y, float gridSizeF, const Texture& tex,
+        const IntRect& tex_rect,int type,
     int amount,
     int time_To_Spawn, int max_Distance);
     virtual ~EnemySpawner();
