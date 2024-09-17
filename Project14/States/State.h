@@ -23,12 +23,9 @@ class State
 private:
 
 protected:
-
-	RenderWindow* window;
 	bool Exit;
 	bool paused;
-
-
+	RenderWindow* window;
 
 	stack<State*>* states;
 	GraphicsSettings* GfxSettings;
