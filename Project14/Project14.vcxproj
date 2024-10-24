@@ -72,7 +72,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(IncludePath)</IncludePath>
-    <LibraryPath>D:\VisualStudio 2022\vs\VC\Tools\MSVC\14.41.34120\lib\x64;D:\VisualStudio 2022\vs\VC\Redist\MSVC\v143;$(WindowsSdkDir)lib\$(TargetPlatformVersion)\ucrt\$(PlatformTarget);$(WindowsSdkDir)lib\$(TargetPlatformVersion)\um\$(PlatformTarget)</LibraryPath>
+    <LibraryPath>C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\lib\x64;D:\VisualStudio 2022\vs\VC\Tools\MSVC\14.41.34120\lib\x64;D:\VisualStudio 2022\vs\VC\Redist\MSVC\v143;$(WindowsSdkDir)lib\$(TargetPlatformVersion)\ucrt\$(PlatformTarget);$(WindowsSdkDir)lib\$(TargetPlatformVersion)\um\$(PlatformTarget)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -1493,6 +1493,8 @@
       <LinkCompiled>true</LinkCompiled>
       <AdditionalIncludeDirectories>C:\Users\popka\RiderProjects\Game\packages\sfml_graphics.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_network.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_audio.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_window.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_system.2.6.0\build\native\../..//build/native/include/;</AdditionalIncludeDirectories>
     </ClCompile>
+    <ClCompile Include="States\Editor_Modes\DefaultEditorMode.cpp" />
+    <ClCompile Include="States\Editor_Modes\EditorMode.cpp" />
     <ClCompile Include="States\GameState.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -1821,6 +1823,8 @@
     <ClInclude Include="Player\Weapon\Peak.h" />
     <ClInclude Include="Player\Weapon\Weapon.h" />
     <ClInclude Include="States\EditorState.h" />
+    <ClInclude Include="States\Editor_Modes\DefaultEditorMode.h" />
+    <ClInclude Include="States\Editor_Modes\EditorMode.h" />
     <ClInclude Include="States\GameState.h" />
     <ClInclude Include="States\MainMenuState.h" />
     <ClInclude Include="States\SettingsState.h" />

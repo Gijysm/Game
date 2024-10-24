@@ -26,7 +26,7 @@ protected:
 
 	RenderWindow* window;
 	bool Exit;
-	bool paused;
+	bool paused = false;
 
 
 

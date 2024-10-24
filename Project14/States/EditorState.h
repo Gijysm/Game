@@ -4,6 +4,7 @@
 #include "../GUI/Gui.h"
 #include "../GUI/PauseMenu.h"
 #include "../Map/TileMap.h"
+#include "../States/Editor_Modes/EditorMode.h"
 #include "../Map/Editor Modes/EditorMode.h"
 
 class State;
@@ -15,43 +16,69 @@ class EditorMode;
 
 enum class EditorModes
 {
- DEFAULT = 0, ENEMY	
+ DEFAULT_MODE = 0, ENEMY
+};
+
+class EditorStateData
+{
+public:
+	EditorStateData()
+	{
+		
+	}
+	~EditorStateData()
+	{
+		
+	}
+	float GridSize;
+	RenderWindow* window;
+	GraphicsSettings* GFXSettings;
+	map<string, int>* supportedKey; 
+	stack<State*>* states;
+
+	float *Keytime;
+	float *KeytimeMax;
+
+	map<string, int>* Key_binds;
+	
+	Vector2i *MousePosScreen;
+	Vector2i *MousePosWindow;
+	Vector2f *MousePosView;
+	Vector2i *MousePosGrid;
 };
 
 class EditorState:public State
 {
 private:
+	EditorStateData editorStateData;
+	
 	View MainView;
 	TileMap* Tilemap;
 	Button* Hide_Button;
 	bool hiden;
 	PauseMenu* pmenu;
-	TextureSelector* Texture_sel;
-	RectangleShape slidebar;
-	RectangleShape SelectorRect;
-	RectangleShape collisionbox;
 	Font font;
-	Text CursorText;
-	IntRect Texture_rect;
-	bool collision;
-	bool TileAddLock;
-	short type;
-	int layer;
-
+	int cam_speed;
+	
 	map<string, gui::Button*> Buttons;
-public:
-	EditorState(StateData* state_data);
-	virtual ~EditorState();
+
+	vector<EditorMode*> EModes;
+
+	void InitEditorStates();
 	void InitVariables();
 	void InitView();
-	void InitBackGround();
+	// void InitBackGround();
 	void InitFont();
 	void InitButtons();
 	void InitKeyBinds();
 	void InitPmenu();
 	void InitTileMap();
 	void InitGui();
-	void InitText();
+	void InitModes();
+public:
+	EditorState(StateData* state_data);
+	virtual ~EditorState();
+	
 	void updateInput(const float& dt);
 
 	void KeyTime(const float& dt);
