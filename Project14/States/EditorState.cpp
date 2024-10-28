@@ -45,7 +45,7 @@ void EditorState::InitEditorStates()
 
 void EditorState::InitVariables()
 {
-	int cam_speed = 100;
+	cam_speed = 100;
 }
 
 void EditorState::InitView()

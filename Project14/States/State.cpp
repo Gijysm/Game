@@ -46,35 +46,35 @@ void State::UpdateKeyTime(const float& dt)
 }
 
 
-// const bool& State::GetQuit() const
-// {
-// 	return this->Exit;
-// }
+const bool& State::GetQuit() const
+{
+	return this->Exit;
+}
 
-// const bool State::GetKeyTime()
-// {
-// 	if (this->Keytime > this->KeytimeMax)
-// 	{
-// 		this->Keytime = 0;
-// 		return true;
-// 	}
-// 	return false;
-// }
+const bool State::GetKeyTime()
+{
+	if (this->Keytime > this->KeytimeMax)
+	{
+		this->Keytime = 0;
+		return true;
+	}
+	return false;
+}
 
-// void State::EndState()
-// {
-// 	this->Exit = true;
-// }
-//
-// void State::PausedState()
-// {
-// 	this->paused = true;
-// }
-//
-// void State::UnPausedState()
-// {
-// 	this->paused = false;
-// }
+void State::EndState()
+{
+	this->Exit = true;
+}
+
+void State::PausedState()
+{
+	this->paused = true;
+}
+
+void State::UnPausedState()
+{
+	this->paused = false;
+}
 
 void State::update(const float& dt)
 {
