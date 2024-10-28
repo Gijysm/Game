@@ -5,6 +5,7 @@ EditorState::EditorState(StateData* state_data)
 	:State(state_data)
 {
 	this->InitVariables();
+	this->InitEditorStates();
 	// this->InitBackGround();
 	this->InitView();
 	this->InitFont();
@@ -30,9 +31,16 @@ EditorState::~EditorState()
 
 void EditorState::InitEditorStates()
 {
+	this->editorStateData.vm = &this->vm;
+	this->editorStateData.view = &this->MainView;
+	this->editorStateData.font = &this->font;
 	this->editorStateData.Keytime = &this->Keytime;
 	this->editorStateData.KeytimeMax = &this->KeytimeMax;
 	this->editorStateData.Key_binds= &this->KeyBinds;
+	this->editorStateData.MousePosScreen = &this->MousePosScreen;
+	this->editorStateData.MousePosWindow = &this->MousePosWindow;
+	this->editorStateData.MousePosView = &this->MousePosView;
+	this->editorStateData.MousePosGrid = &this->MousePosGrid;
 }
 
 void EditorState::InitVariables()
@@ -47,7 +55,6 @@ void EditorState::InitView()
 	this->MainView.setCenter(this->Statedata->GFXSettings->resolution.width / 2.f,
 		this->Statedata->GFXSettings->resolution.height/ 2.f);
 }
-
 // void EditorState::InitBackGround()
 // {
 //
@@ -109,11 +116,23 @@ void EditorState::InitGui()
 
 void EditorState::InitModes()
 {
+	this->EModes.push_back(new DefaultEditorMode(this->Statedata, this->Tilemap, &this->editorStateData));
 }
 
 
 void EditorState::updateInput(const float& dt)
 {
+	if (Keyboard::isKeyPressed(Keyboard::Key(this->KeyBinds.at("Close"))) && this->GetKeyTime())
+	{
+		if (!this->paused)
+		{
+			this->PausedState();
+		}
+		else
+		{
+			this->UnPausedState();
+		}
+	}
 }
 void EditorState::KeyTime(const float& dt)
 {
@@ -191,6 +210,7 @@ void EditorState::update(const float& dt)
 		this->KeyTime(dt);
 		this->UpdateEditorInput(dt);
 		this->updateGui(dt);
+		this->EModes[static_cast<size_t>(EditorModes::DEFAULT_MODE)]->update(dt);
 	}
 	else
 	{
@@ -209,7 +229,7 @@ void EditorState::render(RenderTarget* target)
 	target->setView(this->MainView);
 	this->Tilemap->render(*target, this->MousePosGrid, NULL, Vector2f(), true);
 	this->Tilemap->renderDeferrent(*target, NULL, Vector2f());
-
+	this->EModes[static_cast<size_t>(EditorModes::DEFAULT_MODE)]->render(target);
 	target->setView(this->window->getDefaultView());
 	this->renderGui(target);
 	if (paused)

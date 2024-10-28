@@ -28,8 +28,6 @@ protected:
 	bool Exit;
 	bool paused = false;
 
-
-
 	stack<State*>* states;
 	GraphicsSettings* GfxSettings;
 	StateData* Statedata;

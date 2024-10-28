@@ -26,7 +26,7 @@ private:
     void InitVariables();
     void InitGui();
 public:
-    DefaultEditorMode(StateData* state_data, TileMap* tile_map, Font* font);
+    DefaultEditorMode(StateData* state_data, TileMap* tile_map, EditorStateData* editor_state_data);
     virtual ~DefaultEditorMode();
 
 void updateInput(const float& dt);

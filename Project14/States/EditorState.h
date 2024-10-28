@@ -4,8 +4,7 @@
 #include "../GUI/Gui.h"
 #include "../GUI/PauseMenu.h"
 #include "../Map/TileMap.h"
-#include "../States/Editor_Modes/EditorMode.h"
-#include "../Map/Editor Modes/EditorMode.h"
+#include "../States/Editor_Modes/DefaultEditorMode.h"
 
 class State;
 class StateData;
@@ -13,38 +12,13 @@ class Gui;
 class PauseMenu;
 class TileMap;
 class EditorMode;
+class DefaultEditorMode;
+class EditorStateData;
+
 
 enum class EditorModes
 {
  DEFAULT_MODE = 0, ENEMY
-};
-
-class EditorStateData
-{
-public:
-	EditorStateData()
-	{
-		
-	}
-	~EditorStateData()
-	{
-		
-	}
-	float GridSize;
-	RenderWindow* window;
-	GraphicsSettings* GFXSettings;
-	map<string, int>* supportedKey; 
-	stack<State*>* states;
-
-	float *Keytime;
-	float *KeytimeMax;
-
-	map<string, int>* Key_binds;
-	
-	Vector2i *MousePosScreen;
-	Vector2i *MousePosWindow;
-	Vector2f *MousePosView;
-	Vector2i *MousePosGrid;
 };
 
 class EditorState:public State
