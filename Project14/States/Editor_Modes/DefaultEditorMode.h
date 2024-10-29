@@ -16,6 +16,9 @@ private:
     RectangleShape slidebar;
     RectangleShape SelectorRect;
     RectangleShape collisionbox;
+    Button* Hide_Button;
+    bool hiden;
+    string text;
     Text CursorText;
     IntRect Texture_rect;
     bool collision;
@@ -25,15 +28,15 @@ private:
 
     void InitVariables();
     void InitGui();
+    void updateInput(const float& dt);
+    void updateGui(const float& dt);
+    void renderGui(RenderTarget* target);
 public:
     DefaultEditorMode(StateData* state_data, TileMap* tile_map, EditorStateData* editor_state_data);
     virtual ~DefaultEditorMode();
-
-void updateInput(const float& dt);
-void updateGui(const float& dt);
+    
 void update(const float& dt);
-
-void renderGui(RenderTarget* target);
-void render(RenderTarget* target = NULL);
+    
+void render(RenderTarget& target);
 };
 #endif

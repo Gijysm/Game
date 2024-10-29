@@ -60,10 +60,11 @@ public:
 	void updateButton();
 	void updateGui(const float& dt);
 	void UpdateEditorInput(const float& dt);
+	void UpdateModes(const float& dt);
 	void renderPmenuButton(RenderTarget& target);
 	void renderButton(RenderTarget& target);
-	void renderGui(RenderTarget* target);
-
+	void renderGui(RenderTarget& target);
+	void renderModes(RenderTarget& target);
 	void update(const float& dt);
 	void render(RenderTarget* target = NULL);
 };

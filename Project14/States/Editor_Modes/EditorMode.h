@@ -64,6 +64,6 @@ public:
     virtual void update(const float& dt) = 0;
     
     virtual void renderGui(RenderTarget* target) = 0;
-    virtual void render(RenderTarget* target = NULL) = 0;
+    virtual void render(RenderTarget& targetb) = 0;
 };
 #endif

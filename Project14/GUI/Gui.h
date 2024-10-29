@@ -83,12 +83,11 @@ namespace gui
 		Sprite sheet;
 		RectangleShape selector;
 		Vector2u mousePosGrid;
-		Button* Hide_Button;
 		IntRect TextureRect;
 		float offset;
 		float gridSize;
-		bool hiden;
 		bool active;
+		bool hiden;
 		float Keytime;
 		float KeytimeMax;
 	public:
@@ -104,8 +103,8 @@ namespace gui
 
 		const bool GetKeyTime();
 		void UpdateKeyTime(const float& dt);
-		void update(const Vector2i& MousePosWindow, const float& dt);
-		void render(RenderTarget& target);
+		void update(const Vector2i& MousePosWindow, const float& dt, bool& Hiden);
+		void render(RenderTarget& target, bool& Hiden);
 	};
 	enum F_ont
 	{

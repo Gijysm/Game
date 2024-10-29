@@ -6,12 +6,12 @@ void TileMap::clear()
 {
 	if (!this->T_map.empty())
 	{
-		for (int x = 0; x < this->MaxSizeWorldI.x; x++)
+		for (int x = 0; x < this->T_map.size(); x++)
 		{
 
-			for (int y = 0; y < this->MaxSizeWorldI.y; y++)
+			for (int y = 0; y < this->T_map[x].size(); y++)
 			{
-				for (int z = 0; z < this->layers; z++)
+				for (int z = 0; z < this->T_map[x][y].size(); z++)
 				{
 					for (int k = 0; k < this->T_map[x][y][z].size(); k++)
 					{

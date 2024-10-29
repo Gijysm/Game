@@ -264,7 +264,7 @@ void GameState::render(RenderTarget* target)
 	//mousetext.setString(ss.str());
 
 	//this->renderTexture.draw(mousetext);
-	this->player->render(this->renderTexture, &core_shader);
+	this->player->render(this->renderTexture, &core_shader, false, this->player->getCenter());
 	this->Tilemap->renderDeferrent(this->renderTexture, &this->core_shader, this->player->getCenter());
 	this->playerGUI->Render_Dynamical(renderTexture);
 	this->renderTexture.setView(this->renderTexture.getDefaultView());

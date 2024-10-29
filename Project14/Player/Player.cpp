@@ -125,20 +125,24 @@ void Player::update(const float& dt, Vector2f& mouse_view_pos)
     this->hitboxComponent->update();
 }
 
-void Player::render(RenderTarget& target, Shader* shader)
+void Player::render(RenderTarget& target, Shader* shader, const bool showCol, const Vector2f Light_Position)
 {
     if (shader)
     {
         shader->setUniform("hasTexture", true);
-        shader->setUniform("lightPos", this->getCenter());
+        shader->setUniform("lightPos", Light_Position);
         target.draw(this->sprite, shader);
 
-        this->peak->render(target, shader, getCenter());
+        this->peak->render(target, shader, Light_Position);
     }
     else
     {
         target.draw(this->sprite);
         this->peak->render(target);
+        
+    }
+    if(showCol)
+    {
         this->hitboxComponent->render(target);
     }
 }

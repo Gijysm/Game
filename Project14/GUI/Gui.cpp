@@ -222,7 +222,6 @@ gui::TextureSelector::TextureSelector(const float& x, const float& y,
 	const string& str, VideoMode vm)
 	: active(active), gridSize(gridSize), Keytime(0), KeytimeMax(5)
 {
-	this->hiden = false;
 	this->offset = gridSize;
 	this->bounds.setSize(Vector2f(width, height));
 	this->bounds.setPosition(x, y);
@@ -250,17 +249,11 @@ gui::TextureSelector::TextureSelector(const float& x, const float& y,
 
 	this->TextureRect.width = static_cast<int>(gridSize);
 	this->TextureRect.height = static_cast<int>(gridSize);
-	this->Hide_Button = new Button(gui::p2pX(85, vm), gui::p2pY(85, vm), gui::p2pX(12, vm), gui::p2pY(7, vm),
-		&font, str, gui::CharacterSize(vm), Color(100, 100, 200, 50),
-		Color(50, 150, 200, 125),
-		Color(30, 30, 70, 180), Color(100, 100, 200, 150),
-		Color(50, 150, 200, 185),
-		Color(30, 30, 70, 230));
 }
 
 gui::TextureSelector::~TextureSelector()
 {
-	delete this->Hide_Button;
+	
 }
 
 const bool& gui::TextureSelector::GetActive() const
@@ -291,22 +284,11 @@ void gui::TextureSelector::UpdateKeyTime(const float& dt)
 	}
 }
 
-void gui::TextureSelector::update(const Vector2i& MousePosWindow, const float& dt)
+void gui::TextureSelector::update(const Vector2i& MousePosWindow, const float& dt, bool& Hiden)
 {
 	UpdateKeyTime(dt);
-	this->Hide_Button->update(MousePosWindow);
-	if (this->Hide_Button->isPressed() && this->GetKeyTime())
-	{
-		if(this->hiden)
-		{
-			this->hiden = false;
-		}
-		else
-		{
-			this->hiden = true;
-		}
-	}
-	if(!this->hiden)
+	hiden = Hiden;
+	if(!hiden)
 	{
 		this->active = false;
 		if (this->bounds.getGlobalBounds().contains(static_cast<Vector2f>(MousePosWindow)))
@@ -324,10 +306,9 @@ void gui::TextureSelector::update(const Vector2i& MousePosWindow, const float& d
 }
 
 
-void gui::TextureSelector::render(RenderTarget& target)
+void gui::TextureSelector::render(RenderTarget& target, bool& Hiden)
 {
-	this->Hide_Button->render(target);
-	if(!this->hiden)
+	if(!hiden)
 	{
 		target.draw(this->bounds);
 		target.draw(this->sheet);

@@ -83,12 +83,12 @@ void Enemy::update(const float& dt, Vector2f& mouse_view_pos)
     this->hitboxComponent->update();
 }
 
-void Enemy::render(RenderTarget& target, Shader* shader)
+void Enemy::render(RenderTarget& target, Shader* shader, const bool& Show_col, const Vector2f Light_Position)
 {
     if (shader)
     {
         shader->setUniform("hasTexture", true);
-        shader->setUniform("lightPos", this->getCenter());
+        shader->setUniform("lightPos", Light_Position);
         target.draw(this->sprite, shader);
 
         // this->peak->render(target, shader, getCenter());
@@ -97,6 +97,9 @@ void Enemy::render(RenderTarget& target, Shader* shader)
     {
         target.draw(this->sprite);
         // this->peak->render(target);
+    }
+    if(Show_col)
+    {
         this->hitboxComponent->render(target);
     }
 }

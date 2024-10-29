@@ -54,7 +54,7 @@ public:
 	virtual void move(const float dir_x, const float dir_y, const float& dt);
 
 	virtual void update(const float& dt, Vector2f& mouse_view_pos) = 0;
-	virtual void render(RenderTarget& target, Shader* shader) = 0;
+	virtual void render(RenderTarget& target, Shader* shader, const bool showCol = true, const Vector2f Light_Position = Vector2f()) = 0;
 };
 
 

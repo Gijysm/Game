@@ -37,6 +37,6 @@ public:
     virtual ~Enemy();
     void updateAnimation(const float& dt);
     void update(const float& dt, Vector2f& mouse_view_pos);
-    void render(RenderTarget& target, Shader* shader = NULL);
+    void render(RenderTarget& target, Shader* shader = NULL, const bool& Show_col = true, const Vector2f Light_Position = Vector2f());
 };
 #endif

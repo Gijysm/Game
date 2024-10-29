@@ -160,7 +160,7 @@ void Entity::update(const float& dt, Vector2f& mouse_view_pos)
 {
 }
 
-void Entity::render(RenderTarget& target, Shader* shader)
+void Entity::render(RenderTarget& target, Shader* shader, const bool showCol, const Vector2f Light_Position)
 {
 	target.draw(this->sprite);
 }

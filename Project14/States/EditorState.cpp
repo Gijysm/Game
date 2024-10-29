@@ -187,6 +187,11 @@ void EditorState::UpdateEditorInput(const float& dt)
 {
 }
 
+void EditorState::UpdateModes(const float& dt)
+{
+	this->EModes[static_cast<size_t>(EditorModes::DEFAULT_MODE)]->update(dt);
+}
+
 void EditorState::renderPmenuButton(RenderTarget& target)
 {
 	this->pmenu->render(target);
@@ -196,7 +201,12 @@ void EditorState::renderButton(RenderTarget& target)
 {
 }
 
-void EditorState::renderGui(RenderTarget* target)
+void EditorState::renderGui(RenderTarget& target)
+{
+	this->EModes[static_cast<size_t>(EditorModes::DEFAULT_MODE)]->render(target);
+}
+
+void EditorState::renderModes(RenderTarget& target)
 {
 }
 
@@ -210,7 +220,7 @@ void EditorState::update(const float& dt)
 		this->KeyTime(dt);
 		this->UpdateEditorInput(dt);
 		this->updateGui(dt);
-		this->EModes[static_cast<size_t>(EditorModes::DEFAULT_MODE)]->update(dt);
+		this->UpdateModes(dt);
 	}
 	else
 	{
@@ -222,16 +232,17 @@ void EditorState::update(const float& dt)
 void EditorState::render(RenderTarget* target)
 {	
 
-	if (!target)
+	if (target == NULL)
 	{
 		target = this->window;
 	}
 	target->setView(this->MainView);
+
+	this->renderGui(*target);
 	this->Tilemap->render(*target, this->MousePosGrid, NULL, Vector2f(), true);
 	this->Tilemap->renderDeferrent(*target, NULL, Vector2f());
-	this->EModes[static_cast<size_t>(EditorModes::DEFAULT_MODE)]->render(target);
+	
 	target->setView(this->window->getDefaultView());
-	this->renderGui(target);
 	if (paused)
 	{
 		target->setView(this->window->getDefaultView());
