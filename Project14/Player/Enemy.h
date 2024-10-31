@@ -18,7 +18,7 @@ class EnemySpawner;
 class Enemy:protected Entity
 {
 private:
-    EnemySpawner& spawner;
+    // EnemySpawner& spawner;
     // Direction dir;
     bool Attacking;
     void InitVariables();
@@ -31,12 +31,13 @@ public:
     void InitAnnimations();
 	
     AtributeComponent* getAtributeComponent();
-    Enemy(EnemySpawner& spawner,float x, float y, std::map<std::string, sf::Texture>& textures, sf::Texture texture = Texture());
+    Enemy(/*EnemySpawner& spawner*/float x, float y, std::map<std::string, sf::Texture>& textures, sf::Texture texture = Texture());
     Vector2f GetPosition() { return this->sprite.getPosition(); }
     // string directionToString(Direction dir);
     virtual ~Enemy();
     void updateAnimation(const float& dt);
     void update(const float& dt, Vector2f& mouse_view_pos);
-    void render(RenderTarget& target, Shader* shader = NULL, const bool& Show_col = true, const Vector2f Light_Position = Vector2f());
+    void update(const float& dt);
+    void render(RenderTarget& target, Shader* shader = NULL, const bool Show_col = true, const Vector2f Light_Position = Vector2f());
 };
 #endif

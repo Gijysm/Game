@@ -1493,6 +1493,7 @@
     </ClCompile>
     <ClCompile Include="States\Editor_Modes\DefaultEditorMode.cpp" />
     <ClCompile Include="States\Editor_Modes\EditorMode.cpp" />
+    <ClCompile Include="States\Editor_Modes\EnemyEditorMode.cpp" />
     <ClCompile Include="States\GameState.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -1821,6 +1822,7 @@
     <ClInclude Include="States\EditorState.h" />
     <ClInclude Include="States\Editor_Modes\DefaultEditorMode.h" />
     <ClInclude Include="States\Editor_Modes\EditorMode.h" />
+    <ClInclude Include="States\Editor_Modes\EnemyEditorMode.h" />
     <ClInclude Include="States\GameState.h" />
     <ClInclude Include="States\MainMenuState.h" />
     <ClInclude Include="States\SettingsState.h" />

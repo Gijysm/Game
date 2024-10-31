@@ -41,6 +41,11 @@ GameState::GameState(StateData* state_data)
 	this->InitPlayers();
 	this->InitEnemy();
 	this->InitPlayerGUI();
+
+enemies.push_back(new Enemy(200, 400, this->temp));
+enemies.push_back(new Enemy(100, 300, this->temp));
+enemies.push_back(new Enemy(130, 120, this->temp));
+enemies.push_back(new Enemy(80, 210, this->temp));
 }
 void GameState::InitFont()
 {
@@ -85,6 +90,21 @@ void GameState::InitKeyBinds()
 
 void GameState::InitAnimations()
 {
+	//Enemy
+	{
+		temp["Enemy_Idle_Top"].loadFromFile("..\\All_Texture\\Enemy\\Spider Sprite Sheet.png");
+		temp["Enemy_Run_Top"].loadFromFile("..\\All_Texture\\Enemy\\Spider Sprite Sheet.png");
+		temp["Enemy_Attack_Top"].loadFromFile("..\\All_Texture\\Enemy\\Spider Sprite Sheet.png");
+		temp["Enemy_Idle_Left"].loadFromFile("..\\All_Texture\\Enemy\\Spider Sprite Sheet.png");
+		temp["Enemy_Run_Left"].loadFromFile("..\\All_Texture\\Enemy\\Spider Sprite Sheet.png");
+		temp["Enemy_Attack_Left"].loadFromFile("..\\All_Texture\\Enemy\\Spider Sprite Sheet.png");
+		temp["Enemy_Idle_Right"].loadFromFile("..\\All_Texture\\Enemy\\Spider Sprite Sheet.png");
+		temp["Enemy_Run_Right"].loadFromFile("..\\All_Texture\\Enemy\\Spider Sprite Sheet.png");
+		temp["Enemy_Attack_Right"].loadFromFile("..\\All_Texture\\Enemy\\Spider Sprite Sheet.png");
+		temp["Enemy_Idle_Bottom"].loadFromFile("..\\All_Texture\\Enemy\\Spider Sprite Sheet.png");
+		temp["Enemy_Run_Bottom"].loadFromFile("..\\All_Texture\\Enemy\\Spider Sprite Sheet.png");
+		temp["Enemy_Attack_Bottom"].loadFromFile("..\\All_Texture\\Enemy\\Spider Sprite Sheet.png");
+	}
 	//Player
 	{
 		temp["Idle_Top"].loadFromFile("..\\All_Texture\\ALTERNATIVE\\Pixelarium - Playable Character - Free Version\\Pack Content\\Back animations\\spr_player_back_idle.png");
@@ -143,7 +163,6 @@ void GameState::UpdateTileMap(const float& dt)
 
 void GameState::UpdateView(const float& dt)
 {
-	//unsigned i = -100;
 	this->view.setCenter(floor(this->player->getPosition().x + (static_cast<float>(this->MousePosWindow.x) - static_cast<float>(this->Statedata->GFXSettings->resolution.width / 2)) / 10.f),
 		floor(this->player->getPosition().y + (static_cast<float>(this->MousePosWindow.y) - static_cast<float>(this->Statedata->GFXSettings->resolution.height / 2)) / 10.f)
 		);
@@ -199,6 +218,10 @@ void GameState::update(const float& dt)
 		this->UpdateTileMap(dt);
 		this->player->update(dt, this->MousePosView);
 		this->playerGUI->update(dt);
+		for(auto i : enemies)
+		{
+			i->update(dt);
+		}
 		this->playerGUI->UpdateDynamicalElliments();
 	}
 	else
@@ -265,6 +288,10 @@ void GameState::render(RenderTarget* target)
 
 	//this->renderTexture.draw(mousetext);
 	this->player->render(this->renderTexture, &core_shader, false, this->player->getCenter());
+	for(auto i : enemies)
+	{
+		i->render(this->renderTexture, &core_shader, false, this->player->getCenter());
+	}
 	this->Tilemap->renderDeferrent(this->renderTexture, &this->core_shader, this->player->getCenter());
 	this->playerGUI->Render_Dynamical(renderTexture);
 	this->renderTexture.setView(this->renderTexture.getDefaultView());

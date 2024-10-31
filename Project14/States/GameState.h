@@ -34,6 +34,7 @@ private:
 	Vector2i viewPos;
 	map<string, Texture> temp;
 	Player* player;
+	vector<Enemy*> enemies;
 	PlayerGUI* playerGUI;
 	sf::Font font;
 	void InitView();
