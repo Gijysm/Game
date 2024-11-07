@@ -44,28 +44,29 @@ Game::~Game()
 
 void Game::InitKeys()
 {
-    ifstream ifs("C:\\Users\\popka\\source\\repos\\Gijysm\\Game\\Config\\Sup_Keys.ini");
+    std::ifstream ifs("..\\Config\\Sup_Keys.ini");
 
-    if (ifs.is_open())
+    if (!ifs.is_open())
     {
-        string key = "";
-        int Key_value = 0;
-
-        while (ifs >> key >> Key_value)
-        {
-            this->supportedKey[key] = Key_value;
-        }
+        std::cerr << "Error: Failed to open the keys configuration file.\n";
+        return;
     }
-    for (auto i : supportedKey)
+
+    std::string key;
+    int Key_value;
+
+    // Зчитування всіх ключів і їхніх значень з файлу
+    while (ifs >> key >> Key_value)
     {
-        if (i.first != "Escape")
-        {
-            cout << i.first << "      " << i.second << "\n";
-        }
-        else
-        {
-            cout << i.first << " " << i.second << "\n";
-        }
+        this->supportedKey[key] = Key_value;
+    }
+
+    ifs.close(); // Закриття файлу після використання
+
+    // Виведення всіх ключів та значень
+    for (const auto& i : supportedKey)
+    {
+        std::cout << i.first << " " << i.second << "\n";
     }
 }
 

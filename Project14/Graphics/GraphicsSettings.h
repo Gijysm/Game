@@ -1,6 +1,6 @@
 #ifndef GRAPHICSSETTINGS
 #define GRAPHICSSETTINGS
-
+#include "..//stdafx.h"
 class GraphicsSettings
 {
 public:

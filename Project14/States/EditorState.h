@@ -4,7 +4,7 @@
 #include "../GUI/Gui.h"
 #include "../GUI/PauseMenu.h"
 #include "../Map/TileMap.h"
-#include "../States/Editor_Modes/DefaultEditorMode.h"
+#include "../States/Editor_Modes/EditorModes_Class.h"
 
 class State;
 class StateData;
@@ -12,13 +12,15 @@ class Gui;
 class PauseMenu;
 class TileMap;
 class EditorMode;
+class EditorModes_Class;
 class DefaultEditorMode;
+class EnemyEditorMode;
 class EditorStateData;
 
 
 enum class EditorModes
 {
- DEFAULT_MODE = 0, ENEMY
+ DEFAULT_EDITOR_MODE = 0, ENEMY_EDITOR_MODE
 };
 
 class EditorState:public State
@@ -33,6 +35,7 @@ private:
 	PauseMenu* pmenu;
 	Font font;
 	int cam_speed;
+	int activemode;
 	
 	map<string, gui::Button*> Buttons;
 

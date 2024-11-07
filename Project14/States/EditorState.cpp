@@ -1,6 +1,8 @@
 #include "..//stdafx.h"
 #include "EditorState.h"
 
+#include "Editor_Modes/EnemyEditorMode.h"
+
 EditorState::EditorState(StateData* state_data)
 	:State(state_data)
 {
@@ -53,7 +55,8 @@ void EditorState::InitView()
 	this->MainView.setSize(Vector2f(this->Statedata->GFXSettings->resolution.width,
 		this->Statedata->GFXSettings->resolution.height));
 	this->MainView.setCenter(this->Statedata->GFXSettings->resolution.width / 2.f,
-		this->Statedata->GFXSettings->resolution.height/ 2.f);
+		this->Statedata->GFXSettings->resolution.height / 2.f);
+
 }
 // void EditorState::InitBackGround()
 // {
@@ -117,6 +120,8 @@ void EditorState::InitGui()
 void EditorState::InitModes()
 {
 	this->EModes.push_back(new DefaultEditorMode(this->Statedata, this->Tilemap, &this->editorStateData));
+	this->EModes.push_back(new EnemyEditorMode(this->Statedata, this->Tilemap, &this->editorStateData));
+	this->activemode = static_cast<int>(EditorModes::DEFAULT_EDITOR_MODE);
 }
 
 
@@ -153,6 +158,30 @@ void EditorState::KeyTime(const float& dt)
 		this->MainView.move(0, cam_speed * dt);
 	}
 
+	if (Keyboard::isKeyPressed(Keyboard::Key(this->KeyBinds.at("MODEUP")))&& GetKeyTime())
+	{
+		if(this->activemode <= this->EModes.size())
+		{
+			this->activemode++;
+		}
+		else
+		{
+			activemode = this->EModes.size();
+			cerr << "Error::EditorMode::Cant_Change_EditorMode" << endl;
+		}
+	}
+	if (Keyboard::isKeyPressed(Keyboard::Key(this->KeyBinds.at("MODEDOWN")))&& GetKeyTime())
+	{
+		if(this->activemode > 0)
+		{
+			activemode--;
+		}
+		else
+		{
+			activemode = 0;
+			cerr << "Error::EditorMode::Cant_Change_EditorMode" << endl;
+		}
+	}
 }
 
 void EditorState::updatePmenuButton()
@@ -189,7 +218,7 @@ void EditorState::UpdateEditorInput(const float& dt)
 
 void EditorState::UpdateModes(const float& dt)
 {
-	this->EModes[static_cast<size_t>(EditorModes::DEFAULT_MODE)]->update(dt);
+	this->EModes[activemode]->update(dt);
 }
 
 void EditorState::renderPmenuButton(RenderTarget& target)
@@ -203,7 +232,7 @@ void EditorState::renderButton(RenderTarget& target)
 
 void EditorState::renderGui(RenderTarget& target)
 {
-	this->EModes[static_cast<size_t>(EditorModes::DEFAULT_MODE)]->render(target);
+	this->EModes[activemode]->render(target);
 }
 
 void EditorState::renderModes(RenderTarget& target)
@@ -231,7 +260,7 @@ void EditorState::update(const float& dt)
 }
 void EditorState::render(RenderTarget* target)
 {	
-
+Keyboard::Left;
 	if (target == NULL)
 	{
 		target = this->window;

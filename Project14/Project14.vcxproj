@@ -1822,6 +1822,7 @@
     <ClInclude Include="States\EditorState.h" />
     <ClInclude Include="States\Editor_Modes\DefaultEditorMode.h" />
     <ClInclude Include="States\Editor_Modes\EditorMode.h" />
+    <ClInclude Include="States\Editor_Modes\EditorModes_Class.h" />
     <ClInclude Include="States\Editor_Modes\EnemyEditorMode.h" />
     <ClInclude Include="States\GameState.h" />
     <ClInclude Include="States\MainMenuState.h" />
