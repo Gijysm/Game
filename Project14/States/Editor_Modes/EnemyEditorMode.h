@@ -2,13 +2,13 @@
 #define ENEMYEDITORMODE_H
 
 #include "EditorMode.h"
-#include "../../Map/EnemySpawner.h"
+#include "../../Map/EnemySpawnerTile.h"
 class State;
 class StateData;
 class EditorMode;
 class Tile;
 class TileMap;
-class EnemySpawner;
+class EnemySpawnerTile;
 class gui::TextureSelector;
 
 class EnemyEditorMode : public EditorMode
@@ -17,8 +17,13 @@ private:
     // TextureSelector* Texture_sel;
     RectangleShape slidebar;
     RectangleShape SelectorRect;
-    // IntRect Texture_rect;
+    IntRect Texture_rect;
     Text CursorText;
+    bool TileAddLock = false;
+    int type,
+        amount,
+        time_to_spawn;
+        float maxDistance;
     // string text;
     // bool collision;
     // short type;

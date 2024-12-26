@@ -128,11 +128,31 @@ void TileMap::AddTile(const int x, const int y,
 		&& y < this->MaxSizeWorldI.y && y >= 0
 		&& z < this->layers && z >= 0)
 	{
-			this->T_map[x][y][z].push_back(new Tile(x,y,this->GridSizeF, this->tileSheet,tex_rect, collision, type));
+		if(type ==TileTypes::DEFAULT)
+			this->T_map[x][y][z].push_back(new RegularTile(type, x,y,this->GridSizeF, this->tileSheet,tex_rect, collision));
 	}
 }
 
-void TileMap::RemoveTile(const int x, const int y, const int z)
+void TileMap::AddTile(const int x, const int y,
+	const int z, const IntRect& tex_rect,
+	const int& enemy_type,const int& enemy_amount,
+	const int& enemy_T_T_S,const int& enemy_M_D )
+{
+	if (x < this->MaxSizeWorldI.x && x >= 0
+		&& y < this->MaxSizeWorldI.y && y >= 0
+		&& z < this->layers && z >= 0)
+	{
+		this->T_map[x][y][z].push_back(new EnemySpawnerTile(x,
+					y, GridSizeF,
+					tileSheet,
+					tex_rect,enemy_type,
+						enemy_amount,
+						enemy_T_T_S,
+						enemy_M_D));
+	}
+}
+
+void TileMap::RemoveTile(const int x, const int y, const int z, const int type)
 {
 	if (x < this->MaxSizeWorldI.x && x >= 0
 		&& y < this->MaxSizeWorldI.y && y >= 0
@@ -140,8 +160,19 @@ void TileMap::RemoveTile(const int x, const int y, const int z)
 	{
 		if (!this->T_map[x][y][z].empty())
 		{
-			delete this->T_map[x][y][z][this->T_map[x][y][z].size()-1];
-			this->T_map[x][y][z].pop_back();
+			if(type >= 0)
+			{
+				if(this->T_map[x][y][z].back()->GetType() == type)
+				{
+					delete this->T_map[x][y][z][this->T_map[x][y][z].size()-1];
+					this->T_map[x][y][z].pop_back();
+				}
+			}
+			else
+			{
+				delete this->T_map[x][y][z][this->T_map[x][y][z].size()-1];
+				this->T_map[x][y][z].pop_back();
+			}
 		}
 	}
 }
@@ -271,6 +302,11 @@ const Vector2f& TileMap::GetMaxSizeF() const
 	return this->MaxSizeWorldF;
 }
 
+const bool TileMap::checkType(const int x, const int y, const int z, const int type) const
+{
+	return this->T_map[x][y][this->layer].back()->GetType() == type;
+}
+
 void TileMap::saveToFile(const string file_name)
 {
 	/*Saves the entire tilemap to txt.file
@@ -282,7 +318,8 @@ void TileMap::saveToFile(const string file_name)
 	texture_file
 
 	All tiles:
-	gridPos x y, Texture rect x, y
+	
+	type, gridPos x y, Texture rect x, y, tile_specific
 	*/
 	ofstream out_file;
 
@@ -375,10 +412,35 @@ gridPos x y, Texture rect x, y
 		}
 		if (!this->tileSheet.loadFromFile(this->Texture_file))
 			throw "ERROR";
-		while(in_file >> x >> y >> z >> Trx  >> Try >> collision >> type)
+		while(in_file >> x >> y >> z >> type)
 		{
+			if(type == TileTypes::ENEMYSPAWNER)
+			{
+					int enemy_amount = 0,
+				enemy_time_to_spawn = 0,
+				enemy_max_Distance = 0;
+				short enemy_type = 0;
+					in_file  >> Trx  >> Try >> enemy_type >>
+					enemy_amount >> enemy_time_to_spawn>> enemy_max_Distance;
+				this->T_map[x][y][z].push_back(
+					new EnemySpawnerTile(x,
+						y, GridSizeF,
+						tileSheet,
+						IntRect(Trx, Try,
+							maxGridSize_T.x,
+							maxGridSize_T.y),enemy_type,
+							enemy_amount, enemy_time_to_spawn, enemy_max_Distance));
 
-			this->T_map[x][y][z].push_back(new Tile(x, y, GridSizeF, tileSheet, IntRect(Trx, Try, maxGridSize_T.x, maxGridSize_T.y), collision, type));
+			}
+			else
+			{
+				in_file >> Trx  >> Try >> collision;
+				this->T_map[x][y][z].push_back(new RegularTile(type, x, y,
+					GridSizeF, tileSheet, IntRect(Trx, Try,
+						maxGridSize_T.x, maxGridSize_T.y),
+						collision));
+
+			}
 		}
 	}
 	else
@@ -466,6 +528,11 @@ void TileMap::render(RenderTarget& target,const Vector2i& GridPosition,
 						{
 							target.draw(this->collisionbox);
 						}
+					}
+					if(this->T_map[x][y][layer][k]->GetType() == TileTypes::ENEMYSPAWNER)
+					{
+						this->collisionbox.setPosition(this->T_map[x][y][layer][k]->getPosition());
+						target.draw(this->collisionbox);
 					}
 				}
 			}

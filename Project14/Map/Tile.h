@@ -16,20 +16,19 @@ protected:
 	bool collision;
 public:
 	Tile();
-	Tile(int x, int y, float gridSizeF, const Texture& tex,
-		const IntRect& tex_rect, bool collision = false, short type = TileTypes::DEFAULT);
+	Tile(short type , int x, int y, float gridSizeF, const Texture& tex,
+		const IntRect& tex_rect, const bool collision = false);
 	virtual ~Tile();
 
-	const int& GetType() const;
-	const string getAsString() const;
-	const bool& getCollision() const;
-	const bool& OutOfRage(Vector2f& Pos) const;
-	const FloatRect getGlobalBounds() const;
-	const bool intersects(const FloatRect bounds) const;
-	const Vector2f& getPosition() const;
-
-	void update();
-	void render(RenderTarget& target, Shader* shader = NULL, Vector2f PlayerPos = Vector2f());
+	virtual const int& GetType() const;
+	virtual const string getAsString() const = 0;
+	virtual const bool& OutOfRage(Vector2f& Pos) const;
+	virtual const FloatRect getGlobalBounds() const;
+	virtual const bool intersects(const FloatRect bounds) const;
+	virtual const Vector2f& getPosition() const;
+	virtual const bool& getCollision() const;
+	virtual void update();
+	virtual void render(RenderTarget& target, Shader* shader = NULL, Vector2f PlayerPos = Vector2f());
 };
 
 #endif

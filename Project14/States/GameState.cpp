@@ -42,10 +42,10 @@ GameState::GameState(StateData* state_data)
 	this->InitEnemy();
 	this->InitPlayerGUI();
 
-enemies.push_back(new Enemy(200, 400, this->temp));
-enemies.push_back(new Enemy(100, 300, this->temp));
-enemies.push_back(new Enemy(130, 120, this->temp));
-enemies.push_back(new Enemy(80, 210, this->temp));
+enemies.push_back(new Spider(200, 400, this->temp));
+enemies.push_back(new Spider(100, 300, this->temp));
+enemies.push_back(new Spider(130, 120, this->temp));
+enemies.push_back(new Spider(80, 210, this->temp));
 }
 void GameState::InitFont()
 {

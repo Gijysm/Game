@@ -4,11 +4,11 @@
 Tile::Tile()
 {
 	this->collision = 0;
-	this->type = false;
+	this->type = 0;
 }
 
-Tile::Tile(int x, int y, float gridSizeF, const Texture& tex,
-	const IntRect& tex_rect, bool collision, short type)
+Tile::Tile(short type, int x, int y, float gridSizeF, const Texture& tex,
+	const IntRect& tex_rect, const bool collision)
 {
 	this->shape.setTexture(tex);
 	this->shape.setTextureRect(tex_rect);
@@ -25,25 +25,25 @@ Tile::Tile(int x, int y, float gridSizeF, const Texture& tex,
 Tile::~Tile()
 {
 }
-
-const int& Tile::GetType() const
-{
-	return type;
-}
-
-const string Tile::getAsString() const
-{
-	stringstream ss;
-
-	ss << this->shape.getTextureRect().left << " " << 
-		this->shape.getTextureRect().top << " " << this->collision <<
-		" " << this->type;
-	return ss.str();
-}
-
 const bool& Tile::getCollision() const
 {
 	return this->collision;
+}
+const int& Tile::GetType() const
+{
+	return this->type;
+}
+void Tile::update()
+{
+}
+
+void Tile::render(RenderTarget& target, Shader* shader, Vector2f PlayerPos)
+{
+}
+
+const bool& Tile::OutOfRage(Vector2f& Pos) const
+{
+	return 0;
 }
 
 const FloatRect Tile::getGlobalBounds() const
@@ -61,19 +61,4 @@ const Vector2f& Tile::getPosition() const
 	return this->shape.getPosition();
 }
 
-void Tile::update()
-{
-	this->shape.setColor(Color::Red);
-}
 
-void Tile::render(RenderTarget& target, Shader* shader, Vector2f PlayerPos)
-{
-	if(shader)
-	{
-		shader->setUniform("hasTexture", true);
-		shader->setUniform("lightPos", PlayerPos);
-		target.draw(this->shape, shader);
-	}
-	else
-		target.draw(this->shape);
-}

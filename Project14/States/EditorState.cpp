@@ -232,11 +232,11 @@ void EditorState::renderButton(RenderTarget& target)
 
 void EditorState::renderGui(RenderTarget& target)
 {
-	this->EModes[activemode]->render(target);
 }
 
 void EditorState::renderModes(RenderTarget& target)
 {
+	this->EModes[activemode]->render(target);
 }
 
 void EditorState::update(const float& dt)
@@ -260,17 +260,15 @@ void EditorState::update(const float& dt)
 }
 void EditorState::render(RenderTarget* target)
 {	
-Keyboard::Left;
 	if (target == NULL)
 	{
 		target = this->window;
 	}
 	target->setView(this->MainView);
-
-	this->renderGui(*target);
+	
 	this->Tilemap->render(*target, this->MousePosGrid, NULL, Vector2f(), true);
 	this->Tilemap->renderDeferrent(*target, NULL, Vector2f());
-	
+	this->renderModes(*target);
 	target->setView(this->window->getDefaultView());
 	if (paused)
 	{

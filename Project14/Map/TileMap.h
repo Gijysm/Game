@@ -1,9 +1,12 @@
 #ifndef TILEMAP_H
 #define TILEMAP_H
-#include "../Map/Tile.h"
+#include "../Map/RegularTile.h"
 #include "../Player/Entity.h"
+#include "../Map/EnemySpawnerTile.h"
+class  RegularTile;
 class Tile;
 class Entity;
+class EnemySpawnerTile;
 class TileMap
 {
 private:
@@ -40,11 +43,16 @@ public:
 	void AddTile(const int x, const int y,
 		const int z, const IntRect& tex_rect,
 		const bool& collision, const short& type);
-	void RemoveTile(const int x, const int y, const int z);
+	void AddTile(const int x, const int y,
+	const int z, const IntRect& tex_rect,
+	const int& enemy_type,const int& enemy_amount,
+	const int& enemy_T_T_S,const int& enemy_M_D );
+	void RemoveTile(const int x, const int y, const int z, const int type = -1);
 	void update(Entity* entity, const float& dt);
 
 	const Vector2i& GetMaxSizeGrid() const;
 	const Vector2f& GetMaxSizeF() const;
+	const bool checkType(const int x, const int y, const int z, const int type) const;
 
 	void saveToFile(const string file_name);
 	void loadFromFile(const string file_name);

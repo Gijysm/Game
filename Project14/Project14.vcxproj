@@ -814,7 +814,8 @@
       <AdditionalIncludeDirectories>C:\Users\popka\RiderProjects\Game\packages\sfml_graphics.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_network.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_audio.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_window.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_system.2.6.0\build\native\../..//build/native/include/;</AdditionalIncludeDirectories>
     </ClCompile>
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Map\EnemySpawner.cpp" />
+    <ClCompile Include="Map\EnemySpawnerTile.cpp" />
+    <ClCompile Include="Map\RegularTile.cpp" />
     <ClCompile Include="Map\Tile.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -965,7 +966,83 @@
       <LinkCompiled>true</LinkCompiled>
       <AdditionalIncludeDirectories>C:\Users\popka\RiderProjects\Game\packages\sfml_graphics.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_network.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_audio.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_window.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_system.2.6.0\build\native\../..//build/native/include/;</AdditionalIncludeDirectories>
     </ClCompile>
-    <ClCompile Include="Player\Enemy.cpp" />
+    <ClCompile Include="Player\Enemys\Enemy.cpp">
+      <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <Optimization>Disabled</Optimization>
+      <SupportJustMyCode>true</SupportJustMyCode>
+      <AssemblerOutput>NoListing</AssemblerOutput>
+      <AssemblerListingLocation>x64\Debug\</AssemblerListingLocation>
+      <UndefineAllPreprocessorDefinitions>false</UndefineAllPreprocessorDefinitions>
+      <BrowseInformation>false</BrowseInformation>
+      <BrowseInformationFile>x64\Debug\</BrowseInformationFile>
+      <CompileAs>Default</CompileAs>
+      <ConformanceMode>true</ConformanceMode>
+      <DiagnosticsFormat>Column</DiagnosticsFormat>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <ErrorReporting>Prompt</ErrorReporting>
+      <ExpandAttributedSource>false</ExpandAttributedSource>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <EnableASAN>false</EnableASAN>
+      <EnableFuzzer>false</EnableFuzzer>
+      <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <GenerateModuleDependencies>false</GenerateModuleDependencies>
+      <GenerateSourceDependencies>false</GenerateSourceDependencies>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+      <LanguageStandard>Default</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ModuleDependenciesFile>x64\Debug\</ModuleDependenciesFile>
+      <ModuleOutputFile>x64\Debug\</ModuleOutputFile>
+      <OmitDefaultLibName>false</OmitDefaultLibName>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <ObjectFileName>x64\Debug\</ObjectFileName>
+      <CallingConvention>Cdecl</CallingConvention>
+      <ProgramDataBaseFileName>x64\Debug\vc143.pdb</ProgramDataBaseFileName>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>x64\Debug\Project14.pch</PrecompiledHeaderOutputFile>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PreprocessKeepComments>false</PreprocessKeepComments>
+      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
+      <RemoveUnreferencedCodeData>true</RemoveUnreferencedCodeData>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+      <ShowIncludes>false</ShowIncludes>
+      <SourceDependenciesFile>x64\Debug\</SourceDependenciesFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <SmallerTypeCheck>false</SmallerTypeCheck>
+      <SpectreMitigation>false</SpectreMitigation>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <TrackerLogDirectory>x64\Debug\Project14.tlog\</TrackerLogDirectory>
+      <TranslateIncludes>false</TranslateIncludes>
+      <MinimalRebuildFromTracking>true</MinimalRebuildFromTracking>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <UseFullPaths>true</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <XMLDocumentationFileName>x64\Debug\</XMLDocumentationFileName>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <IntelJCCErratum>false</IntelJCCErratum>
+      <BuildStlModules>false</BuildStlModules>
+      <TreatAngleIncludeAsExternal>false</TreatAngleIncludeAsExternal>
+      <ExternalWarningLevel>InheritWarningLevel</ExternalWarningLevel>
+      <TreatExternalTemplatesAsInternal>true</TreatExternalTemplatesAsInternal>
+      <DisableAnalyzeExternal>false</DisableAnalyzeExternal>
+      <PreprocessorDefinitions>HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;_DEBUG;_CONSOLE;_UNICODE;UNICODE;</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <LinkCompiled>true</LinkCompiled>
+      <AdditionalIncludeDirectories>C:\Users\popka\RiderProjects\Game1\packages\sfml_graphics.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game1\packages\sfml_network.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game1\packages\sfml_audio.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game1\packages\sfml_window.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game1\packages\sfml_system.2.6.0\build\native\../..//build/native/include/;;C:\Users\popka\source\repos\TelegaBot\vcpkg\installed\x64-windows\include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ClCompile Include="Player\Enemys\Enemys_Include.cpp" />
+    <ClCompile Include="Player\Enemys\Spider.cpp" />
     <ClCompile Include="Player\Entity.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -1809,10 +1886,13 @@
     <ClInclude Include="Graphics\GraphicsSettings.h" />
     <ClInclude Include="GUI\Gui.h" />
     <ClInclude Include="GUI\PauseMenu.h" />
-    <ClInclude Include="Map\EnemySpawner.h" />
+    <ClInclude Include="Map\EnemySpawnerTile.h" />
+    <ClInclude Include="Map\RegularTile.h" />
     <ClInclude Include="Map\Tile.h" />
     <ClInclude Include="Map\TileMap.h" />
-    <ClInclude Include="Player\Enemy.h" />
+    <ClInclude Include="Player\Enemys\Enemy.h" />
+    <ClInclude Include="Player\Enemys\Enemys_Include.h" />
+    <ClInclude Include="Player\Enemys\Spider.h" />
     <ClInclude Include="Player\Entity.h" />
     <ClInclude Include="Player\Player.h" />
     <ClInclude Include="Player\PlayerGUI.h" />

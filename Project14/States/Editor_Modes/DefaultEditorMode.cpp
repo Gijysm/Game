@@ -21,7 +21,7 @@ DefaultEditorMode::~DefaultEditorMode()
 void DefaultEditorMode::InitGui()
 {
     this->CursorText.setFillColor(Color::White);
-    this->CursorText.setFont(*this->font);
+    this->CursorText.setFont(*this->editor->font);
     this->CursorText.setCharacterSize(15);
     this->CursorText.setPosition(this->editor->MousePosView->x, this->editor->MousePosView->y);
     this->slidebar.setSize(Vector2f(50, this->Statedata->GFXSettings->resolution.height));
@@ -34,13 +34,13 @@ void DefaultEditorMode::InitGui()
     this->SelectorRect.setOutlineColor(Color::Green);
     this->SelectorRect.setTexture(this->Tile_map->getTileSheet());
     this->Hide_Button = new Button(gui::p2pX(85, *this->editor->vm), gui::p2pY(85, *this->editor->vm), gui::p2pX(12, *this->editor->vm), gui::p2pY(7, *this->editor->vm),
-        this->font, text, gui::CharacterSize(*this->editor->vm), Color(100, 100, 200, 50),
+        this->editor->font, text, gui::CharacterSize(*this->editor->vm), Color(100, 100, 200, 50),
         Color(50, 150, 200, 125),
         Color(30, 30, 70, 180), Color(100, 100, 200, 150),
         Color(50, 150, 200, 185),
         Color(30, 30, 70, 230));
     this->Texture_sel = new gui::TextureSelector(16, 16, 400, 224, 16,
-        this->Tile_map->getTileSheet(), *this->font,
+        this->Tile_map->getTileSheet(), *this->editor->font,
         "Hide_Tile", *this->editor->vm);
 }
 
@@ -162,10 +162,10 @@ void DefaultEditorMode::renderGui(RenderTarget* target)
     target->setView(this->Statedata->window->getDefaultView());
     this->Hide_Button->render(*target);
     this->Texture_sel->render(*target, hiden);
+    
     target->draw(this->slidebar);
-
-    target->setView(*this->editor->view);
     target->draw(this->CursorText);
+    target->setView(*this->editor->view);
 }
 
 void DefaultEditorMode::render(RenderTarget& target)

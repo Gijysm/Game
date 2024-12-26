@@ -9,7 +9,8 @@
 #include "..//GUI/PauseMenu.h"
 #include "..//Map/TileMap.h"
 #include "..//Player//Player.h"
-#include "..//Player/Enemy.h"
+#include "../Player/Enemys/Enemy.h"
+#include "../Player/Enemys/Enemys_Include.h"
 #include "..//Player/PlayerGUI.h"
 
 class Enemy;
