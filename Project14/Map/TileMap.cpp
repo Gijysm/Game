@@ -177,30 +177,13 @@ void TileMap::RemoveTile(const int x, const int y, const int z, const int type)
 	}
 }
 
-void TileMap::update(Entity* entity, const float& dt)
+void TileMap::updateTiles(Entity* entity, const float& dt)
 {
-	if (entity->getPosition().x < 0)
-	{
-		entity->SetPosition(0.f, entity->getPosition().y);
-		entity->stopVelocityX();
-	}
-	else if (entity->getPosition().x + entity->getGlobalBounds().width > this->MaxSizeWorldF.x)
-	{
-		entity->SetPosition(this->MaxSizeWorldF.x -entity->getGlobalBounds().width, entity->getPosition().y);
-		entity->stopVelocityX();
-	}
-	if (entity->getPosition().y < 0)
-	{
-		entity->SetPosition(entity->getPosition().x, 0);
-		entity->stopVelocityY();
-	}
-	else if (entity->getPosition().y + entity->getGlobalBounds().height > this->MaxSizeWorldF.y)
-	{
-		entity->SetPosition(entity->getPosition().x, this->MaxSizeWorldF.y - entity->getGlobalBounds().height);
-		entity->stopVelocityY();
-	}
+}
 
-	this->layer = 0;
+void TileMap::updateTilesCollision(Entity* entity, const float& dt)
+{
+		this->layer = 0;
 	this->fromX = entity->getGridPos(this->GridSizeF).x - 14;
 	if (this->fromX < 0)
 	{
@@ -288,8 +271,37 @@ void TileMap::update(Entity* entity, const float& dt)
 					}
 				}
 			}
-		} 
+		}
 	}
+}
+
+void TileMap::updateViewBindsCollision(Entity* entity, const float& dt)
+{
+}
+
+void TileMap::update(Entity* entity, const float& dt)
+{
+	if (entity->getPosition().x < 0)
+	{
+		entity->SetPosition(0.f, entity->getPosition().y);
+		entity->stopVelocityX();
+	}
+	else if (entity->getPosition().x + entity->getGlobalBounds().width > this->MaxSizeWorldF.x)
+	{
+		entity->SetPosition(this->MaxSizeWorldF.x -entity->getGlobalBounds().width, entity->getPosition().y);
+		entity->stopVelocityX();
+	}
+	if (entity->getPosition().y < 0)
+	{
+		entity->SetPosition(entity->getPosition().x, 0);
+		entity->stopVelocityY();
+	}
+	else if (entity->getPosition().y + entity->getGlobalBounds().height > this->MaxSizeWorldF.y)
+	{
+		entity->SetPosition(entity->getPosition().x, this->MaxSizeWorldF.y - entity->getGlobalBounds().height);
+		entity->stopVelocityY();
+	}
+	this->updateTiles(entity, dt);
 }
 
 const Vector2i& TileMap::GetMaxSizeGrid() const

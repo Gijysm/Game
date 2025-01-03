@@ -48,6 +48,9 @@ public:
 	const int& enemy_type,const int& enemy_amount,
 	const int& enemy_T_T_S,const int& enemy_M_D );
 	void RemoveTile(const int x, const int y, const int z, const int type = -1);
+	void updateTiles(Entity* entity, const float& dt);
+	void updateTilesCollision(Entity* entity, const float& dt);
+	void updateViewBindsCollision(Entity* entity, const float& dt);
 	void update(Entity* entity, const float& dt);
 
 	const Vector2i& GetMaxSizeGrid() const;
