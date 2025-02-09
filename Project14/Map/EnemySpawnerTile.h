@@ -2,6 +2,7 @@
 #define ENEMY_SPAWNER_H
 #include "../Map/Tile.h"
 
+
 class Tile;
 
 class EnemySpawnerTile: public Tile

@@ -1,4 +1,5 @@
-﻿#include "RegularTile.h"
+﻿#include "..//stdafx.h"
+#include "RegularTile.h"
 
 RegularTile::RegularTile()
 {

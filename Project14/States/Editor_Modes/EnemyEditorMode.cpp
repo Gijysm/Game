@@ -1,6 +1,6 @@
-﻿#include "EnemyEditorMode.h"
+﻿#include "..//..//stdafx.h"
+#include "EnemyEditorMode.h"
 
-#include "DefaultEditorMode.h"
 
 void EnemyEditorMode::InitVariables()
 {

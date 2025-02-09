@@ -102,6 +102,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <Optimization>Disabled</Optimization>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -137,6 +138,9 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>MSVCRT;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;sfml-audio.lib;sfml-network.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\SFML\lib;C:\Users\popka\RiderProjects\Game1\packages;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -217,6 +221,12 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
       <AdditionalIncludeDirectories>C:\Users\popka\RiderProjects\Game\packages\sfml_graphics.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_network.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_audio.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_window.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_system.2.6.0\build\native\../..//build/native/include/;</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_ITERATOR_DEBUG_LEVEL=0;HAS_SFML;_DEBUG;_CONSOLE;_UNICODE;UNICODE</PreprocessorDefinitions>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Default</BasicRuntimeChecks>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MultiThreadedDLL</RuntimeLibrary>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">ITERATOR_DEBUG_LEVEL=0;HAS_SFML;_DEBUG;_CONSOLE;_UNICODE;UNICODE</PreprocessorDefinitions>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Component\AtributeComponent.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -292,6 +302,8 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
       <AdditionalIncludeDirectories>C:\Users\popka\RiderProjects\Game\packages\sfml_graphics.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_network.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_audio.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_window.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_system.2.6.0\build\native\../..//build/native/include/;</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_ITERATOR_DEBUG_LEVEL=0;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;_DEBUG;_CONSOLE;_UNICODE;UNICODE;</PreprocessorDefinitions>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Default</BasicRuntimeChecks>
     </ClCompile>
     <ClCompile Include="Component\HitboxComponent.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -367,6 +379,7 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
       <AdditionalIncludeDirectories>C:\Users\popka\RiderProjects\Game\packages\sfml_graphics.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_network.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_audio.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_window.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_system.2.6.0\build\native\../..//build/native/include/;</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_ITERATOR_DEBUG_LEVEL=0;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;_DEBUG;_CONSOLE;_UNICODE;UNICODE;</PreprocessorDefinitions>
     </ClCompile>
     <ClCompile Include="Component\MovementComponent.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -442,6 +455,7 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
       <AdditionalIncludeDirectories>C:\Users\popka\RiderProjects\Game\packages\sfml_graphics.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_network.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_audio.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_window.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_system.2.6.0\build\native\../..//build/native/include/;</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_ITERATOR_DEBUG_LEVEL=0;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;_DEBUG;_CONSOLE;_UNICODE;UNICODE;</PreprocessorDefinitions>
     </ClCompile>
     <ClCompile Include="Component\SkillComponent.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -517,6 +531,7 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
       <AdditionalIncludeDirectories>C:\Users\popka\RiderProjects\Game\packages\sfml_graphics.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_network.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_audio.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_window.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_system.2.6.0\build\native\../..//build/native/include/;</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_ITERATOR_DEBUG_LEVEL=0;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;_DEBUG;_CONSOLE;_UNICODE;UNICODE;</PreprocessorDefinitions>
     </ClCompile>
     <ClCompile Include="Game.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -592,6 +607,7 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
       <AdditionalIncludeDirectories>C:\Users\popka\RiderProjects\Game\packages\sfml_graphics.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_network.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_audio.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_window.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_system.2.6.0\build\native\../..//build/native/include/;</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_ITERATOR_DEBUG_LEVEL=0;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;_DEBUG;_CONSOLE;_UNICODE;UNICODE;</PreprocessorDefinitions>
     </ClCompile>
     <ClCompile Include="Graphics\GraphicsSettings.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -667,6 +683,7 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
       <AdditionalIncludeDirectories>C:\Users\popka\RiderProjects\Game\packages\sfml_graphics.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_network.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_audio.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_window.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_system.2.6.0\build\native\../..//build/native/include/;</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_ITERATOR_DEBUG_LEVEL=0;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;_DEBUG;_CONSOLE;_UNICODE;UNICODE;</PreprocessorDefinitions>
     </ClCompile>
     <ClCompile Include="GUI\Gui.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -742,6 +759,7 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
       <AdditionalIncludeDirectories>C:\Users\popka\RiderProjects\Game\packages\sfml_graphics.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_network.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_audio.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_window.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_system.2.6.0\build\native\../..//build/native/include/;</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_ITERATOR_DEBUG_LEVEL=0;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;_DEBUG;_CONSOLE;_UNICODE;UNICODE;</PreprocessorDefinitions>
     </ClCompile>
     <ClCompile Include="GUI\PauseMenu.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -817,10 +835,19 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
       <AdditionalIncludeDirectories>C:\Users\popka\RiderProjects\Game\packages\sfml_graphics.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_network.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_audio.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_window.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_system.2.6.0\build\native\../..//build/native/include/;</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_ITERATOR_DEBUG_LEVEL=0;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;_DEBUG;_CONSOLE;_UNICODE;UNICODE;</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Map\EnemySpawnerTile.cpp" />
-    <ClCompile Include="Map\RegularTile.cpp" />
+    <ClCompile Include="Main.cpp">
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_ITERATOR_DEBUG_LEVEL=0;HAS_SFML;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ClCompile Include="Map\EnemySpawnerTile.cpp">
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_ITERATOR_DEBUG_LEVEL=0;HAS_SFML;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Map\RegularTile.cpp">
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_ITERATOR_DEBUG_LEVEL=0;HAS_SFML;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
     <ClCompile Include="Map\Tile.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -895,6 +922,7 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
       <AdditionalIncludeDirectories>C:\Users\popka\RiderProjects\Game\packages\sfml_graphics.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_network.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_audio.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_window.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_system.2.6.0\build\native\../..//build/native/include/;</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_ITERATOR_DEBUG_LEVEL=0;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;_DEBUG;_CONSOLE;_UNICODE;UNICODE;</PreprocessorDefinitions>
     </ClCompile>
     <ClCompile Include="Map\TileMap.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -970,6 +998,7 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
       <AdditionalIncludeDirectories>C:\Users\popka\RiderProjects\Game\packages\sfml_graphics.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_network.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_audio.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_window.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_system.2.6.0\build\native\../..//build/native/include/;</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_ITERATOR_DEBUG_LEVEL=0;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;_DEBUG;_CONSOLE;_UNICODE;UNICODE;</PreprocessorDefinitions>
     </ClCompile>
     <ClCompile Include="Player\Enemys\Enemy.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -1045,9 +1074,14 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
       <AdditionalIncludeDirectories>C:\Users\popka\RiderProjects\Game1\packages\sfml_graphics.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game1\packages\sfml_network.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game1\packages\sfml_audio.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game1\packages\sfml_window.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game1\packages\sfml_system.2.6.0\build\native\../..//build/native/include/;;C:\Users\popka\source\repos\TelegaBot\vcpkg\installed\x64-windows\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_ITERATOR_DEBUG_LEVEL=0;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;_DEBUG;_CONSOLE;_UNICODE;UNICODE;</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="Player\Enemys\Enemys_Include.cpp" />
-    <ClCompile Include="Player\Enemys\Spider.cpp" />
+    <ClCompile Include="Player\Enemys\Enemys_Include.cpp">
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_ITERATOR_DEBUG_LEVEL=0;HAS_SFML;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ClCompile Include="Player\Enemys\Spider.cpp">
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_ITERATOR_DEBUG_LEVEL=0;HAS_SFML;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
     <ClCompile Include="Player\Entity.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -1122,6 +1156,7 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
       <AdditionalIncludeDirectories>C:\Users\popka\RiderProjects\Game\packages\sfml_graphics.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_network.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_audio.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_window.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_system.2.6.0\build\native\../..//build/native/include/;</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_ITERATOR_DEBUG_LEVEL=0;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;_DEBUG;_CONSOLE;_UNICODE;UNICODE;</PreprocessorDefinitions>
     </ClCompile>
     <ClCompile Include="Player\Player.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -1197,6 +1232,7 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
       <AdditionalIncludeDirectories>C:\Users\popka\RiderProjects\Game\packages\sfml_graphics.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_network.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_audio.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_window.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_system.2.6.0\build\native\../..//build/native/include/;</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_ITERATOR_DEBUG_LEVEL=0;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;_DEBUG;_CONSOLE;_UNICODE;UNICODE;</PreprocessorDefinitions>
     </ClCompile>
     <ClCompile Include="Player\PlayerGUI.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -1272,6 +1308,7 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
       <AdditionalIncludeDirectories>C:\Users\popka\RiderProjects\Game\packages\sfml_graphics.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_network.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_audio.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_window.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_system.2.6.0\build\native\../..//build/native/include/;</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_ITERATOR_DEBUG_LEVEL=0;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;_DEBUG;_CONSOLE;_UNICODE;UNICODE;</PreprocessorDefinitions>
     </ClCompile>
     <ClCompile Include="Player\Weapon\Medium_range_weapon.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -1347,6 +1384,7 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
       <AdditionalIncludeDirectories>C:\Users\popka\RiderProjects\Game\packages\sfml_graphics.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_network.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_audio.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_window.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_system.2.6.0\build\native\../..//build/native/include/;</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_ITERATOR_DEBUG_LEVEL=0;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;_DEBUG;_CONSOLE;_UNICODE;UNICODE;</PreprocessorDefinitions>
     </ClCompile>
     <ClCompile Include="Player\Weapon\Peak.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -1422,6 +1460,7 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
       <AdditionalIncludeDirectories>C:\Users\popka\RiderProjects\Game\packages\sfml_graphics.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_network.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_audio.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_window.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_system.2.6.0\build\native\../..//build/native/include/;</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_ITERATOR_DEBUG_LEVEL=0;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;_DEBUG;_CONSOLE;_UNICODE;UNICODE;</PreprocessorDefinitions>
     </ClCompile>
     <ClCompile Include="Player\Weapon\Weapon.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -1497,6 +1536,7 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
       <AdditionalIncludeDirectories>C:\Users\popka\RiderProjects\Game\packages\sfml_graphics.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_network.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_audio.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_window.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_system.2.6.0\build\native\../..//build/native/include/;</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_ITERATOR_DEBUG_LEVEL=0;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;_DEBUG;_CONSOLE;_UNICODE;UNICODE;</PreprocessorDefinitions>
     </ClCompile>
     <ClCompile Include="States\EditorState.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -1572,10 +1612,17 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
       <AdditionalIncludeDirectories>C:\Users\popka\RiderProjects\Game\packages\sfml_graphics.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_network.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_audio.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_window.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_system.2.6.0\build\native\../..//build/native/include/;</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_ITERATOR_DEBUG_LEVEL=0;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;_DEBUG;_CONSOLE;_UNICODE;UNICODE;</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="States\Editor_Modes\DefaultEditorMode.cpp" />
-    <ClCompile Include="States\Editor_Modes\EditorMode.cpp" />
-    <ClCompile Include="States\Editor_Modes\EnemyEditorMode.cpp" />
+    <ClCompile Include="States\Editor_Modes\DefaultEditorMode.cpp">
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_ITERATOR_DEBUG_LEVEL=0;HAS_SFML;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ClCompile Include="States\Editor_Modes\EditorMode.cpp">
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_ITERATOR_DEBUG_LEVEL=0;HAS_SFML;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ClCompile Include="States\Editor_Modes\EnemyEditorMode.cpp">
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_ITERATOR_DEBUG_LEVEL=0;HAS_SFML;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
     <ClCompile Include="States\GameState.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -1650,6 +1697,7 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
       <AdditionalIncludeDirectories>C:\Users\popka\RiderProjects\Game\packages\sfml_graphics.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_network.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_audio.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_window.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_system.2.6.0\build\native\../..//build/native/include/;</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_ITERATOR_DEBUG_LEVEL=0;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;_DEBUG;_CONSOLE;_UNICODE;UNICODE;</PreprocessorDefinitions>
     </ClCompile>
     <ClCompile Include="States\MainMenuState.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -1725,6 +1773,7 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
       <AdditionalIncludeDirectories>C:\Users\popka\RiderProjects\Game\packages\sfml_graphics.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_network.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_audio.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_window.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_system.2.6.0\build\native\../..//build/native/include/;</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_ITERATOR_DEBUG_LEVEL=0;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;_DEBUG;_CONSOLE;_UNICODE;UNICODE;</PreprocessorDefinitions>
     </ClCompile>
     <ClCompile Include="States\SettingsState.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -1800,6 +1849,7 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
       <AdditionalIncludeDirectories>C:\Users\popka\RiderProjects\Game\packages\sfml_graphics.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_network.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_audio.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_window.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_system.2.6.0\build\native\../..//build/native/include/;</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_ITERATOR_DEBUG_LEVEL=0;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;_DEBUG;_CONSOLE;_UNICODE;UNICODE;</PreprocessorDefinitions>
     </ClCompile>
     <ClCompile Include="States\State.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -1875,10 +1925,12 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
       <AdditionalIncludeDirectories>C:\Users\popka\RiderProjects\Game\packages\sfml_graphics.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_network.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_audio.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_window.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_system.2.6.0\build\native\../..//build/native/include/;</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_ITERATOR_DEBUG_LEVEL=0;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;_DEBUG;_CONSOLE;_UNICODE;UNICODE;</PreprocessorDefinitions>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_ITERATOR_DEBUG_LEVEL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

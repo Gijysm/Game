@@ -1,4 +1,5 @@
-﻿#include "Spider.h"
+﻿#include "..//..//stdafx.h"
+#include "Spider.h"
 void Spider::InitVariables()
 {
     Attacking = false;
