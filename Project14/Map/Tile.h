@@ -1,5 +1,6 @@
 #ifndef TILE_H
 #define TILE_H
+#include "../Player/Entity.h"
 #include "..//stdafx.h"
 
 enum TileTypes

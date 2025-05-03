@@ -24,6 +24,7 @@
     <ProjectGuid>{c9486f35-7e08-49fd-8384-4ad6fb5435a5}</ProjectGuid>
     <RootNamespace>Project14</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Project14</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -42,8 +43,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -72,7 +73,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\lib\x64;D:\VisualStudio 2022\vs\VC\Tools\MSVC\14.41.34120\lib\x64;D:\VisualStudio 2022\vs\VC\Redist\MSVC\v143;$(WindowsSdkDir)lib\$(TargetPlatformVersion)\ucrt\$(PlatformTarget);$(WindowsSdkDir)lib\$(TargetPlatformVersion)\um\$(PlatformTarget)</LibraryPath>
+    <LibraryPath>C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\lib\x64;C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\lib\x64;D:\VisualStudio 2022\vs\VC\Tools\MSVC\14.41.34120\lib\x64;D:\VisualStudio 2022\vs\VC\Redist\MSVC\v143;$(WindowsSdkDir)lib\$(TargetPlatformVersion)\ucrt\$(PlatformTarget);$(WindowsSdkDir)lib\$(TargetPlatformVersion)\um\$(PlatformTarget)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <RuntimeLibrary>
@@ -117,6 +118,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -131,7 +134,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_ITERATOR_DEBUG_LEVEL=0</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -1076,6 +1080,7 @@
       <AdditionalIncludeDirectories>C:\Users\popka\RiderProjects\Game1\packages\sfml_graphics.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game1\packages\sfml_network.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game1\packages\sfml_audio.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game1\packages\sfml_window.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game1\packages\sfml_system.2.6.0\build\native\../..//build/native/include/;;C:\Users\popka\source\repos\TelegaBot\vcpkg\installed\x64-windows\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_ITERATOR_DEBUG_LEVEL=0;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;_DEBUG;_CONSOLE;_UNICODE;UNICODE;</PreprocessorDefinitions>
     </ClCompile>
+    <ClCompile Include="Player\Enemys\EnemySystem.cpp" />
     <ClCompile Include="Player\Enemys\Enemys_Include.cpp">
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_ITERATOR_DEBUG_LEVEL=0;HAS_SFML;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
@@ -1310,6 +1315,7 @@
       <AdditionalIncludeDirectories>C:\Users\popka\RiderProjects\Game\packages\sfml_graphics.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_network.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_audio.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_window.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_system.2.6.0\build\native\../..//build/native/include/;</AdditionalIncludeDirectories>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_ITERATOR_DEBUG_LEVEL=0;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;_DEBUG;_CONSOLE;_UNICODE;UNICODE;</PreprocessorDefinitions>
     </ClCompile>
+    <ClCompile Include="Player\Weapon\Inventory.cpp" />
     <ClCompile Include="Player\Weapon\Medium_range_weapon.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -1538,6 +1544,7 @@
       <AdditionalIncludeDirectories>C:\Users\popka\RiderProjects\Game\packages\sfml_graphics.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_network.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_audio.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_window.2.6.0\build\native\../..//build/native/include/;C:\Users\popka\RiderProjects\Game\packages\sfml_system.2.6.0\build\native\../..//build/native/include/;</AdditionalIncludeDirectories>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_ITERATOR_DEBUG_LEVEL=0;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;HAS_SFML;_DEBUG;_CONSOLE;_UNICODE;UNICODE;</PreprocessorDefinitions>
     </ClCompile>
+    <ClCompile Include="Socket\StatusNetworkServer.cpp" />
     <ClCompile Include="States\EditorState.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -1948,14 +1955,17 @@
     <ClInclude Include="Map\Tile.h" />
     <ClInclude Include="Map\TileMap.h" />
     <ClInclude Include="Player\Enemys\Enemy.h" />
+    <ClInclude Include="Player\Enemys\EnemySystem.h" />
     <ClInclude Include="Player\Enemys\Enemys_Include.h" />
     <ClInclude Include="Player\Enemys\Spider.h" />
     <ClInclude Include="Player\Entity.h" />
     <ClInclude Include="Player\Player.h" />
     <ClInclude Include="Player\PlayerGUI.h" />
+    <ClInclude Include="Player\Weapon\Inventory.h" />
     <ClInclude Include="Player\Weapon\Medium_range_weapon.h" />
     <ClInclude Include="Player\Weapon\Peak.h" />
     <ClInclude Include="Player\Weapon\Weapon.h" />
+    <ClInclude Include="Socket\StatusNetworkServer.h" />
     <ClInclude Include="States\EditorState.h" />
     <ClInclude Include="States\Editor_Modes\DefaultEditorMode.h" />
     <ClInclude Include="States\Editor_Modes\EditorMode.h" />

@@ -1,12 +1,10 @@
 #ifndef TILEMAP_H
 #define TILEMAP_H
 #include "../Map/RegularTile.h"
-#include "../Player/Entity.h"
 #include "../Map/EnemySpawnerTile.h"
-class  RegularTile;
-class Tile;
-class Entity;
-class EnemySpawnerTile;
+#include "../Player/Enemys/EnemySystem.h"
+#include <memory>
+
 class TileMap
 {
 private:
@@ -48,10 +46,12 @@ public:
 	const int& enemy_type,const int& enemy_amount,
 	const int& enemy_T_T_S,const int& enemy_M_D );
 	void RemoveTile(const int x, const int y, const int z, const int type = -1);
-	void updateTiles(Entity* entity, const float& dt);
+	void update_tiles(Entity* entity, const float& dt, EnemySystem& enemy_system);
 	void updateTilesCollision(Entity* entity, const float& dt);
-	void updateViewBindsCollision(Entity* entity, const float& dt);
+	void updateWorldBoundsCollision(Entity* entity, const float& dt);
 	void update(Entity* entity, const float& dt);
+	void render(RenderTarget& target, const Vector2i& gridPosition, Shader* shader = NULL, const Vector2f playerPos = Vector2f(), bool visibility = true);
+	void renderDeferrent(RenderTarget& target, Shader* shader = NULL, const Vector2f PlayerPos = Vector2f());
 
 	const Vector2i& GetMaxSizeGrid() const;
 	const Vector2f& GetMaxSizeF() const;
@@ -59,8 +59,5 @@ public:
 
 	void saveToFile(const string file_name);
 	void loadFromFile(const string file_name);
-	void renderDeferrent(RenderTarget& target, Shader* shader = NULL, const Vector2f PlayerPos = Vector2f());
-	void render(RenderTarget& target,const Vector2i& GridPosition, Shader* shader = NULL,
-		const Vector2f PlayerPos = Vector2f(), bool Visability = true);
 };
 #endif

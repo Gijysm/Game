@@ -12,6 +12,7 @@
 #include <././SFML/Graphics/RenderTexture.hpp>
 
 #include <sstream>
+#include <mutex>
 #include <fstream>
 #include <iostream>
 #include <ctime>

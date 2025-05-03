@@ -11,6 +11,7 @@ protected:
     void InitAnnimations();
 public:
     Spider(/*EnemySpawner& spawner*/float x, float y, std::map<std::string, sf::Texture>& textures, sf::Texture texture = Texture());
+    Spider(float x, float y, sf::Texture texture, const string& name_anim);
     ~Spider();
     void updateAnimation(const float& dt);
     void update(const float& dt, Vector2f& mouse_view_pos);

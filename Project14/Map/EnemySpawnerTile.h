@@ -16,6 +16,7 @@ private:
     enemy_amount,
     enemy_timeToSpawn;
     float ememy_maxDistance;
+    bool spawned = false;
 protected:
 public:
     EnemySpawnerTile( int x, int y, float gridSizeF, const Texture& tex,
@@ -23,7 +24,9 @@ public:
     int amount,
     int time_To_Spawn, int max_Distance);
     virtual ~EnemySpawnerTile();
-
+    const bool getSpawned()const;
+    
+    void setSpawned(const bool spawned);
     void spawn();
     void clear();
     

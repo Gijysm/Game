@@ -42,6 +42,22 @@ Spider::Spider(float x, float y,
     this->InitAnnimations();
 }
 
+Spider::Spider(float x, float y, sf::Texture texture, const string& name_anim)
+{
+    this->InitVariables();
+    this->CreateHitBoxComponent(this->sprite, 50, 55, 55, 55);
+    this->CreateMovementComponent(300.f, 1500.f, 500.f);
+    std::map<std::string, sf::Texture> textures;
+    textures[name_anim] = texture;
+    this->CreateAnimationComponent(textures);
+    this->CreateSkillComponent();
+    // cout << this->skillComponent->getSkillLevel(SKILLS::Health) << endl;
+    // this->createAtributeComponent(0);
+    this->SetPosition(x, y);
+    // this->CreateWeapon(Weapon);
+    this->InitAnnimations();
+}
+
 Spider::~Spider()
 {
 }

@@ -1,7 +1,6 @@
 #include "..//..//stdafx.h"
-#include "../Player.h"
-
-Weapon::Weapon(Texture& texture, Vector2f Position)
+#include "Weapon.h"
+Weapon::Weapon(sf::Texture& texture, sf::Vector2f Position)
 {
 	this->texture = texture;
 	this->sprite.setTexture(this->texture);
@@ -33,18 +32,18 @@ const Vector2f& Weapon::getPosition() const
 }
 
 void Weapon::updatePosition(const float& dt, Vector2f Position)
-				{
-				this->sprite.setPosition(Position);
-				}
+{
+this->sprite.setPosition(Position);
+}
 
 void Weapon::render(RenderTarget& target, Shader* shader, Vector2f Pos)
-				{
-					if(shader)
-					{
-						shader->setUniform("hasTexture", true);
-						shader->setUniform("lightPos", Pos);
-						target.draw(this->sprite, shader);
-					}
-					else
-						target.draw(this->sprite);
-				}
+{
+	if(shader)
+	{
+		shader->setUniform("hasTexture", true);
+		shader->setUniform("lightPos", Pos);
+		target.draw(this->sprite, shader);
+	}
+	else
+		target.draw(this->sprite);
+}

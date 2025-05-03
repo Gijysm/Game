@@ -21,6 +21,7 @@ Global
 		{C9486F35-7E08-49FD-8384-4AD6FB5435A5}.Release|x64.Build.0 = Release|x64
 		{C9486F35-7E08-49FD-8384-4AD6FB5435A5}.Release|x86.ActiveCfg = Release|Win32
 		{C9486F35-7E08-49FD-8384-4AD6FB5435A5}.Release|x86.Build.0 = Release|Win32
+		{C9486F35-7E08-49FD-8384-4AD6FB5435A5}.Debug|x64.Deploy.0 = Debug|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

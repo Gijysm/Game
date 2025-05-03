@@ -177,13 +177,43 @@ void TileMap::RemoveTile(const int x, const int y, const int z, const int type)
 	}
 }
 
-void TileMap::updateTiles(Entity* entity, const float& dt)
+void TileMap::update_tiles(Entity* entity, const float& dt,EnemySystem& enemy_system)
 {
+
+	for (int x = fromX; x < this->toX; x++)
+	{
+		for (int y = fromY; y < this->toY; y++)
+		{
+			if (!this->T_map[x][y][layer].empty())
+			{
+				for (int k = 0; k < this->T_map[x][y][this->layer].size(); k++)
+				{
+					this->T_map[x][y][layer][k]->update();
+					if(this->T_map[x][y][layer][k]->GetType() == TileTypes::ENEMYSPAWNER)
+					{
+						EnemySpawnerTile* es = dynamic_cast<EnemySpawnerTile*>(this->T_map[x][y][this->layer][k]);
+						if(es)
+						{
+							if(!es->getSpawned())
+							{
+								cout << "Spawned" << endl;
+								enemy_system.CreateEnemy(0, x * this->GridSizeF, y * this->GridSizeF,"Enemy_Idle_Top");
+								es->setSpawned(true);
+							}
+							
+						}
+						// delete this->T_map[x][y][layer][k];
+						// this->T_map[x][y][layer].pop_back();
+					}
+				}
+			}
+		}
+	}
+
 }
 
 void TileMap::updateTilesCollision(Entity* entity, const float& dt)
 {
-		this->layer = 0;
 	this->fromX = entity->getGridPos(this->GridSizeF).x - 14;
 	if (this->fromX < 0)
 	{
@@ -275,11 +305,7 @@ void TileMap::updateTilesCollision(Entity* entity, const float& dt)
 	}
 }
 
-void TileMap::updateViewBindsCollision(Entity* entity, const float& dt)
-{
-}
-
-void TileMap::update(Entity* entity, const float& dt)
+void TileMap::updateWorldBoundsCollision(Entity* entity, const float& dt)
 {
 	if (entity->getPosition().x < 0)
 	{
@@ -301,7 +327,11 @@ void TileMap::update(Entity* entity, const float& dt)
 		entity->SetPosition(entity->getPosition().x, this->MaxSizeWorldF.y - entity->getGlobalBounds().height);
 		entity->stopVelocityY();
 	}
-	this->updateTiles(entity, dt);
+}
+
+void TileMap::update(Entity* entity, const float& dt)
+{
+
 }
 
 const Vector2i& TileMap::GetMaxSizeGrid() const
@@ -475,78 +505,66 @@ void TileMap::renderDeferrent(RenderTarget& target, Shader* shader, const Vector
 	}
 }
 
-void TileMap::render(RenderTarget& target,const Vector2i& GridPosition,
-	Shader* shader, const Vector2f PlayerPos, bool Visability)
+void TileMap::render(RenderTarget& target, const Vector2i& gridPosition,
+	Shader* shader, const Vector2f playerPos, bool visibility)
 {
 	this->layer = 0;
 
-		this->fromX = GridPosition.x - 14;
-		if (this->fromX <= 0)
+	this->fromX = gridPosition.x - 14;
+	if (this->fromX <= 0)
+	{
+		this->fromX = 0;
+	}
+	else if (this->fromX >= this->MaxSizeWorldI.x)
+	{
+		this->fromX = this->MaxSizeWorldI.x;
+	}
+	this->toX = gridPosition.x + 15;
+	if (this->toX <= 0)
+	{
+		this->toX = 0;
+	}
+	else if (this->toX >= this->MaxSizeWorldI.x)
+	{
+		this->toX = this->MaxSizeWorldI.x;
+	}
+	this->fromY = gridPosition.y - 8;
+	if (this->fromY <= 0)
+	{
+		this->fromY = 0;
+	}
+	else if (this->fromY >= this->MaxSizeWorldI.y)
+	{
+		this->fromY = this->MaxSizeWorldI.y;
+	}
+	this->toY = gridPosition.y + 9;
+	if (this->toY <= 0)
+	{
+		this->toY = 0;
+	}
+	else if (this->toY >= this->MaxSizeWorldI.y)
+	{
+		this->toY = this->MaxSizeWorldI.y;
+	}
+
+	for (int x = fromX; x < this->toX; x++)
+	{
+		for (int y = fromY; y < this->toY; y++)
 		{
-			this->fromX = 0;
-		}
-		else if (this->fromX >= this->MaxSizeWorldI.x)
-		{
-			this->fromX = this->MaxSizeWorldI.x;
-		}
-		this->toX = GridPosition.x + 15;
-		if (this->toX <= 0)
-		{
-			this->toX = 0;
-		}
-		else if (this->toX >= this->MaxSizeWorldI.x)
-		{
-			this->toX = this->MaxSizeWorldI.x;
-		}
-		this->fromY = GridPosition.y - 8;
-		if (this->fromY <= 0)
-		{
-			this->fromY = 0;
-		}
-		else if (this->fromY >= this->MaxSizeWorldI.y)
-		{
-			this->fromY = this->MaxSizeWorldI.y;
-		}
-		this->toY = GridPosition.y + 9;
-		if (this->toY <= 0)
-		{
-			this->toY = 0;
-		}
-		else if (this->toY >= this->MaxSizeWorldI.y)
-		{
-			this->toY = this->MaxSizeWorldI.y;
-		}
-		for (int x = fromX; x != this->toX; x++)
-		{
-			for (int y = fromY; y != this->toY; y++)
+			if (!this->T_map[x][y][layer].empty())
 			{
-				for (int k = 0; k < this->T_map[x][y][this->layer].size(); k++)
+				for (int k = 0; k < this->T_map[x][y][layer].size(); k++)
 				{
-					if (this->T_map[x][y][layer][k]->GetType() == TileTypes::DOODAD)
+					if (shader)
 					{
-						this->deferredRenderStack.push(this->T_map[x][y][layer][k]);
+						this->T_map[x][y][layer][k]->render(target, shader, playerPos);
 					}
 					else
 					{
-						if(shader)
-							this->T_map[x][y][layer][k]->render(target, shader, PlayerPos);
-						else
-							this->T_map[x][y][layer][k]->render(target);
-					}
-					if (this->T_map[x][y][layer][k]->getCollision())
-					{
-						this->collisionbox.setPosition(this->T_map[x][y][layer][k]->getPosition());
-						if(Visability)
-						{
-							target.draw(this->collisionbox);
-						}
-					}
-					if(this->T_map[x][y][layer][k]->GetType() == TileTypes::ENEMYSPAWNER)
-					{
-						this->collisionbox.setPosition(this->T_map[x][y][layer][k]->getPosition());
-						target.draw(this->collisionbox);
+						this->T_map[x][y][layer][k]->render(target);
 					}
 				}
 			}
 		}
+	}
 }

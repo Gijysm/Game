@@ -29,9 +29,16 @@ void MainMenuState::InitFont()
 void MainMenuState::InitButtons()
 {
 	using namespace gui;
-	this->MainMenuState_Btn["Button_NewGame"] = new Button(gui::p2pX(8,vm), gui::p2pY(13, vm),
+	this->MainMenuState_Btn["Button_Client"] = new Button(gui::p2pX(8,vm), gui::p2pY(13, vm),
 		gui::p2pX(12, vm), gui::p2pY(7, vm),
-		&this->font, "New Game", gui::CharacterSize(vm), Color(100, 100, 200, 50),
+		&this->font, "Client Game", gui::CharacterSize(vm), Color(100, 100, 200, 50),
+		Color(50, 150, 200, 125),
+		Color(30, 30, 70, 180), Color(100, 100, 200, 150),
+		Color(50, 150, 200, 185),
+		Color(30, 30, 70, 230));
+	this->MainMenuState_Btn["Button_Host"] = new Button(gui::p2pX(20,vm), gui::p2pY(13, vm),
+		gui::p2pX(12, vm), gui::p2pY(7, vm),
+		&this->font, "Host Game", gui::CharacterSize(vm), Color(100, 100, 200, 50),
 		Color(50, 150, 200, 125),
 		Color(30, 30, 70, 180), Color(100, 100, 200, 150),
 		Color(50, 150, 200, 185),
@@ -111,9 +118,13 @@ void MainMenuState::updateButton()
 		it.second->update(this->MousePosWindow);
 	}
 
-	if (this->MainMenuState_Btn["Button_NewGame"]->isPressed())
+	if (this->MainMenuState_Btn["Button_Client"]->isPressed())
 	{
-		this->states->push(new GameState(this->Statedata));
+		this->states->push(new GameState(this->Statedata, ONLINE_GAME_STATE::CLIENT));
+	}
+	if (this->MainMenuState_Btn["Button_Host"]->isPressed())
+	{
+		this->states->push(new GameState(this->Statedata, ONLINE_GAME_STATE::SERVER));
 	}
 	if (this->MainMenuState_Btn["Button_Settings"]->isPressed())
 	{

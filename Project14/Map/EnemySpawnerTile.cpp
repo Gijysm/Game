@@ -14,10 +14,21 @@ EnemySpawnerTile::EnemySpawnerTile(int x, int y, float gridsize, const Texture& 
     this->enemy_amount = amount;
     this->enemy_timeToSpawn = time_To_Spawn;
     this->ememy_maxDistance = max_Distance;
+    this->spawned = false;
 }
 
 EnemySpawnerTile::~EnemySpawnerTile()
 {
+}
+
+const bool EnemySpawnerTile::getSpawned() const
+{
+    return this->spawned;
+}
+
+void EnemySpawnerTile::setSpawned(const bool spawned)
+{
+    this->spawned = spawned;
 }
 
 void EnemySpawnerTile::spawn()

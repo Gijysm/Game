@@ -103,7 +103,6 @@ void Entity::CreateAnimationComponent(map < string, Texture>& texture)
 {
 	this->animationComponent = new AnimationComponent(this->sprite, texture);
 }
-
 const Vector2f& Entity::getPosition() const
 {
 	if (this->hitboxComponent)

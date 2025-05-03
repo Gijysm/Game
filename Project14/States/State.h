@@ -34,6 +34,7 @@ protected:
 
 	map<string, int>* supportedKey;
 	map<string, int> KeyBinds;
+	map<string, Texture> textures;
 	float Keytime;
 	float KeytimeMax;
 	float gridSize; 

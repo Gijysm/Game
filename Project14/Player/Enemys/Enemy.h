@@ -15,7 +15,7 @@ class EnemySpawnerTile;
 //     Left
 // };
 
-class Enemy:protected Entity
+class Enemy:public Entity
 {
 protected:
     // EnemySpawner& spawner;
